@@ -1,0 +1,8 @@
+name: Leather Coloriser Pro
+version: '${project.version}'
+main: com.minecraftheads.leathercoloriserpro.LeatherColoriserPro
+api-version: 1.18
+prefix: LCP
+authors: [ LordRazen ]
+description: Description...
+website: https://minecraft-heads.com
