@@ -29,7 +29,6 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
         LCPInventory inv = new LCPInventory();
         inv.openInventory(player);
 
-
         return true;
     }
 }

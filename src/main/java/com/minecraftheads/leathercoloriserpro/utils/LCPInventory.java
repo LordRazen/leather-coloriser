@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class LCPInventory implements Listener {
     private final Inventory inv;
@@ -71,15 +72,7 @@ public class LCPInventory implements Listener {
     // Check for clicks on items
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent e) {
-        Logger.info("CLICK");
-        Logger.info(e.getInventory().toString());
-        Logger.info(e.getView().getTopInventory().toString());
-        Logger.info(inv.toString());
-        Logger.info(String.valueOf(e.getInventory().equals(inv)));
-        Logger.info("CLICK--");
-        Logger.info(String.valueOf(e.getInventory() instanceof LCPInventory));
-        if (e.getInventory() != inv) {
-            Logger.info("ESCAPE 1");
+        if (!e.getView().getTitle().equals("Leather Coloriser Pro")) {
             return;
         }
 
@@ -89,8 +82,6 @@ public class LCPInventory implements Listener {
 
         // verify current item is not null
         if (clickedItem == null || clickedItem.getType().isAir()) {
-
-            Logger.info("ESCAPE 2");
             return;
         }
 
