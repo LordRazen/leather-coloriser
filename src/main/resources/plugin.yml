@@ -1,8 +1,15 @@
-name: Leather Coloriser Pro
+name: LeatherColoriserPro
 version: '${project.version}'
 main: com.minecraftheads.leathercoloriserpro.LeatherColoriserPro
-api-version: 1.18
+api-version: 1.17
 prefix: LCP
 authors: [ LordRazen ]
 description: Description...
 website: https://minecraft-heads.com
+commands:
+  LCP:
+    aliases:  [/lcp]
+    description: "Open LCP GUI"
+    permission: lcp.main
+    permission-message: "No Permissssssion :D"
+    usage: "Use it the right way!"

@@ -8,7 +8,7 @@ public class Logger {
      *
      * @param msg
      */
-    public void info(String msg) {
+    public static void info(String msg) {
         Bukkit.getLogger().info(msg);
     }
 }
