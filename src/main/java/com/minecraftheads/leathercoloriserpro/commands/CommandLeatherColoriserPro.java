@@ -1,7 +1,7 @@
 package com.minecraftheads.leathercoloriserpro.commands;
 
 import com.minecraftheads.leathercoloriserpro.LeatherColoriserPro;
-import com.minecraftheads.leathercoloriserpro.utils.LCPInventory;
+import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
     /**
      * Constructor
      *
-     * @param
+     * @param LeatherColoriserPro (plugin)
      */
     public CommandLeatherColoriserPro(LeatherColoriserPro plugin) {
         this.plugin = plugin;
@@ -24,11 +24,11 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
 
-        player.sendRawMessage("HI!");
-
-        LCPInventory inv = new LCPInventory();
+        InventoryCreator inv = new InventoryCreator();
+        inv.initializeArmor();
         inv.openInventory(player);
 
         return true;
     }
+
 }
