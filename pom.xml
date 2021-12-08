@@ -72,5 +72,15 @@
             <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.mojang/authlib
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>1.11</version>
+            <scope>provided</scope>
+        </dependency>-->
+
+
     </dependencies>
 </project>
