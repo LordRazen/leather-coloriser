@@ -5,6 +5,9 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Basic storage of a inventoryList so we can check if the inv is one of our LCP invs
+ */
 public class InventoryHandler {
     private final static List<Inventory> InventoryList = new ArrayList<>();
 

@@ -4,7 +4,6 @@ import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
 import com.minecraftheads.leathercoloriserpro.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import com.minecraftheads.leathercoloriserpro.utils.ItemCreator;
-import com.minecraftheads.leathercoloriserpro.utils.Logger;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +16,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Objects;
 
 public class InventoryListener implements Listener {
-    // Check for clicks on items
+
+    /**
+     * Check for clicks on items
+     *
+     * @param e InventoryClickEvent
+     */
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent e) {
         // Check if inventory is a LCP inventory
@@ -36,39 +40,61 @@ public class InventoryListener implements Listener {
         // Using slots click is a best option for your inventory click's
         final Player player = (Player) e.getWhoClicked();
 
+        // If item is a piece or Armor save it in the SelectionHandler
         if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Leather")) {
             SelectionHandler.addItem(player, clickedItem);
+
+            // create the inventory for choosing the color
             InventoryCreator inv = new InventoryCreator();
             inv.initializeColor();
             inv.openInventory(player);
             return;
+
+        // Choose color you want to have
         } else if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Dye")) {
-            Logger.info(SelectionHandler.getItem((Player) e.getWhoClicked()).toString());
+            // TODO: select correct Color.
+
+            // Create a new item which can be given to the player
             ItemStack item = ItemCreator.createItem(SelectionHandler.getItem((Player) e.getWhoClicked()),
-                    clickedItem.getType());
+                    Objects.requireNonNull(clickedItem.getData()).getItemType());
             player.getInventory().addItem(item);
+
+            // remove the old item in the SelectionHandler
+            try {
+                SelectionHandler.removeItem((Player) e.getWhoClicked());
+            } catch (NullPointerException ignored) {}
             return;
         }
+        // Player cancels the LCP -> data cleanup
         if (clickedItem.getType().equals(Material.BARRIER)) {
             e.getWhoClicked().closeInventory();
+            try {
+                SelectionHandler.removeItem((Player) e.getWhoClicked());
+            } catch (NullPointerException ignored) {}
         }
 
     }
 
-    // Cancel dragging in our inventory
+    /**
+     * Cancel dragging in LCP inventory
+     *
+     * @param e InventoryDragEvent
+     */
     @EventHandler
     public void onInventoryClick(final InventoryDragEvent e) {
         if (InventoryHandler.getInventory().contains(e.getView().getTopInventory())) e.setCancelled(true);
     }
 
-    // Remove inventory from inventoryHandler
+    /**
+     * Remove inventory from inventoryHandler when a inventory is closed
+     *
+     * @param e InventoryCloseEvent
+     */
     @EventHandler
     public void onInventoryClose(final InventoryCloseEvent e) {
+        // TODO: cleanup of old selections when player leave? could result in memoryleak if server runs a long time
         if (InventoryHandler.getInventory().contains(e.getView().getTopInventory())) {
             InventoryHandler.removeInventory(e.getView().getTopInventory());
-            try {
-                SelectionHandler.removeItem((Player) e.getPlayer());
-            } catch (NullPointerException ignored) {}
         }
     }
 }

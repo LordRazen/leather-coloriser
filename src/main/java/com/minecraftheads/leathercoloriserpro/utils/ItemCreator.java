@@ -6,6 +6,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class ItemCreator {
+    /**
+     * Creates a leather armor ItemStack with a color
+     * @param item ItemStack
+     * @param color Material
+     * @return ItemStack
+     */
     public static ItemStack createItem(ItemStack item, Material color) {
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
         switch (color) {

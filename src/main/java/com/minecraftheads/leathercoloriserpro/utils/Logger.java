@@ -6,7 +6,7 @@ public class Logger {
     /**
      * Logger Method
      *
-     * @param msg
+     * @param msg String
      */
     public static void info(String msg) {
         Bukkit.getLogger().info(msg);

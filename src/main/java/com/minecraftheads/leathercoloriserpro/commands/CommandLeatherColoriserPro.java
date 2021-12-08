@@ -9,17 +9,15 @@ import org.bukkit.entity.Player;
 
 public class CommandLeatherColoriserPro implements CommandExecutor {
 
-    private LeatherColoriserPro plugin;
-
     /**
-     * Constructor
+     * Initiates LCP when /lcp is entered
      *
-     * @param LeatherColoriserPro (plugin)
+     * @param sender CommandSender
+     * @param command Command
+     * @param label String
+     * @param args String
+     * @return
      */
-    public CommandLeatherColoriserPro(LeatherColoriserPro plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
