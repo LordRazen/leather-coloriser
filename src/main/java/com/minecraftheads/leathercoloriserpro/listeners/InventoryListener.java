@@ -35,15 +35,17 @@ public class InventoryListener implements Listener {
         e.setCancelled(true);
 
         // verify current item is not null
-        final ItemStack clickedItem = e.getCurrentItem();
+        ItemStack clickedItem = e.getCurrentItem();
         if (clickedItem == null || clickedItem.getType().isAir()) return;
 
-        // Using slots click is a best option for your inventory click's
-        final Player player = (Player) e.getWhoClicked();
+        // set variable player to the one who clicked
+        Player player = (Player) e.getWhoClicked();
 
         // If item is a piece or Armor save it in the SelectionHandler
         if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Leather")) {
             // check if player has item in inventory
+
+            // ToDo: move into separate method
             if (player.getInventory().contains(clickedItem.getType())) {
                 SelectionHandler.addItem(player, clickedItem);
 
@@ -62,6 +64,7 @@ public class InventoryListener implements Listener {
                     Objects.requireNonNull(clickedItem.getType()));
 
             // give item to player and remove raw item
+            // ToDo: this is broken
             player.getInventory().remove(new ItemStack(SelectionHandler.getItem((Player) e.getWhoClicked()).getType(), 1));
             player.getInventory().addItem(item);
 
