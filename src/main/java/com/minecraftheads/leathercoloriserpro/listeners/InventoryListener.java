@@ -41,48 +41,8 @@ public class InventoryListener implements Listener {
         // set variable player to the one who clicked
         Player player = (Player) e.getWhoClicked();
 
-        // If item is a piece or Armor save it in the SelectionHandler
-
-        if (clickedItem.getType().toString().startsWith("LEATHER_")) {
-            // check if player has item in inventory
-
-            // ToDo: move into separate method
-            if (player.getInventory().contains(clickedItem.getType())) {
-                SelectionHandler.addItem(player, clickedItem);
-
-                // create the inventory for choosing the color
-                InventoryCreator inv = new InventoryCreator();
-                inv.initializeColor();
-                inv.openInventory(player);
-            } else {
-                player.sendMessage("You need to have the item in your inventory");
-            }
-            return;
-        // Choose color you want to have
-        } else if (clickedItem.getType().toString().endsWith("_DYE")) {
-            // Create a new item which can be given to the player
-            ItemStack item = ItemCreator.createItem(SelectionHandler.getItem((Player) e.getWhoClicked()).getType(),
-                    Objects.requireNonNull(clickedItem.getType()));
-
-            // give item to player and remove raw item
-            // ToDo: this is broken
-            player.getInventory().remove(new ItemStack(SelectionHandler.getItem((Player) e.getWhoClicked()).getType(), 1));
-            player.getInventory().addItem(item);
-
-            // remove the old item in the SelectionHandler
-            try {
-                SelectionHandler.removeItem((Player) e.getWhoClicked());
-            } catch (NullPointerException ignored) {}
-            player.closeInventory();
-            return;
-        }
-        // Player cancels the LCP -> data cleanup
-        if (clickedItem.getType().equals(Material.BARRIER)) {
-            e.getWhoClicked().closeInventory();
-            try {
-                SelectionHandler.removeItem((Player) e.getWhoClicked());
-            } catch (NullPointerException ignored) {}
-        }
+        // check what is clicked and perform action
+        handleClick(player, clickedItem);
 
     }
 
@@ -108,5 +68,71 @@ public class InventoryListener implements Listener {
         if (InventoryHandler.getInventory().contains(e.getView().getTopInventory())) {
             InventoryHandler.removeInventory(e.getView().getTopInventory());
         }
+    }
+
+    /**
+     * check what item is clicked and perform action depending on that
+     * @param clickedItem ItemStack
+     * @param player Player
+     */
+    private void handleClick(Player player, ItemStack clickedItem) {
+        // If item is a piece or Armor save it in the SelectionHandler
+
+        if (clickedItem.getType().toString().startsWith("LEATHER_")) {
+            checkRequirement(player, clickedItem);
+            // Choose color you want to have
+        } else if (clickedItem.getType().toString().endsWith("_DYE")) {
+            generateColoredItem(player, clickedItem);
+        }
+        // Player cancels the LCP -> data cleanup
+        else if (clickedItem.getType().equals(Material.BARRIER)) {
+            player.closeInventory();
+            try {
+                SelectionHandler.removeItem(player);
+            } catch (NullPointerException ignored) {}
+        }
+    }
+
+    /**
+     *  check if the player has the needed item in his inventory
+     *
+     * @param player Player
+     * @param item ItemStack
+     */
+    private void checkRequirement(Player player, ItemStack item) {
+        // check if player has item in inventory
+
+        if (player.getInventory().contains(item.getType())) {
+            SelectionHandler.addItem(player, item);
+
+            // create the inventory for choosing the color
+            InventoryCreator inv = new InventoryCreator();
+            inv.initializeColor();
+            inv.openInventory(player);
+        } else {
+            player.sendMessage("You need to have the item in your inventory");
+        }
+    }
+
+    /**
+     * generate colored armor piece, add it to inventory and remove raw (uncolored) armor
+     *
+     * @param player Player
+     * @param item ItemStack
+     */
+    private void generateColoredItem(Player player, ItemStack item) {
+        // Create a new item which can be given to the player
+        ItemStack armor = ItemCreator.createItem(SelectionHandler.getItem(player).getType(),
+                Objects.requireNonNull(item.getType()));
+
+        // give item to player and remove raw item
+        player.getInventory().remove(new ItemStack(SelectionHandler.getItem(player).getType(), 1)); // ToDo: this is broken
+        player.getInventory().addItem(armor);
+
+        // remove the old item in the SelectionHandler
+        try {
+            SelectionHandler.removeItem(player);
+        } catch (NullPointerException ignored) {}
+        player.closeInventory();
     }
 }
