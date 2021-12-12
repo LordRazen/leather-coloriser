@@ -42,7 +42,8 @@ public class InventoryListener implements Listener {
         Player player = (Player) e.getWhoClicked();
 
         // If item is a piece or Armor save it in the SelectionHandler
-        if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Leather")) {
+
+        if (clickedItem.getType().toString().startsWith("LEATHER_")) {
             // check if player has item in inventory
 
             // ToDo: move into separate method
@@ -57,8 +58,8 @@ public class InventoryListener implements Listener {
                 player.sendMessage("You need to have the item in your inventory");
             }
             return;
-            // Choose color you want to have
-        } else if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Dye")) {
+        // Choose color you want to have
+        } else if (clickedItem.getType().toString().endsWith("_DYE")) {
             // Create a new item which can be given to the player
             ItemStack item = ItemCreator.createItem(SelectionHandler.getItem((Player) e.getWhoClicked()).getType(),
                     Objects.requireNonNull(clickedItem.getType()));
