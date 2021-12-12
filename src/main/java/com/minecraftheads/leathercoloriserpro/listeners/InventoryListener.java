@@ -4,6 +4,7 @@ import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
 import com.minecraftheads.leathercoloriserpro.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import com.minecraftheads.leathercoloriserpro.utils.ItemCreator;
+import com.minecraftheads.leathercoloriserpro.utils.Logger;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,27 +43,33 @@ public class InventoryListener implements Listener {
 
         // If item is a piece or Armor save it in the SelectionHandler
         if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Leather")) {
-            SelectionHandler.addItem(player, clickedItem);
+            // check if player has item in inventory
+            if (player.getInventory().contains(clickedItem.getType())) {
+                SelectionHandler.addItem(player, clickedItem);
 
-            // create the inventory for choosing the color
-            InventoryCreator inv = new InventoryCreator();
-            inv.initializeColor();
-            inv.openInventory(player);
+                // create the inventory for choosing the color
+                InventoryCreator inv = new InventoryCreator();
+                inv.initializeColor();
+                inv.openInventory(player);
+            } else {
+                player.sendMessage("You need to have the item in your inventory");
+            }
             return;
-
-        // Choose color you want to have
+            // Choose color you want to have
         } else if (Objects.requireNonNull(clickedItem.getItemMeta()).getDisplayName().startsWith("Dye")) {
-            // TODO: select correct Color.
-
             // Create a new item which can be given to the player
-            ItemStack item = ItemCreator.createItem(SelectionHandler.getItem((Player) e.getWhoClicked()),
-                    Objects.requireNonNull(clickedItem.getData()).getItemType());
+            ItemStack item = ItemCreator.createItem(SelectionHandler.getItem((Player) e.getWhoClicked()).getType(),
+                    Objects.requireNonNull(clickedItem.getType()));
+
+            // give item to player and remove raw item
+            player.getInventory().remove(new ItemStack(SelectionHandler.getItem((Player) e.getWhoClicked()).getType(), 1));
             player.getInventory().addItem(item);
 
             // remove the old item in the SelectionHandler
             try {
                 SelectionHandler.removeItem((Player) e.getWhoClicked());
             } catch (NullPointerException ignored) {}
+            player.closeInventory();
             return;
         }
         // Player cancels the LCP -> data cleanup
@@ -93,6 +100,7 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onInventoryClose(final InventoryCloseEvent e) {
         // TODO: cleanup of old selections when player leave? could result in memoryleak if server runs a long time
+        // not possible yet, as we do not map players to inventoryHandler
         if (InventoryHandler.getInventory().contains(e.getView().getTopInventory())) {
             InventoryHandler.removeInventory(e.getView().getTopInventory());
         }

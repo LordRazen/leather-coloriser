@@ -9,6 +9,6 @@ public class Logger {
      * @param msg String
      */
     public static void info(String msg) {
-        Bukkit.getLogger().info(msg);
+        Bukkit.getLogger().info("[LCP] " + msg);
     }
 }

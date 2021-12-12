@@ -6,6 +6,8 @@ import com.minecraftheads.leathercoloriserpro.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ResourceBundle;
+
 public final class LeatherColoriserPro extends JavaPlugin {
 
     @Override

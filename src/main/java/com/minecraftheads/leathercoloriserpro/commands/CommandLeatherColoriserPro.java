@@ -2,6 +2,7 @@ package com.minecraftheads.leathercoloriserpro.commands;
 
 import com.minecraftheads.leathercoloriserpro.LeatherColoriserPro;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
+import com.minecraftheads.leathercoloriserpro.utils.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,11 +21,16 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
-        InventoryCreator inv = new InventoryCreator();
-        inv.initializeArmor();
-        inv.openInventory(player);
+            InventoryCreator inv = new InventoryCreator();
+            inv.initializeArmor();
+            inv.openInventory(player);
+        } else {
+            Logger.info("/lcp can only be used by players");
+        }
+
 
         return true;
     }

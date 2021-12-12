@@ -3,7 +3,7 @@ version: '${project.version}'
 main: com.minecraftheads.leathercoloriserpro.LeatherColoriserPro
 api-version: 1.17
 prefix: LCP
-authors: [ LordRazen ]
+authors: [ LordRazen, bmack94 ]
 description: Description...
 website: https://minecraft-heads.com
 commands:
@@ -11,5 +11,5 @@ commands:
     aliases:  [/lcp]
     description: "Open LCP GUI"
     permission: lcp.main
-    permission-message: "No Permissssssion :D"
-    usage: "Use it the right way!"
+    permission-message: "[LCP] you don't have the permission to do this"
+    usage: "just enter /lcp"
