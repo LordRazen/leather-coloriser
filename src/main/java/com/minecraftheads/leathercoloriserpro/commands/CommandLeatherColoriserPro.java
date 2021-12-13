@@ -23,15 +23,27 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
+            if (args.length == 0) {
 
-            InventoryCreator inv = new InventoryCreator();
-            inv.initializeArmor();
-            inv.openInventory(player);
+                InventoryCreator inv = new InventoryCreator();
+                inv.initializeItems();
+                inv.openInventory(player);
+            // check if user provided a colorString
+            } else if (args.length == 1) {
+                // check by regex if string matches HEX code
+                String regex = "[0-9a-fA-F]{6}$";
+                if (args[0].matches(regex)) {
+                    InventoryCreator inv = new InventoryCreator();
+                    inv.initializeItems(args[0]);
+                    inv.openInventory(player);
+                }
+            } else {
+                return false;
+            }
+
         } else {
             Logger.info("/lcp can only be used by players");
         }
-
-
         return true;
     }
 
