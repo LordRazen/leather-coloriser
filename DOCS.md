@@ -1,7 +1,7 @@
 # DOCS
 
 ### config.yml 
-| Key | description | available | default |
+| Key | description | options | default |
 |---|---|---|---|
 | language | choose the language in the languages folder | [en,de] | en |
 

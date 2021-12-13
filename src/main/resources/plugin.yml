@@ -4,7 +4,7 @@ main: com.minecraftheads.leathercoloriserpro.LeatherColoriserPro
 api-version: 1.17
 prefix: LCP
 authors: [ LordRazen, bmack94 ]
-description: Description...
+description: This plugin lets players choose the color of leather armor by basic dye's and Hexcode.
 website: https://minecraft-heads.com
 commands:
   LCP:

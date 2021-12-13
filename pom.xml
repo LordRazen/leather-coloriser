@@ -6,12 +6,12 @@
 
     <groupId>com.minecraftheads</groupId>
     <artifactId>leather-coloriser-pro</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>Leather Coloriser Pro</name>
 
-    <description>Description...</description>
+    <description>This plugin lets players choose the color of leather armor by basic dye's and Hexcode.</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
