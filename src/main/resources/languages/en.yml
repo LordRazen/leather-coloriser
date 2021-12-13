@@ -1,2 +1,2 @@
-useHexCommand: "enter /lcp <HEX Color code>"
-requiredItemMissing: "You need to have the item in your inventory"
+useHexCommand: "§6[§4LCP§6] §aEnter /lcp <HEX Color code>"
+requiredItemMissing: "§6[§4LCP§6] §cYou need to have the item in your inventory"

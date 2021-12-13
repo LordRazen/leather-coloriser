@@ -1,2 +1,2 @@
-useHexCommand: "nutze /lcp <Hexadecimal Farbcode"
-requiredItemMissing: "Du musst das Item im Inventar haben"
+useHexCommand: "§6[§4LCP§6] §anutze /lcp <Hexadezimal Farbcode>"
+requiredItemMissing: "§6[§4LCP§6] §cDu musst das Item im Inventar haben"
