@@ -1,0 +1,2 @@
+useHexCommand: "enter /lcp <HEX Color code>"
+requiredItemMissing: "You need to have the item in your inventory"

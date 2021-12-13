@@ -1,6 +1,7 @@
 package com.minecraftheads.leathercoloriserpro.listeners;
 
 import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
+import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import com.minecraftheads.leathercoloriserpro.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import com.minecraftheads.leathercoloriserpro.utils.ItemCreator;
@@ -78,7 +79,8 @@ public class InventoryListener implements Listener {
         // close inventory and send message to player how to use custom color codes
         if (clickedItem.getType().toString().equals("NAME_TAG")) {
             player.closeInventory();
-            player.sendMessage("enter /lcp <HEX Color code>");
+            player.sendMessage(LanguageHandler.getMessage("useHexCommand"));
+            //player.sendMessage("enter /lcp <HEX Color code>");
         }
         // Player chooses armor piece
         else if (clickedItem.getType().toString().startsWith("LEATHER_")) {
@@ -112,7 +114,7 @@ public class InventoryListener implements Listener {
     private boolean checkRequirement(Player player, ItemStack item) {
         // check if player has item in inventory
         if (!player.getInventory().contains(new ItemStack(item.getType(), 1))) {
-            player.sendMessage("You need to have the item in your inventory");
+            player.sendMessage(LanguageHandler.getMessage("requiredItemMissing"));
             return false;
         }
         return true;
