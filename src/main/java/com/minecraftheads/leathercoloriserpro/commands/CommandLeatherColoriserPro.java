@@ -1,6 +1,6 @@
 package com.minecraftheads.leathercoloriserpro.commands;
 
-import com.minecraftheads.leathercoloriserpro.LeatherColoriserPro;
+import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import com.minecraftheads.leathercoloriserpro.utils.Logger;
 import org.bukkit.command.Command;
@@ -23,13 +23,14 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
+            // Default
             if (args.length == 0) {
-
                 InventoryCreator inv = new InventoryCreator();
                 inv.initializeItems();
                 inv.openInventory(player);
-            // check if user provided a colorString
-            } else if (args.length == 1) {
+            }
+            // Check if user provided an argument
+            else if (args.length == 1) {
                 // check by regex if string matches HEX code
                 String regex = "[0-9a-fA-F]{6}$";
                 if (args[0].matches(regex)) {
@@ -37,12 +38,16 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
                     inv.initializeItems(args[0]);
                     inv.openInventory(player);
                 }
+                // invalid argument
+                else {
+                    player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
+                }
             } else {
                 return false;
             }
 
         } else {
-            Logger.info("/lcp can only be used by players");
+            Logger.info(LanguageHandler.getMessage("error_invalid_command_sender"));
         }
         return true;
     }

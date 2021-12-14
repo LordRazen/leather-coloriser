@@ -1,12 +1,7 @@
 package com.minecraftheads.leathercoloriserpro.handlers;
-
-import com.minecraftheads.leathercoloriserpro.LeatherColoriserPro;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-
 import java.io.File;
-import java.io.InputStream;
-import java.util.Objects;
 
 public class LanguageHandler {
     /**

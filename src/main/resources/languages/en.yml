@@ -25,3 +25,6 @@ leather_chestplate: "Leather Chestplate"
 leather_leggings: "Leather Leggings"
 leather_boots: "Leather Boots"
 leather_horse_armor: "Leather Horse Armor"
+
+error_invalid_command_sender: "/lcp can only be used by players"
+error_invalid_color: "Invalid HEX Color"
