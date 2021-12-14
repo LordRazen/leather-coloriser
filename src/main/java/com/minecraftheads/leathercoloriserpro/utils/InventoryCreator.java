@@ -1,6 +1,7 @@
 package com.minecraftheads.leathercoloriserpro.utils;
 
 import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
+import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,13 +24,15 @@ public class InventoryCreator {
      *
      */
     public void initializeItems() {
-        setColors();
+        setColorIcons();
         this.inv.setItem(28, new ItemStack(Material.LEATHER_BOOTS, 1));
-        this.inv.setItem(30, new ItemStack(Material.LEATHER_LEGGINGS, 1));
-        this.inv.setItem(32, new ItemStack(Material.LEATHER_CHESTPLATE, 1));
-        this.inv.setItem(34, new ItemStack(Material.LEATHER_HELMET, 1));
+        this.inv.setItem(29, new ItemStack(Material.LEATHER_LEGGINGS, 1));
+        this.inv.setItem(30, new ItemStack(Material.LEATHER_CHESTPLATE, 1));
+        this.inv.setItem(31, new ItemStack(Material.LEATHER_HELMET, 1));
 
-        this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
+        this.inv.setItem(33, new ItemStack(Material.LEATHER_HORSE_ARMOR, 1));
+
+       // this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
     /**
@@ -38,13 +41,16 @@ public class InventoryCreator {
      * @param color String
      */
     public void initializeItems(String color) {
-        setColors();
-        this.inv.setItem(28, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), "Leather Boots"));
-        this.inv.setItem(30, createItem(ItemCreator.createItem(Material.LEATHER_LEGGINGS, color), "Leather Pants"));
-        this.inv.setItem(32, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), "Leather Chestplate"));
-        this.inv.setItem(34, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), "Leather Helmet"));
+        // TODO: Combine the main part of initializeItems()!
+        setColorIcons();
+        this.inv.setItem(28, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), LanguageHandler.getMessage("leather_helmet")));
+        this.inv.setItem(29, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), LanguageHandler.getMessage("leather_chestplate")));
+        this.inv.setItem(30, createItem(ItemCreator.createItem(Material.LEATHER_LEGGINGS, color), LanguageHandler.getMessage("leather_leggings")));
+        this.inv.setItem(31, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), LanguageHandler.getMessage("leather_boots")));
 
-        this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
+        this.inv.setItem(33, createItem(ItemCreator.createItem(Material.LEATHER_HORSE_ARMOR, color), LanguageHandler.getMessage("leather_horse_armor")));
+
+        //this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
     /**
@@ -53,36 +59,39 @@ public class InventoryCreator {
      * @param color Material
      */
     public void initializeItems(Material color) {
-        setColors();
-        this.inv.setItem(28, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), "Leather Boots"));
-        this.inv.setItem(30, createItem(ItemCreator.createItem(Material.LEATHER_LEGGINGS, color), "Leather Pants"));
-        this.inv.setItem(32, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), "Leather Chestplate"));
-        this.inv.setItem(34, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), "Leather Helmet"));
+        setColorIcons();
+        this.inv.setItem(28, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), LanguageHandler.getMessage("leather_helmet")));
+        this.inv.setItem(29, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), LanguageHandler.getMessage("leather_chestplate")));
+        this.inv.setItem(30, createItem(ItemCreator.createItem(Material.LEATHER_LEGGINGS, color), LanguageHandler.getMessage("leather_leggings")));
+        this.inv.setItem(31, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), LanguageHandler.getMessage("leather_boots")));
 
-        this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
+        this.inv.setItem(33, createItem(ItemCreator.createItem(Material.LEATHER_HORSE_ARMOR, color), LanguageHandler.getMessage("leather_horse_armor")));
+
+        //this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
     /**
      * generates the Dys slots
      */
-    private void setColors() {
-        this.inv.setItem(0, createItem(Material.BLACK_DYE, "Dye black"));
-        this.inv.setItem(1, createItem(Material.BLUE_DYE, "Dye blue"));
-        this.inv.setItem(2, createItem(Material.BROWN_DYE, "Dye brown"));
-        this.inv.setItem(3, createItem(Material.CYAN_DYE, "Dye cyan"));
-        this.inv.setItem(4, createItem(Material.GRAY_DYE, "Dye gray"));
-        this.inv.setItem(5, createItem(Material.GREEN_DYE, "Dye green"));
-        this.inv.setItem(6, createItem(Material.LIGHT_BLUE_DYE, "Dye light blue"));
-        this.inv.setItem(7, createItem(Material.LIGHT_GRAY_DYE, "Dye light gray"));
-        this.inv.setItem(8, createItem(Material.LIME_DYE, "Dye lime"));
-        this.inv.setItem(9, createItem(Material.MAGENTA_DYE, "Dye magenta"));
-        this.inv.setItem(10, createItem(Material.ORANGE_DYE, "Dye orange"));
-        this.inv.setItem(11, createItem(Material.PINK_DYE, "Dye pink"));
-        this.inv.setItem(12, createItem(Material.PURPLE_DYE, "Dye purple"));
-        this.inv.setItem(13, createItem(Material.RED_DYE, "Dye red"));
-        this.inv.setItem(14, createItem(Material.WHITE_DYE, "Dye white"));
-        this.inv.setItem(15, createItem(Material.YELLOW_DYE, "Dye yellow"));
-        this.inv.setItem(16, createItem(Material.NAME_TAG, "Custom color code"));
+    private void setColorIcons() {
+        this.inv.setItem(0, createItem(Material.YELLOW_DYE, LanguageHandler.getMessage("yellow")));
+        this.inv.setItem(1, createItem(Material.ORANGE_DYE, LanguageHandler.getMessage("orange")));
+        this.inv.setItem(2, createItem(Material.RED_DYE, LanguageHandler.getMessage("red")));
+        this.inv.setItem(3, createItem(Material.BROWN_DYE, LanguageHandler.getMessage("brown")));
+        this.inv.setItem(4, createItem(Material.LIME_DYE, LanguageHandler.getMessage("lime")));
+        this.inv.setItem(5, createItem(Material.GREEN_DYE, LanguageHandler.getMessage("green")));
+        this.inv.setItem(6, createItem(Material.LIGHT_BLUE_DYE, LanguageHandler.getMessage("light_blue")));
+        this.inv.setItem(7, createItem(Material.CYAN_DYE, LanguageHandler.getMessage("cyan")));
+        this.inv.setItem(8, createItem(Material.BLUE_DYE, LanguageHandler.getMessage("blue")));
+        this.inv.setItem(9, createItem(Material.PINK_DYE, LanguageHandler.getMessage("pink")));
+        this.inv.setItem(10, createItem(Material.MAGENTA_DYE, LanguageHandler.getMessage("magenta")));
+        this.inv.setItem(11, createItem(Material.PURPLE_DYE, LanguageHandler.getMessage("purple")));
+        this.inv.setItem(12, createItem(Material.WHITE_DYE, LanguageHandler.getMessage("white")));
+        this.inv.setItem(13, createItem(Material.LIGHT_GRAY_DYE, LanguageHandler.getMessage("light_gray")));
+        this.inv.setItem(14, createItem(Material.GRAY_DYE, LanguageHandler.getMessage("gray")));
+        this.inv.setItem(15, createItem(Material.BLACK_DYE, LanguageHandler.getMessage("black")));
+
+        this.inv.setItem(17, createItem(Material.NAME_TAG, LanguageHandler.getMessage("custom_color")));
     }
 
 
