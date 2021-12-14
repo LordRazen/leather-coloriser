@@ -5,6 +5,8 @@ import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import com.minecraftheads.leathercoloriserpro.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import com.minecraftheads.leathercoloriserpro.utils.ItemCreator;
+import org.bukkit.Color;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -90,13 +92,12 @@ public class InventoryListener implements Listener {
         // Choose color you want to have
         else if (clickedItem.getType().toString().endsWith("_DYE")) {
             // create the inventory for choosing the color
-            SelectionHandler.addColor(player, clickedItem.getType());
             InventoryCreator inv = new InventoryCreator();
-            inv.initializeItems(clickedItem.getType());
+            inv.initializeColoredArmor(getColorFromDye(clickedItem.getType()));
             inv.openInventory(player);
         }
         // Player cancels the LCP -> data cleanup
-        // TODO: Escape only!
+        // TODO: open url to minecraft-heads
         else if (clickedItem.getType().equals(Material.BARRIER)) {
             player.closeInventory();
             try {
@@ -135,5 +136,43 @@ public class InventoryListener implements Listener {
         try {
             SelectionHandler.removeColor(player);
         } catch (NullPointerException ignored) {}
+    }
+
+    private Color getColorFromDye(Material mat) {
+        switch (mat) {
+            case BLACK_DYE:
+                return DyeColor.BLACK.getColor();
+            case BLUE_DYE:
+                return DyeColor.BLUE.getColor();
+            case BROWN_DYE:
+                return DyeColor.BROWN.getColor();
+            case CYAN_DYE:
+                return DyeColor.CYAN.getColor();
+            case GRAY_DYE:
+                return DyeColor.GRAY.getColor();
+            case GREEN_DYE:
+                return DyeColor.GREEN.getColor();
+            case LIGHT_BLUE_DYE:
+                return DyeColor.LIGHT_BLUE.getColor();
+            case LIGHT_GRAY_DYE:
+                return DyeColor.LIGHT_GRAY.getColor();
+            case LIME_DYE:
+                return DyeColor.LIME.getColor();
+            case MAGENTA_DYE:
+                return DyeColor.MAGENTA.getColor();
+            case ORANGE_DYE:
+                return DyeColor.ORANGE.getColor();
+            case PINK_DYE:
+                return DyeColor.PINK.getColor();
+            case PURPLE_DYE:
+                return DyeColor.PURPLE.getColor();
+            case RED_DYE:
+                return DyeColor.RED.getColor();
+            case WHITE_DYE:
+                return DyeColor.WHITE.getColor();
+            case YELLOW_DYE:
+                return DyeColor.YELLOW.getColor();
+        }
+        return DyeColor.BROWN.getColor();
     }
 }

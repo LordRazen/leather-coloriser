@@ -3,6 +3,7 @@ package com.minecraftheads.leathercoloriserpro.utils;
 import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
 import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -23,7 +24,7 @@ public class InventoryCreator {
      * create the inventory with the default items for selection (opens with uncolored armor)
      *
      */
-    public void initializeItems() {
+    public void initializeUncoloredArmor() {
         setColorIcons();
         this.inv.setItem(28, new ItemStack(Material.LEATHER_HELMET, 1));
         this.inv.setItem(29, new ItemStack(Material.LEATHER_CHESTPLATE, 1));
@@ -35,30 +36,13 @@ public class InventoryCreator {
        // this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
-    /**
-     * open the inventory with the colored items, color is set via HEX string
-     *
-     * @param color String
-     */
-    public void initializeItems(String color) {
-        // TODO: Combine the main part of initializeItems()!
-        setColorIcons();
-        this.inv.setItem(28, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), LanguageHandler.getMessage("leather_helmet")));
-        this.inv.setItem(29, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), LanguageHandler.getMessage("leather_chestplate")));
-        this.inv.setItem(30, createItem(ItemCreator.createItem(Material.LEATHER_LEGGINGS, color), LanguageHandler.getMessage("leather_leggings")));
-        this.inv.setItem(31, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), LanguageHandler.getMessage("leather_boots")));
-
-        this.inv.setItem(33, createItem(ItemCreator.createItem(Material.LEATHER_HORSE_ARMOR, color), LanguageHandler.getMessage("leather_horse_armor")));
-
-        //this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
-    }
 
     /**
      * open the inventory with the colored items, color is set via DYE selection
      *
      * @param color Material
      */
-    public void initializeItems(Material color) {
+    public void initializeColoredArmor(Color color) {
         setColorIcons();
         this.inv.setItem(28, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), LanguageHandler.getMessage("leather_helmet")));
         this.inv.setItem(29, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), LanguageHandler.getMessage("leather_chestplate")));
@@ -67,6 +51,7 @@ public class InventoryCreator {
 
         this.inv.setItem(33, createItem(ItemCreator.createItem(Material.LEATHER_HORSE_ARMOR, color), LanguageHandler.getMessage("leather_horse_armor")));
 
+        // ToDo: replace with something from minecraft-heads (to open url)
         //this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
@@ -104,11 +89,7 @@ public class InventoryCreator {
      */
     private ItemStack createItem(Material mat, String name) {
         ItemStack item = new ItemStack(mat, 1);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
-        item.setItemMeta(meta);
-
-        return item;
+        return createItem(item, name);
     }
 
     /**
@@ -122,7 +103,6 @@ public class InventoryCreator {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
         item.setItemMeta(meta);
-
         return item;
     }
 

@@ -3,10 +3,14 @@ package com.minecraftheads.leathercoloriserpro.commands;
 import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
 import com.minecraftheads.leathercoloriserpro.utils.Logger;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommandLeatherColoriserPro implements CommandExecutor {
 
@@ -26,16 +30,19 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
             // Default
             if (args.length == 0) {
                 InventoryCreator inv = new InventoryCreator();
-                inv.initializeItems();
+                inv.initializeUncoloredArmor();
                 inv.openInventory(player);
             }
             // Check if user provided an argument
             else if (args.length == 1) {
                 // check by regex if string matches HEX code
-                String regex = "[0-9a-fA-F]{6}$";
+                String regex = "^[#]?[0-9a-fA-F]{6}$";
+                if (args[0].contains("#")) {
+                    args[0] = args[0].replace("#", "");
+                }
                 if (args[0].matches(regex)) {
                     InventoryCreator inv = new InventoryCreator();
-                    inv.initializeItems(args[0]);
+                    inv.initializeColoredArmor(Color.fromRGB(Integer.parseInt(args[0], 16)));
                     inv.openInventory(player);
                 }
                 // invalid argument

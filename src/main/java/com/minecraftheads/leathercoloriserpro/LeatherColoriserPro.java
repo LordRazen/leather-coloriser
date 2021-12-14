@@ -4,12 +4,24 @@ import com.minecraftheads.leathercoloriserpro.commands.CommandLeatherColoriserPr
 import com.minecraftheads.leathercoloriserpro.listeners.InventoryListener;
 import com.minecraftheads.leathercoloriserpro.utils.Logger;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.File;
 import java.util.ResourceBundle;
 
 public final class LeatherColoriserPro extends JavaPlugin {
+
+    /**
+     * constructors for unittests
+     */
+    public LeatherColoriserPro() {
+        super();
+    }
+    protected LeatherColoriserPro(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+        super(loader, description, dataFolder, file);
+    }
 
     @Override
     public void onEnable() {
