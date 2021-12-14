@@ -1,5 +1,8 @@
-useHexCommand: "§6[§4LCP§6] §aEnter /lcp <HEX Color code>"
-requiredItemMissing: "§6[§4LCP§6] §cYou need to have the item in your inventory"
+error_invalid_command_sender: "/lcp can only be used by players"
+error_invalid_color: "§6[§4LCP§6] §aEnter /lcp <HEX Color code>"
+error_item_missing: "§6[§4LCP§6] §cYou need to have the item in your inventory"
+
+custom_color: "Enter Custom Color Code"
 
 yellow: "Yellow"
 orange: "Orange"
@@ -18,13 +21,8 @@ light_gray: "Light Gray"
 gray: "Gray"
 black: "Black"
 
-custom_color: "Enter Custom Color Code"
-
 leather_helmet: "Leather Helmet"
 leather_chestplate: "Leather Chestplate"
 leather_leggings: "Leather Leggings"
 leather_boots: "Leather Boots"
 leather_horse_armor: "Leather Horse Armor"
-
-error_invalid_command_sender: "/lcp can only be used by players"
-error_invalid_color: "Invalid HEX Color"

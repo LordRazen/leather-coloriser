@@ -79,7 +79,7 @@ public class InventoryListener implements Listener {
         // close inventory and send message to player how to use custom color codes
         if (clickedItem.getType().toString().equals("NAME_TAG")) {
             player.closeInventory();
-            player.sendMessage(LanguageHandler.getMessage("useHexCommand"));
+            player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
             //player.sendMessage("enter /lcp <HEX Color code>");
         }
         // Player chooses armor piece
@@ -114,7 +114,7 @@ public class InventoryListener implements Listener {
     private boolean checkRequirement(Player player, ItemStack item) {
         // check if player has item in inventory
         if (!player.getInventory().contains(new ItemStack(item.getType(), 1))) {
-            player.sendMessage(LanguageHandler.getMessage("requiredItemMissing"));
+            player.sendMessage(LanguageHandler.getMessage("error_item_missing"));
             return false;
         }
         return true;
