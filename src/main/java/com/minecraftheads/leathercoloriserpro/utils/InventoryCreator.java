@@ -25,10 +25,10 @@ public class InventoryCreator {
      */
     public void initializeItems() {
         setColorIcons();
-        this.inv.setItem(28, new ItemStack(Material.LEATHER_BOOTS, 1));
-        this.inv.setItem(29, new ItemStack(Material.LEATHER_LEGGINGS, 1));
-        this.inv.setItem(30, new ItemStack(Material.LEATHER_CHESTPLATE, 1));
-        this.inv.setItem(31, new ItemStack(Material.LEATHER_HELMET, 1));
+        this.inv.setItem(28, new ItemStack(Material.LEATHER_HELMET, 1));
+        this.inv.setItem(29, new ItemStack(Material.LEATHER_CHESTPLATE, 1));
+        this.inv.setItem(30, new ItemStack(Material.LEATHER_LEGGINGS, 1));
+        this.inv.setItem(31, new ItemStack(Material.LEATHER_BOOTS, 1));
 
         this.inv.setItem(33, new ItemStack(Material.LEATHER_HORSE_ARMOR, 1));
 

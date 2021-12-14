@@ -80,7 +80,6 @@ public class InventoryListener implements Listener {
         if (clickedItem.getType().toString().equals("NAME_TAG")) {
             player.closeInventory();
             player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
-            //player.sendMessage("enter /lcp <HEX Color code>");
         }
         // Player chooses armor piece
         else if (clickedItem.getType().toString().startsWith("LEATHER_")) {
@@ -97,6 +96,7 @@ public class InventoryListener implements Listener {
             inv.openInventory(player);
         }
         // Player cancels the LCP -> data cleanup
+        // TODO: Escape only!
         else if (clickedItem.getType().equals(Material.BARRIER)) {
             player.closeInventory();
             try {
@@ -135,6 +135,5 @@ public class InventoryListener implements Listener {
         try {
             SelectionHandler.removeColor(player);
         } catch (NullPointerException ignored) {}
-        player.closeInventory();
     }
 }
