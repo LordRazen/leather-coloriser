@@ -32,8 +32,6 @@ public class InventoryCreator {
         this.inv.setItem(39, new ItemStack(Material.LEATHER_BOOTS, 1));
 
         this.inv.setItem(41, new ItemStack(Material.LEATHER_HORSE_ARMOR, 1));
-
-       // this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
 
@@ -50,9 +48,6 @@ public class InventoryCreator {
         this.inv.setItem(39, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), LanguageHandler.getMessage("leather_boots")));
 
         this.inv.setItem(41, createItem(ItemCreator.createItem(Material.LEATHER_HORSE_ARMOR, color), LanguageHandler.getMessage("leather_horse_armor")));
-
-        // ToDo: replace with something from minecraft-heads (to open url)
-        //this.inv.setItem(53, createItem(Material.BARRIER, "Cancel"));
     }
 
     /**
@@ -81,19 +76,20 @@ public class InventoryCreator {
         this.inv.setItem(8, createItem(Material.WATER_BUCKET, LanguageHandler.getMessage("color_reset")));
         this.inv.setItem(17, createItem(Material.TARGET, LanguageHandler.getMessage("color_random")));
         this.inv.setItem(26, createItem(Material.NAME_TAG, LanguageHandler.getMessage("color_string")));
+
+        this.inv.setItem(53, createItem(Material.PUFFERFISH, "www.minecraft-heads.com"));
     }
 
 
     /**
      * Basic method to create ItemStack with name from Material
      *
-     * @param mat Material
+     * @param material Material
      * @param name String
      * @return ItemStack
      */
-    private ItemStack createItem(Material mat, String name) {
-        ItemStack item = new ItemStack(mat, 1);
-        return createItem(item, name);
+    private ItemStack createItem(Material material, String name) {
+        return createItem(new ItemStack(material, 1), name);
     }
 
     /**

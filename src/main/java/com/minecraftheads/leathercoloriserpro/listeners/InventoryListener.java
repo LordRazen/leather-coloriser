@@ -8,13 +8,18 @@ import com.minecraftheads.leathercoloriserpro.utils.ItemCreator;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Llama;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.material.Colorable;
 
 import java.util.Objects;
 import java.util.Random;
@@ -44,8 +49,13 @@ public class InventoryListener implements Listener {
         // set variable player to the one who clicked
         Player player = (Player) e.getWhoClicked();
 
+        // Get color from leather helmet and send it
+        ItemStack leatherHelmet = e.getView().getTopInventory().getItem(36);
+        LeatherArmorMeta meta = (LeatherArmorMeta) leatherHelmet.getItemMeta();
+        Color color = meta.getColor();
+
         // check what is clicked and perform action
-        handleClick(player, clickedItem);
+        handleClick(player, clickedItem, color);
 
     }
 
@@ -56,7 +66,8 @@ public class InventoryListener implements Listener {
      */
     @EventHandler
     public void onInventoryClick(final InventoryDragEvent e) {
-        if (InventoryHandler.getInventory().contains(e.getView().getTopInventory())) e.setCancelled(true);
+        if (InventoryHandler.getInventory().contains(e.getView().getTopInventory()))
+            e.setCancelled(true);
     }
 
     /**
@@ -77,8 +88,9 @@ public class InventoryListener implements Listener {
      * check what item is clicked and perform action depending on that
      * @param clickedItem ItemStack
      * @param player Player
+     * @param actualColor Color
      */
-    private void handleClick(Player player, ItemStack clickedItem) {
+    private void handleClick(Player player, ItemStack clickedItem, Color actualColor) {
         // close inventory and send message to player how to use custom color codes
         if (clickedItem.getType().toString().equals("NAME_TAG")) {
             player.closeInventory();
@@ -106,18 +118,23 @@ public class InventoryListener implements Listener {
         }
         // Choose color you want to have
         else if (clickedItem.getType().toString().endsWith("_DYE")) {
+
+            // Mix Colors if the color is not the default one
+            Color newColor = getColorFromDye(clickedItem.getType());
+            if(!actualColor.equals(Color.fromRGB(0xA06540))) {
+                newColor = newColor.mixColors(actualColor);
+            }
+
             // create the inventory for choosing the color
             InventoryCreator inv = new InventoryCreator();
-            inv.initializeColoredArmor(getColorFromDye(clickedItem.getType()));
+            inv.initializeColoredArmor(newColor);
             inv.openInventory(player);
         }
         // Player cancels the LCP -> data cleanup
         // TODO: open url to minecraft-heads
-        else if (clickedItem.getType().equals(Material.BARRIER)) {
+        else if (clickedItem.getType().equals(Material.PUFFERFISH)) {
             player.closeInventory();
-            try {
-                SelectionHandler.removeColor(player);
-            } catch (NullPointerException ignored) {}
+            player.sendMessage(LanguageHandler.getMessage("hardcoded URLs... no language handler!"));
         }
     }
 
@@ -132,7 +149,6 @@ public class InventoryListener implements Listener {
         if (player.getInventory().contains(new ItemStack(item.getType(), 1)))
             return true;
 
-        // TODO: UMBAU! RETURN TRUE NUR WENN ERS HAT; NICHT PER DEFAULT! TEST!
         player.sendMessage(LanguageHandler.getMessage("error_item_missing"));
         return false;
     }
@@ -145,6 +161,8 @@ public class InventoryListener implements Listener {
      */
     private void giveItem(Player player, ItemStack item) {
         // search for the first item in the inventory of the player which is the base item of the colored one
+
+        // TODO: CLEAN ITEMS!
         player.getInventory().clear(player.getInventory().first(new ItemStack(item.getType(), 1)));
         player.getInventory().addItem(item);
 
