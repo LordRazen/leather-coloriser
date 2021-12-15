@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class InventoryListener implements Listener {
 
@@ -83,6 +84,20 @@ public class InventoryListener implements Listener {
             player.closeInventory();
             player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
         }
+        // close inventory and send message to player how to use custom color codes
+        else if (clickedItem.getType().toString().equals("TARGET")) {
+            // create the inventory for choosing the color
+            Random obj = new Random();
+            InventoryCreator inv = new InventoryCreator();
+            inv.initializeColoredArmor(Color.fromRGB(obj.nextInt(0xffffff + 1)));
+            inv.openInventory(player);
+        }
+        // reset color
+        else if (clickedItem.getType().toString().equals("WATER_BUCKET")) {
+            InventoryCreator inv = new InventoryCreator();
+            inv.initializeUncoloredArmor();
+            inv.openInventory(player);
+        }
         // Player chooses armor piece
         else if (clickedItem.getType().toString().startsWith("LEATHER_")) {
             if (checkRequirement(player, clickedItem)) {
@@ -114,11 +129,12 @@ public class InventoryListener implements Listener {
      */
     private boolean checkRequirement(Player player, ItemStack item) {
         // check if player has item in inventory
-        if (!player.getInventory().contains(new ItemStack(item.getType(), 1))) {
-            player.sendMessage(LanguageHandler.getMessage("error_item_missing"));
-            return false;
-        }
-        return true;
+        if (player.getInventory().contains(new ItemStack(item.getType(), 1)))
+            return true;
+
+        // TODO: UMBAU! RETURN TRUE NUR WENN ERS HAT; NICHT PER DEFAULT! TEST!
+        player.sendMessage(LanguageHandler.getMessage("error_item_missing"));
+        return false;
     }
 
     /**

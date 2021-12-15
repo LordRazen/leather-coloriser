@@ -2,7 +2,9 @@ error_invalid_command_sender: "/lcp can only be used by players"
 error_invalid_color: "§6[§4LCP§6] §aEnter /lcp <HEX Color code>"
 error_item_missing: "§6[§4LCP§6] §cYou need to have the item in your inventory"
 
-custom_color: "Enter Custom Color Code"
+color_string: "Enter Custom Color Code"
+color_random: "Random Color"
+color_reset: "Reset Color"
 
 yellow: "Yellow"
 orange: "Orange"

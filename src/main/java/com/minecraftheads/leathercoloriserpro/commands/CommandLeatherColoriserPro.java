@@ -9,9 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class CommandLeatherColoriserPro implements CommandExecutor {
 
     /**
@@ -50,6 +47,7 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
                     player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
                 }
             } else {
+                player.sendMessage("XXX");
                 return false;
             }
 
