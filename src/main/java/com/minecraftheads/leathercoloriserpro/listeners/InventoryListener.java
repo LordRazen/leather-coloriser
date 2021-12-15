@@ -42,20 +42,20 @@ public class InventoryListener implements Listener {
         // Item cannot be removed
         e.setCancelled(true);
 
-        // verify current item is not null
+        // Verify current item is not null
         ItemStack clickedItem = e.getCurrentItem();
         if (clickedItem == null || clickedItem.getType().isAir()) return;
 
-        // set variable player to the one who clicked
+        // Get Player
         Player player = (Player) e.getWhoClicked();
 
-        // Get color from leather helmet and send it
+        // Get actual color
         ItemStack leatherHelmet = e.getView().getTopInventory().getItem(36);
         LeatherArmorMeta meta = (LeatherArmorMeta) leatherHelmet.getItemMeta();
-        Color color = meta.getColor();
+        Color actualColor = meta.getColor();
 
         // check what is clicked and perform action
-        handleClick(player, clickedItem, color);
+        handleClick(player, clickedItem, actualColor);
 
     }
 
@@ -112,9 +112,31 @@ public class InventoryListener implements Listener {
         }
         // Player chooses armor piece
         else if (clickedItem.getType().toString().startsWith("LEATHER_")) {
-            if (checkRequirement(player, clickedItem)) {
-                giveItem(player, clickedItem);
+            // TODO: Clean armor
+            // DEFAULT COLOR:
+            if(actualColor.equals(Color.fromRGB(0xA06540))) {
+                player.sendMessage("REMOVE COLOR");
+                ItemStack[] items = player.getInventory().getContents();
+                for (int i = 0; i < items.length; i++) {
+                    if(items[i].getType() == clickedItem.getType()) {
+                        LeatherArmorMeta meta = (LeatherArmorMeta) items[i].getItemMeta();
+                        if(!meta.getColor().equals(Color.fromRGB(0xA06540))) {
+                            player.getInventory().clear(i);
+                            player.getInventory().addItem(new ItemStack(clickedItem.getType(), 1));
+                            break;
+                        }
+                    }
+                }
+
             }
+            else {
+                player.sendMessage("COLOR");
+                if (checkRequirement(player, clickedItem)) {
+                    giveItem(player, clickedItem);
+                }
+            }
+
+
         }
         // Choose color you want to have
         else if (clickedItem.getType().toString().endsWith("_DYE")) {
