@@ -12,16 +12,6 @@ import java.io.File;
 
 public final class LeatherColoriserPro extends JavaPlugin {
 
-    /**
-     * constructors for unittests
-     */
-    public LeatherColoriserPro() {
-        super();
-    }
-    protected LeatherColoriserPro(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
-        super(loader, description, dataFolder, file);
-    }
-
     @Override
     public void onEnable() {
         Logger.info("LeatherColoriserPro starts...");

@@ -7,7 +7,7 @@ title: "§f§nLeather Coloriser PRO"
 error_invalid_command_sender: "lcp can only be used by players!"
 error_invalid_color: "§6[§4LCP§6] §aInvalid Argument - please enter a HEX Color:\n/lcp <HEX Color code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§6[§4LCP§6] §cYou need to have the item in your inventory"
-
+error_permission_missing: "§6[§4LCP§6] §cyou don't have the permission to do this"
 
 color_reset: "§fReset Color"
 color_random: "§fRandom Color"

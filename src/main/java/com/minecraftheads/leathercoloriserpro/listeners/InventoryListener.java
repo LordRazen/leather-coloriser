@@ -31,11 +31,11 @@ public class InventoryListener implements Listener {
         // Check where the click was
         if (Objects.equals(e.getClickedInventory(), e.getView().getTopInventory())) {
             // GUI
-            ClickHandler.onInventoryClickGUI(e, clickedItem);
+            ClickHandler.handleInventoryClickGUI(e, clickedItem);
         }
         else {
             // Inventory
-            ClickHandler.onInventoryClickInventory(e, clickedItem);
+            ClickHandler.handleInventoryClickInventory(e, clickedItem);
         }
     }
 
