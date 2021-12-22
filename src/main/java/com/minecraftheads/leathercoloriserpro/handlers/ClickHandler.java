@@ -20,7 +20,7 @@ public class ClickHandler {
      * @param e           InventoryClickEvent
      * @param clickedItem ItemStack
      */
-    public static void onInventoryClickGUI(InventoryClickEvent e, ItemStack clickedItem) {
+    public static void handleInventoryClickGUI(InventoryClickEvent e, ItemStack clickedItem) {
         // Get Player
         Player player = (Player) e.getWhoClicked();
 
@@ -39,7 +39,7 @@ public class ClickHandler {
      * @param e           InventoryClickEvent
      * @param clickedItem ItemStack
      */
-    public static void onInventoryClickInventory(InventoryClickEvent e, ItemStack clickedItem) {
+    public static void handleInventoryClickInventory(InventoryClickEvent e, ItemStack clickedItem) {
         // Abort if the clicked item in the players inventory is no colorizable leather item
         Material[] leatherItems = {Material.LEATHER_HELMET,
                 Material.LEATHER_CHESTPLATE,

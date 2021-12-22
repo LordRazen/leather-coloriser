@@ -10,5 +10,8 @@ commands:
   LCP:
     aliases: [ /lcp ]
     description: "Open LCP GUI"
-    permission: lcp.main
-    permission-message: "[LCP] you don't have the permission to do this TODO: WEG DAMIT, ÜBER LANGEUAGE HANDLER!"
+
+permissions:
+  lcp.main:
+    default: op
+    description: "Allows users to use the LCP"

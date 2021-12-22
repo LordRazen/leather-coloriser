@@ -9,6 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class CommandLeatherColoriserPro implements CommandExecutor {
 
     /**
@@ -29,6 +31,13 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+
+        // check permissions
+        if (!player.hasPermission("lcp.main")) {
+            player.sendMessage(LanguageHandler.getMessage("error_permission_missing"));
+            return true;
+        }
+
         // Default / No arguments
         if (args.length == 0) {
             new InventoryCreator().openInventory(player);
