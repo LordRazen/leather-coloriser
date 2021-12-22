@@ -1,7 +1,6 @@
 package com.minecraftheads.leathercoloriserpro.handlers;
 
 import org.bukkit.Color;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -15,7 +14,7 @@ public class SelectionHandler {
     private final static HashMap<Player, Color> ColorSelection = new HashMap<Player, Color>();
 
     /**
-     * Adds entry to the HashMap with Player as key
+     * Adds entry to the HashMap with Player as key - TODO: NEEDED?
      * @param p Player
      * @param color Color
      */
@@ -28,14 +27,14 @@ public class SelectionHandler {
     public static void removeColor(Player p) { ColorSelection.remove(p); }
 
     /**
-     * Return the Material which matches the Player
+     * Return the Material which matches the Player - TODO: NEEDED?
      * @param p Player
      * @return Material
      */
     public static Color getColor(Player p) { return ColorSelection.get(p); }
 
     /**
-     * Get complete list of Player -> Material relations
+     * Get complete list of Player -> Material relations - TODO: NEEDED?
      * @return HashMap<Player, Material>
      */
     public static HashMap<Player, Color> getColorList() { return ColorSelection; }

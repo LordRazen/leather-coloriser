@@ -1,28 +1,53 @@
 package com.minecraftheads.leathercoloriserpro.utils;
 
+import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
 import org.bukkit.Color;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.MapMeta;
 
 public class ItemCreator {
     /**
      * Creates a leather armor ItemStack with a color
-     * @param item ItemStack
-     * @param color Color
+     *
+     * @param material Material
+     * @param name     String
+     * @param color    Color
      * @return ItemStack
      */
-    public static ItemStack createItem(Material item, Color color) {
-        ItemStack armor = new ItemStack(item, 1);
+    public static ItemStack createDyedItem(Material material, String name, Color color) {
+        ItemStack armor = renameItem(new ItemStack(material, 1), LanguageHandler.getMessage(name));
         LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
         if (meta != null) {
             meta.setColor(color);
         }
         armor.setItemMeta(meta);
         return armor;
+    }
+
+    /**
+     * Basic method to create ItemStack with name from Material
+     *
+     * @param material Material
+     * @param name     String
+     * @return ItemStack
+     */
+    public static ItemStack createItem(Material material, String name) {
+        return renameItem(new ItemStack(material, 1), LanguageHandler.getMessage(name));
+    }
+
+    /**
+     * Change the name of a ItemStack
+     *
+     * @param item ItemStack
+     * @param name String
+     * @return ItemStack
+     */
+    private static ItemStack renameItem(ItemStack item, String name) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        item.setItemMeta(meta);
+        return item;
     }
 }

@@ -11,103 +11,102 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class InventoryCreator {
-    private final Inventory inv;
+    private Inventory inv;
+    private Color color;
 
     /**
-     * Constructor creates a new inventory
+     * Constructor
      */
     public InventoryCreator() {
-        this.inv = Bukkit.createInventory(null, 54, "Leather Coloriser Pro");
+        this.color = ColorUtils.DEFAULT_COLOR;
+        initializeInventory();
     }
 
     /**
-     * create the inventory with the default items for selection (opens with uncolored armor)
+     * Constructor
      *
+     * @param color Color
      */
-    public void initializeUncoloredArmor() {
-        setColorIcons();
-        this.inv.setItem(36, new ItemStack(Material.LEATHER_HELMET, 1));
-        this.inv.setItem(37, new ItemStack(Material.LEATHER_CHESTPLATE, 1));
-        this.inv.setItem(38, new ItemStack(Material.LEATHER_LEGGINGS, 1));
-        this.inv.setItem(39, new ItemStack(Material.LEATHER_BOOTS, 1));
-
-        this.inv.setItem(41, new ItemStack(Material.LEATHER_HORSE_ARMOR, 1));
+    public InventoryCreator(Color color) {
+        this.color = color;
+        initializeInventory();
     }
-
 
     /**
      * open the inventory with the colored items, color is set via DYE selection
-     *
-     * @param color Material
      */
-    public void initializeColoredArmor(Color color) {
+    public void initializeInventory() {
+        this.inv = Bukkit.createInventory(null, 54, LanguageHandler.getMessage("title"));
+        setLeatherIcons();
         setColorIcons();
-        this.inv.setItem(36, createItem(ItemCreator.createItem(Material.LEATHER_HELMET, color), LanguageHandler.getMessage("leather_helmet")));
-        this.inv.setItem(37, createItem(ItemCreator.createItem(Material.LEATHER_CHESTPLATE, color), LanguageHandler.getMessage("leather_chestplate")));
-        this.inv.setItem(38, createItem(ItemCreator.createItem(Material.LEATHER_LEGGINGS, color), LanguageHandler.getMessage("leather_leggings")));
-        this.inv.setItem(39, createItem(ItemCreator.createItem(Material.LEATHER_BOOTS, color), LanguageHandler.getMessage("leather_boots")));
-
-        this.inv.setItem(41, createItem(ItemCreator.createItem(Material.LEATHER_HORSE_ARMOR, color), LanguageHandler.getMessage("leather_horse_armor")));
+        setConfigIcons();
+        setWatermark();
     }
 
     /**
-     * generates the Dys slots
+     * Generate Leather Item Icons
+     */
+    private void setLeatherIcons() {
+        this.inv.setItem(0, ItemCreator.createDyedItem(Material.LEATHER_HELMET, "leather_helmet", color));
+        this.inv.setItem(1, ItemCreator.createDyedItem(Material.LEATHER_CHESTPLATE, "leather_chestplate", color));
+        this.inv.setItem(2, ItemCreator.createDyedItem(Material.LEATHER_LEGGINGS, "leather_leggings", color));
+        this.inv.setItem(3, ItemCreator.createDyedItem(Material.LEATHER_BOOTS, "leather_boots", color));
+        this.inv.setItem(4, ItemCreator.createDyedItem(Material.LEATHER_HORSE_ARMOR, "leather_horse_armor", color));
+    }
+
+    /**
+     * Generate Dye Icons
      */
     private void setColorIcons() {
-        this.inv.setItem(0, createItem(Material.YELLOW_DYE, LanguageHandler.getMessage("yellow")));
-        this.inv.setItem(1, createItem(Material.ORANGE_DYE, LanguageHandler.getMessage("orange")));
-        this.inv.setItem(2, createItem(Material.RED_DYE, LanguageHandler.getMessage("red")));
-        this.inv.setItem(3, createItem(Material.BROWN_DYE, LanguageHandler.getMessage("brown")));
-        this.inv.setItem(4, createItem(Material.LIME_DYE, LanguageHandler.getMessage("lime")));
-        this.inv.setItem(5, createItem(Material.GREEN_DYE, LanguageHandler.getMessage("green")));
+        this.inv.setItem(18, ItemCreator.createItem(Material.YELLOW_DYE, "yellow"));
+        this.inv.setItem(19, ItemCreator.createItem(Material.ORANGE_DYE, "orange"));
+        this.inv.setItem(20, ItemCreator.createItem(Material.RED_DYE, "red"));
+        this.inv.setItem(21, ItemCreator.createItem(Material.BROWN_DYE, "brown"));
+        this.inv.setItem(22, ItemCreator.createItem(Material.LIME_DYE, "lime"));
+        this.inv.setItem(23, ItemCreator.createItem(Material.GREEN_DYE, "green"));
 
-        this.inv.setItem(9, createItem(Material.PINK_DYE, LanguageHandler.getMessage("pink")));
-        this.inv.setItem(10, createItem(Material.MAGENTA_DYE, LanguageHandler.getMessage("magenta")));
-        this.inv.setItem(11, createItem(Material.PURPLE_DYE, LanguageHandler.getMessage("purple")));
-        this.inv.setItem(12, createItem(Material.LIGHT_BLUE_DYE, LanguageHandler.getMessage("light_blue")));
-        this.inv.setItem(13, createItem(Material.CYAN_DYE, LanguageHandler.getMessage("cyan")));
-        this.inv.setItem(14, createItem(Material.BLUE_DYE, LanguageHandler.getMessage("blue")));
+        this.inv.setItem(27, ItemCreator.createItem(Material.PINK_DYE, "pink"));
+        this.inv.setItem(28, ItemCreator.createItem(Material.MAGENTA_DYE, "magenta"));
+        this.inv.setItem(29, ItemCreator.createItem(Material.PURPLE_DYE, "purple"));
+        this.inv.setItem(30, ItemCreator.createItem(Material.LIGHT_BLUE_DYE, "light_blue"));
+        this.inv.setItem(31, ItemCreator.createItem(Material.CYAN_DYE, "cyan"));
+        this.inv.setItem(32, ItemCreator.createItem(Material.BLUE_DYE, "blue"));
 
-        this.inv.setItem(19, createItem(Material.WHITE_DYE, LanguageHandler.getMessage("white")));
-        this.inv.setItem(20, createItem(Material.LIGHT_GRAY_DYE, LanguageHandler.getMessage("light_gray")));
-        this.inv.setItem(21, createItem(Material.GRAY_DYE, LanguageHandler.getMessage("gray")));
-        this.inv.setItem(22, createItem(Material.BLACK_DYE, LanguageHandler.getMessage("black")));
-
-        this.inv.setItem(8, createItem(Material.WATER_BUCKET, LanguageHandler.getMessage("color_reset")));
-        this.inv.setItem(17, createItem(Material.TARGET, LanguageHandler.getMessage("color_random")));
-        this.inv.setItem(26, createItem(Material.NAME_TAG, LanguageHandler.getMessage("color_string")));
-
-        this.inv.setItem(53, createItem(Material.PUFFERFISH, "www.minecraft-heads.com"));
-    }
-
-
-    /**
-     * Basic method to create ItemStack with name from Material
-     *
-     * @param material Material
-     * @param name String
-     * @return ItemStack
-     */
-    private ItemStack createItem(Material material, String name) {
-        return createItem(new ItemStack(material, 1), name);
+        this.inv.setItem(37, ItemCreator.createItem(Material.WHITE_DYE, "white"));
+        this.inv.setItem(38, ItemCreator.createItem(Material.LIGHT_GRAY_DYE, "light_gray"));
+        this.inv.setItem(39, ItemCreator.createItem(Material.GRAY_DYE, "gray"));
+        this.inv.setItem(40, ItemCreator.createItem(Material.BLACK_DYE, "black"));
     }
 
     /**
-     * change the name of a ItemStack
-     *
-     * @param item ItemStack
-     * @param name String
-     * @return ItemStack
+     * Set Config Icons
      */
-    private ItemStack createItem(ItemStack item, String name) {
+    private void setConfigIcons() {
+        this.inv.setItem(6, ItemCreator.createItem(Material.WATER_BUCKET, "color_reset"));
+        this.inv.setItem(7, ItemCreator.createItem(Material.TARGET, "color_random"));
+        this.inv.setItem(8, ItemCreator.createItem(Material.NAME_TAG, "color_string"));
+
+        this.inv.setItem(16, ItemCreator.createItem(Material.PURPLE_CONCRETE, "decrease_hue"));
+        this.inv.setItem(17, ItemCreator.createItem(Material.RED_TERRACOTTA, "increase_hue"));
+        this.inv.setItem(25, ItemCreator.createItem(Material.BLUE_STAINED_GLASS, "decrease_saturation"));
+        this.inv.setItem(26, ItemCreator.createItem(Material.BLUE_CONCRETE, "increase_saturation"));
+        this.inv.setItem(34, ItemCreator.createItem(Material.BLACK_CONCRETE, "decrease_brightness"));
+        this.inv.setItem(35, ItemCreator.createItem(Material.WHITE_CONCRETE, "increase_brightness"));
+    }
+
+    /**
+     * Set MCHeads Watermark
+     */
+    private void setWatermark() {
+        ItemStack item = new ItemStack(Material.PUFFERFISH, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
+        meta.setDisplayName("www.minecraft-heads.com");
         item.setItemMeta(meta);
-        return item;
+        this.inv.setItem(53, item);
     }
 
     /**
-     * open the inventory for given player
+     * Open the inventory for given player
      *
      * @param player Player
      */

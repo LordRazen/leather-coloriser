@@ -14,47 +14,44 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
     /**
      * Initiates LCP when /lcp is entered
      *
-     * @param sender CommandSender
+     * @param sender  CommandSender
      * @param command Command
-     * @param label String
-     * @param args String
+     * @param label   String
+     * @param args    String
      * @return
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            // Default
-            if (args.length == 0) {
-                InventoryCreator inv = new InventoryCreator();
-                inv.initializeUncoloredArmor();
-                inv.openInventory(player);
-            }
-            // Check if user provided an argument
-            else if (args.length == 1) {
-                // check by regex if string matches HEX code
-                String regex = "^[#]?[0-9a-fA-F]{6}$";
-                if (args[0].contains("#")) {
-                    args[0] = args[0].replace("#", "");
-                }
-                if (args[0].matches(regex)) {
-                    InventoryCreator inv = new InventoryCreator();
-                    inv.initializeColoredArmor(Color.fromRGB(Integer.parseInt(args[0], 16)));
-                    inv.openInventory(player);
-                }
-                // invalid argument
-                else {
-                    player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
-                }
-            } else {
-                player.sendMessage("XXX");
-                return false;
-            }
-
-        } else {
+        // Abort if Sender is no player
+        if (!(sender instanceof Player)) {
             Logger.info(LanguageHandler.getMessage("error_invalid_command_sender"));
+            return true;
+        }
+
+        Player player = (Player) sender;
+        // Default / No arguments
+        if (args.length == 0) {
+            new InventoryCreator().openInventory(player);
+        }
+        // One Argument
+        else if (args.length == 1) {
+            // Check by regex if string matches HEX Color Code
+            String regex = "^[#]?[0-9a-fA-F]{6}$";
+            if (args[0].contains("#")) {
+                args[0] = args[0].replace("#", "");
+            }
+            if (args[0].matches(regex)) {
+                new InventoryCreator(Color.fromRGB(Integer.parseInt(args[0], 16))).openInventory(player);
+            }
+            // Invalid Color
+            else {
+                player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
+            }
+        }
+        // More arguments - invalid
+        else {
+            player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
         }
         return true;
     }
-
 }

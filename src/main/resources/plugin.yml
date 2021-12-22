@@ -8,8 +8,7 @@ description: This plugin lets players choose the color of leather armor by basic
 website: https://minecraft-heads.com
 commands:
   LCP:
-    aliases:  [/lcp]
+    aliases: [ /lcp ]
     description: "Open LCP GUI"
     permission: lcp.main
-    permission-message: "[LCP] you don't have the permission to do this"
-    usage: "just enter /lcp"
+    permission-message: "[LCP] you don't have the permission to do this TODO: WEG DAMIT, ÜBER LANGEUAGE HANDLER!"

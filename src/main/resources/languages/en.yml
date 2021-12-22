@@ -1,10 +1,24 @@
-error_invalid_command_sender: "/lcp can only be used by players"
-error_invalid_color: "§6[§4LCP§6] §aEnter /lcp <HEX Color code>"
+# Minecraft Colors:
+# https://minecraft.fandom.com/wiki/Classic_server_protocol#Color_codes
+
+prefix: "§6[§4LCP§6] "
+title: "§f§nLeather Coloriser PRO"
+
+error_invalid_command_sender: "lcp can only be used by players!"
+error_invalid_color: "§6[§4LCP§6] §aInvalid Argument - please enter a HEX Color:\n/lcp <HEX Color code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§6[§4LCP§6] §cYou need to have the item in your inventory"
 
-color_string: "Enter Custom Color Code"
-color_random: "Random Color"
-color_reset: "Reset Color"
+
+color_reset: "§fReset Color"
+color_random: "§fRandom Color"
+color_string: "§fEnter RGB Color"
+
+decrease_hue: "§7(§c-§7) §fDecrease Hue"
+increase_hue: "§7(§a+§7) §fIncrease Hue"
+decrease_saturation: "§7(§c-§7) §fDecrease Saturation"
+increase_saturation: "§7(§a+§7) §fIncrease Saturation"
+decrease_brightness: "§7(§c-§7) §fDecrease Brightness"
+increase_brightness: "§7(§a+§7) §fIncrease Brightness"
 
 yellow: "Yellow"
 orange: "Orange"
