@@ -1,25 +1,24 @@
-package com.minecraftheads.leathercoloriserpro;
+package com.minecraftheads.leathercoloriser;
 
-import com.minecraftheads.leathercoloriserpro.commands.CommandLeatherColoriserPro;
-import com.minecraftheads.leathercoloriserpro.listeners.InventoryListener;
-import com.minecraftheads.leathercoloriserpro.utils.Logger;
+import com.minecraftheads.leathercoloriser.commands.CommandLeatherColoriser;
+import com.minecraftheads.leathercoloriser.listeners.InventoryListener;
+import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.File;
 
-public final class LeatherColoriserPro extends JavaPlugin {
+public final class LeatherColoriser extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Logger.info("LeatherColoriserPro starts...");
+        Logger.setPrefix("[LC]");
+        Logger.info("LeatherColoriser starts...");
         checkConfig();
         // Plugin startup logic
 
         // Register Commands
-        this.getCommand("LCP").setExecutor(new CommandLeatherColoriserPro());
+        this.getCommand("LC").setExecutor(new CommandLeatherColoriser());
 
         // Register Listener
         // this.getServer().getPluginManager().registerEvents(new LCPInventory(), this);

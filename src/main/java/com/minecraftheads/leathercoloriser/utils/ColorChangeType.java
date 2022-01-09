@@ -1,4 +1,4 @@
-package com.minecraftheads.leathercoloriserpro.utils;
+package com.minecraftheads.leathercoloriser.utils;
 
 public enum ColorChangeType {
     DECREASE_HUE,

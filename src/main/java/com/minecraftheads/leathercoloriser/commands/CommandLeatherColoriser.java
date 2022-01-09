@@ -1,20 +1,18 @@
-package com.minecraftheads.leathercoloriserpro.commands;
+package com.minecraftheads.leathercoloriser.commands;
 
-import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
-import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
-import com.minecraftheads.leathercoloriserpro.utils.Logger;
+import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
+import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
+import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Objects;
-
-public class CommandLeatherColoriserPro implements CommandExecutor {
+public class CommandLeatherColoriser implements CommandExecutor {
 
     /**
-     * Initiates LCP when /lcp is entered
+     * Initiates LCP when /lc is entered
      *
      * @param sender  CommandSender
      * @param command Command
@@ -33,7 +31,7 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
         Player player = (Player) sender;
 
         // check permissions
-        if (!player.hasPermission("lcp.main")) {
+        if (!player.hasPermission("lc.main")) {
             player.sendMessage(LanguageHandler.getMessage("error_permission_missing"));
             return true;
         }

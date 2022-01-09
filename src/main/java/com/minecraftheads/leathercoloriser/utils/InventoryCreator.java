@@ -1,7 +1,7 @@
-package com.minecraftheads.leathercoloriserpro.utils;
+package com.minecraftheads.leathercoloriser.utils;
 
-import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
-import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
+import com.minecraftheads.leathercoloriser.handlers.InventoryHandler;
+import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

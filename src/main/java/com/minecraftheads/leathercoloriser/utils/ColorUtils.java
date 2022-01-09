@@ -1,4 +1,4 @@
-package com.minecraftheads.leathercoloriserpro.utils;
+package com.minecraftheads.leathercoloriser.utils;
 
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
