@@ -1,6 +1,8 @@
 package com.minecraftheads.leathercoloriser.handlers;
 
+import com.minecraftheads.leathercoloriser.data.InventoryMapping;
 import com.minecraftheads.leathercoloriser.utils.ColorChangeType;
+import com.minecraftheads.leathercoloriser.utils.ColorChanger;
 import com.minecraftheads.leathercoloriser.utils.ColorUtils;
 import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
 import org.bukkit.Color;
@@ -21,16 +23,13 @@ public class ClickHandler {
      * @param clickedItem ItemStack
      */
     public static void handleInventoryClickGUI(InventoryClickEvent e, ItemStack clickedItem) {
-        // Get Player
-        Player player = (Player) e.getWhoClicked();
-
         // Get actual color
         ItemStack leatherHelmet = e.getView().getTopInventory().getItem(0);
         LeatherArmorMeta meta = (LeatherArmorMeta) leatherHelmet.getItemMeta();
         Color actualColor = meta.getColor();
 
         // check what is clicked and perform action
-        handleClick(player, clickedItem, actualColor);
+        handleClick(e, actualColor);
     }
 
     /**
@@ -63,21 +62,48 @@ public class ClickHandler {
     /**
      * check what item is clicked and perform action depending on that
      *
-     * @param clickedItem ItemStack
-     * @param player      Player
+     * @param e InventoryClickEvent
      * @param actualColor Color
      */
-    private static void handleClick(Player player, ItemStack clickedItem, Color actualColor) {
-        // Close inventory and send message to player how to use custom color codes
-        if (clickedItem.getType().toString().equals("NAME_TAG")) {
-            player.closeInventory();
-            player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
-        }
+    private static void handleClick(InventoryClickEvent e, Color actualColor) {
+        Player player = (Player) e.getWhoClicked();
+        ItemStack clickedItem = e.getCurrentItem();
 
-        // Close inventory and send message to player how to use custom color codes
-        else if (clickedItem.getType().toString().equals("TARGET")) {
-            Random obj = new Random();
-            new InventoryCreator(Color.fromRGB(obj.nextInt(0xffffff + 1))).openInventory(player);
+
+        InventoryMapping im = InventoryMapping.getBySlot(e.getSlot());
+        if (im != null) {
+
+            switch (im.getAction()) {
+                // generate random color
+                case ("randomColor"):
+                    Random obj = new Random();
+                    new InventoryCreator(Color.fromRGB(obj.nextInt(0xffffff + 1))).openInventory(player);
+                    break;
+                // Close inventory and send message to player how to use custom color codes
+                case ("hexCommand"):
+                    player.closeInventory();
+                    player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
+                    break;
+                case ("decrease_hue"):
+                    new InventoryCreator(ColorChanger.DECREASE_HUE.apply(actualColor)).openInventory(player);
+                    break;
+                case ("increase_hue"):
+                    new InventoryCreator(ColorChanger.INCREASE_HUE.apply(actualColor)).openInventory(player);
+                    break;
+                case ("decrease_saturation"):
+                    new InventoryCreator(ColorChanger.INCREASE_SATURATION.apply(actualColor)).openInventory(player);
+                    break;
+                case ("increase_saturation"):
+                    new InventoryCreator(ColorChanger.DECREASE_SATURATION.apply(actualColor)).openInventory(player);
+                    break;
+                case ("decrease_brightness"):
+                    new InventoryCreator(ColorChanger.DECREASE_BRIGHTNESS.apply(actualColor)).openInventory(player);
+                    break;
+                case ("increase_brightness"):
+                    new InventoryCreator(ColorChanger.INCREASE_BRIGHTNESS.apply(actualColor)).openInventory(player);
+                    break;
+            }
+
         }
 
         // Player chooses armor piece
@@ -137,35 +163,6 @@ public class ClickHandler {
             new InventoryCreator(newColor).openInventory(player);
         }
 
-        // Increase Hue
-        else if (clickedItem.getType().equals(Material.RED_TERRACOTTA)) {
-            new InventoryCreator(ColorUtils.changeColor(actualColor, ColorChangeType.DECREASE_HUE)).openInventory(player);
-        }
-
-        // Decrease Hue
-        else if (clickedItem.getType().equals(Material.PURPLE_CONCRETE)) {
-            new InventoryCreator(ColorUtils.changeColor(actualColor, ColorChangeType.INCREASE_HUE)).openInventory(player);
-        }
-
-        // Decrease Saturation
-        else if (clickedItem.getType().equals(Material.BLUE_STAINED_GLASS)) {
-            new InventoryCreator(ColorUtils.changeColor(actualColor, ColorChangeType.DECREASE_SATURATION)).openInventory(player);
-        }
-
-        // Increase Saturation
-        else if (clickedItem.getType().equals(Material.BLUE_CONCRETE)) {
-            new InventoryCreator(ColorUtils.changeColor(actualColor, ColorChangeType.INCREASE_SATURATION)).openInventory(player);
-        }
-
-        // Decrease Brightness
-        else if (clickedItem.getType().equals(Material.BLACK_CONCRETE)) {
-            new InventoryCreator(ColorUtils.changeColor(actualColor, ColorChangeType.DECREASE_BRIGHTNESS)).openInventory(player);
-        }
-
-        // Increase Brightness
-        else if (clickedItem.getType().equals(Material.WHITE_CONCRETE)) {
-            new InventoryCreator(ColorUtils.changeColor(actualColor, ColorChangeType.INCREASE_BRIGHTNESS)).openInventory(player);
-        }
     }
 
     /**

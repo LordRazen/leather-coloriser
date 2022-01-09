@@ -34,7 +34,7 @@ public class ItemCreator {
      * @return ItemStack
      */
     public static ItemStack createItem(Material material, String name) {
-        return renameItem(new ItemStack(material, 1), LanguageHandler.getMessage(name));
+        return renameItem(new ItemStack(material, 1), name);
     }
 
     /**
@@ -44,9 +44,9 @@ public class ItemCreator {
      * @param name String
      * @return ItemStack
      */
-    private static ItemStack renameItem(ItemStack item, String name) {
+    public static ItemStack renameItem(ItemStack item, String name) {
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
+        meta.setDisplayName(LanguageHandler.getMessage(name));
         item.setItemMeta(meta);
         return item;
     }

@@ -83,7 +83,7 @@ public class InventoryCreator {
      */
     private void setConfigIcons() {
         this.inv.setItem(6, ItemCreator.createItem(Material.WATER_BUCKET, "color_reset"));
-        this.inv.setItem(7, ItemCreator.createItem(Material.TARGET, "color_random"));
+        this.inv.setItem(7, ItemCreator.renameItem(CustomHeads.RANDOM.asItemStack(), "color_random"));
         this.inv.setItem(8, ItemCreator.createItem(Material.NAME_TAG, "color_string"));
 
         this.inv.setItem(16, ItemCreator.createItem(Material.PURPLE_CONCRETE, "decrease_hue"));
