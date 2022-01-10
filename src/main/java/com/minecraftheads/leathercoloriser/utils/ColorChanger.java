@@ -1,5 +1,6 @@
 package com.minecraftheads.leathercoloriser.utils;
 
+import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
 import org.bukkit.Color;
 
 public enum ColorChanger {

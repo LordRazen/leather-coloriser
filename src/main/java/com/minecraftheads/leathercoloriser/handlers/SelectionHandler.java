@@ -18,7 +18,7 @@ public class SelectionHandler {
      * @param p Player
      * @param color Color
      */
-    public static void addColor(Player p, Color color) { ColorSelection.put(p, color); }
+    public static void setColor(Player p, Color color) { ColorSelection.put(p, color); }
 
     /**
      * Remove entry from the Hashmap

@@ -1,10 +1,10 @@
 package com.minecraftheads.leathercoloriser.handlers;
 
+import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
 import com.minecraftheads.leathercoloriser.data.InventoryMapping;
-import com.minecraftheads.leathercoloriser.utils.ColorChangeType;
 import com.minecraftheads.leathercoloriser.utils.ColorChanger;
-import com.minecraftheads.leathercoloriser.utils.ColorUtils;
 import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
+import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -102,6 +102,19 @@ public class ClickHandler {
                 case ("increase_brightness"):
                     new InventoryCreator(ColorChanger.INCREASE_BRIGHTNESS.apply(actualColor)).openInventory(player);
                     break;
+                case ("reset"):
+                    new InventoryCreator().openInventory(player);
+                    break;
+                case ("dye"):
+                    // Mix Colors if the color is not the default one
+                    Color newColor = DyeColorMapping.getColorByMat(im.getMaterial());
+                    if (!actualColor.equals(DyeColorMapping.DEFAULT.getColor())) {
+                        newColor = newColor.mixColors(actualColor);
+                    }
+
+                    // Create the inventory for choosing the color
+                    new InventoryCreator(newColor).openInventory(player);
+                    break;
             }
 
         }
@@ -110,12 +123,12 @@ public class ClickHandler {
         else if (clickedItem.getType().toString().startsWith("LEATHER_")) {
 
             // Clean Armor
-            if (actualColor.equals(ColorUtils.DEFAULT_COLOR)) {
+            if (actualColor.equals(DyeColorMapping.DEFAULT.getColor())) {
                 ItemStack[] items = player.getInventory().getContents();
                 for (int i = 0; i < items.length; i++) {
                     if (items[i] != null && items[i].getType() == clickedItem.getType()) {
                         LeatherArmorMeta meta = (LeatherArmorMeta) items[i].getItemMeta();
-                        if (!meta.getColor().equals(ColorUtils.DEFAULT_COLOR)) {
+                        if (!meta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) {
                             player.getInventory().clear(i);
                             player.getInventory().addItem(new ItemStack(clickedItem.getType(), 1));
                             break;
@@ -143,24 +156,11 @@ public class ClickHandler {
             player.sendMessage("§6[§4LCP§6] §aGet more plugins for detailed decoration at\n§3www.minecraft-heads.com");
         }
 
-        // HANDLE COLOR CHANGES
-
-        // Reset color
-        else if (clickedItem.getType().toString().equals("WATER_BUCKET")) {
-            new InventoryCreator().openInventory(player);
-        }
 
         // Choose color you want to have
         else if (clickedItem.getType().toString().endsWith("_DYE")) {
 
-            // Mix Colors if the color is not the default one
-            Color newColor = ColorUtils.getColorFromDye(clickedItem.getType());
-            if (!actualColor.equals(ColorUtils.DEFAULT_COLOR)) {
-                newColor = newColor.mixColors(actualColor);
-            }
-
-            // Create the inventory for choosing the color
-            new InventoryCreator(newColor).openInventory(player);
+            ;
         }
 
     }
