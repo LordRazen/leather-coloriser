@@ -3,17 +3,16 @@ package com.minecraftheads.leathercoloriser.data;
 import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
 import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriser.utils.CustomHeads;
-import com.minecraftheads.leathercoloriser.utils.ItemCreator;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.util.Map;
 
 public enum InventoryMapping {
     // Control units
-    RESET(7, Material.WATER_BUCKET, "color_reset", "reset"),
+    RESET(6, Material.WATER_BUCKET, "color_reset", "reset"),
     RANDOM(7, CustomHeads.RANDOM.asMaterial(), "random_color", "randomColor"),
     HEXCOMMAND(8, Material.NAME_TAG, "color_string", "hexCommand"),
     DECREASE_HUE(16, Material.PURPLE_CONCRETE, "decrease_hue", "decrease_hue"),
@@ -39,7 +38,13 @@ public enum InventoryMapping {
     WHITE_DYE(37, Material.WHITE_DYE, "white", "dye"),
     LIGHT_GRAY_DYE(38, Material.LIGHT_GRAY_DYE, "light_gray", "dye"),
     GRAY_DYE(39, Material.GRAY_DYE, "gray", "dye"),
-    BLACK_DYE(40, Material.BLACK_DYE, "black", "dye")
+    BLACK_DYE(40, Material.BLACK_DYE, "black", "dye"),
+
+    LEATHER_HELMET(0, Material.LEATHER_HELMET, "leather_helmet", "armor"),
+    LEATHER_CHESTPLATE(1, Material.LEATHER_CHESTPLATE, "leather_chestplate", "armor"),
+    LEATHER_LEGGINGS(2, Material.LEATHER_LEGGINGS, "leather_leggings", "armor"),
+    LEATHER_BOOTS(3, Material.LEATHER_BOOTS, "leather_boots", "armor"),
+    LEATHER_HORSE_ARMOR(4, Material.LEATHER_HORSE_ARMOR, "leather_horse_armor", "armor")
     ;
 
 
@@ -48,6 +53,15 @@ public enum InventoryMapping {
     private String name;
     private String action;
 
+
+    /**
+     * Constructor
+     *
+     * @param slot int
+     * @param mat Material
+     * @param name String
+     * @param action String
+     */
     InventoryMapping(int slot, Material mat, String name, String action) {
         this.slot = slot;
         this.mat = mat;
@@ -55,21 +69,56 @@ public enum InventoryMapping {
         this.action = action;
     }
 
+    /**
+     * Returns the action of the given enum
+     * @return String
+     */
     public String getAction(){
         return this.action;
     }
+
+    /**
+     * returns the slot number of the given enum
+     * @return int
+     */
     public int getSlot() { return this.slot; }
-    public String getName() { return this.name; }
+
+    /**
+     * returns the Material of the given enum
+     * @return Material
+     */
     public Material getMaterial() { return this.mat; }
 
-    public ItemStack getItemStack() {
-        ItemStack is = new ItemStack(mat, 1);
-        ItemMeta isMeta = is.getItemMeta();
+    /**
+     * returns the ItemStack (colored if armor)
+     * @param p Player
+     * @return ItemStack
+     */
+    public ItemStack getItemStack(Player p) {
+        ItemStack item = new ItemStack(mat, 1);
+        // If item is the Random head overwrite it with CustomHead
+        if (action.equals("randomColor")) {
+            item = CustomHeads.RANDOM.asItemStack();
+        }
+        // set displayname
+        ItemMeta isMeta = item.getItemMeta();
         isMeta.setDisplayName(LanguageHandler.getMessage(name));
-        is.setItemMeta(isMeta);
-        return is;
+        item.setItemMeta(isMeta);
+
+        // if selected piece is an armor piece, color it and return the colored item
+        if (action.equals("armor")) {
+            LeatherArmorMeta laMeta = (LeatherArmorMeta) item.getItemMeta();
+            laMeta.setColor(SelectionHandler.getColor(p));
+            item.setItemMeta(laMeta);
+        }
+        return item;
     }
 
+    /**
+     * returns the enum by given Slot (needed to find by clicked slot)
+     * @param slot int
+     * @return InventoryMapping
+     */
     public static InventoryMapping getBySlot(int slot) {
         for (InventoryMapping im : InventoryMapping.values()) {
             if (im.slot == slot) {

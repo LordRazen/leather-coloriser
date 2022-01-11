@@ -5,7 +5,7 @@ prefix: "§6[§4LC§6] "
 title: "§f§nLeather Coloriser"
 
 error_invalid_command_sender: "lc can only be used by players!"
-error_invalid_color: "§6[§4LC§6] §aInvalid Argument - please enter a HEX Color:\n/lcp <HEX Color code>\n§3https://htmlcolorcodes.com/"
+error_invalid_color: "§6[§4LC§6] §aInvalid Argument - please enter a HEX Color:\n/lc <HEX Color code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§6[§4LC§6] §cYou need to have the item in your inventory"
 error_permission_missing: "§6[§4LC§6] §cyou don't have the permission to do this"
 

@@ -1,6 +1,8 @@
 package com.minecraftheads.leathercoloriser.commands;
 
+import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
 import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
+import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
 import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Color;
@@ -38,7 +40,10 @@ public class CommandLeatherColoriser implements CommandExecutor {
 
         // Default / No arguments
         if (args.length == 0) {
-            new InventoryCreator().openInventory(player);
+            if (SelectionHandler.getColor(player) == null) {
+                SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
+            }
+            new InventoryCreator(player);
         }
         // One Argument
         else if (args.length == 1) {
@@ -48,7 +53,8 @@ public class CommandLeatherColoriser implements CommandExecutor {
                 args[0] = args[0].replace("#", "");
             }
             if (args[0].matches(regex)) {
-                new InventoryCreator(Color.fromRGB(Integer.parseInt(args[0], 16))).openInventory(player);
+                SelectionHandler.setColor(player, Color.fromRGB(Integer.parseInt(args[0], 16)));
+                new InventoryCreator(player);
             }
             // Invalid Color
             else {

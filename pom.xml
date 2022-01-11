@@ -42,6 +42,29 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <echo>ANT TASK - copying files....</echo>
+                                <copy todir="${basedir}/../../../Minecraft/server-1.18/plugins" overwrite="true" flatten="true">
+                                    <fileset dir="${basedir}" includes="*.bat" >
+                                        <include name="target/leather-coloriser-${project.version}.jar" />
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>

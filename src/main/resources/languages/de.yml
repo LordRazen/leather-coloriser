@@ -1,2 +1,2 @@
-error_invalid_color: "§6[§4LCP§6] §aNutze /lcp <Hexadezimal Farbcode>"
-error_item_missing: "§6[§4LCP§6] §cDu musst das Item im Inventar haben"
+error_invalid_color: "§6[§4LC§6] §aNutze /lc <Hexadezimal Farbcode>"
+error_item_missing: "§6[§4LC§6] §cDu musst das Item im Inventar haben"

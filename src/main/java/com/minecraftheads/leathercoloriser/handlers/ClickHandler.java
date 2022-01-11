@@ -29,7 +29,7 @@ public class ClickHandler {
         Color actualColor = meta.getColor();
 
         // check what is clicked and perform action
-        handleClick(e, actualColor);
+        handleClick(e);
     }
 
     /**
@@ -52,10 +52,10 @@ public class ClickHandler {
 
         // Rip color from leather item
         LeatherArmorMeta meta = (LeatherArmorMeta) clickedItem.getItemMeta();
-        Color rippedColor = meta.getColor();
+        SelectionHandler.setColor(player, meta.getColor());
 
         // Open new INV with ripped color
-        new InventoryCreator(rippedColor).openInventory(player);
+        new InventoryCreator(player).openInventory(player);
     }
 
 
@@ -63,12 +63,11 @@ public class ClickHandler {
      * check what item is clicked and perform action depending on that
      *
      * @param e InventoryClickEvent
-     * @param actualColor Color
      */
-    private static void handleClick(InventoryClickEvent e, Color actualColor) {
+    private static void handleClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
-
+        Color col = ((LeatherArmorMeta) e.getInventory().getItem(0).getItemMeta()).getColor();
 
         InventoryMapping im = InventoryMapping.getBySlot(e.getSlot());
         if (im != null) {
@@ -77,7 +76,8 @@ public class ClickHandler {
                 // generate random color
                 case ("randomColor"):
                     Random obj = new Random();
-                    new InventoryCreator(Color.fromRGB(obj.nextInt(0xffffff + 1))).openInventory(player);
+                    SelectionHandler.setColor(player, Color.fromRGB(obj.nextInt(0xffffff + 1)));
+                    new InventoryCreator(player);
                     break;
                 // Close inventory and send message to player how to use custom color codes
                 case ("hexCommand"):
@@ -85,83 +85,82 @@ public class ClickHandler {
                     player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
                     break;
                 case ("decrease_hue"):
-                    new InventoryCreator(ColorChanger.DECREASE_HUE.apply(actualColor)).openInventory(player);
+                    ColorChanger.DECREASE_HUE.apply(player);
+                    new InventoryCreator(player).openInventory(player);
                     break;
                 case ("increase_hue"):
-                    new InventoryCreator(ColorChanger.INCREASE_HUE.apply(actualColor)).openInventory(player);
+                    ColorChanger.INCREASE_HUE.apply(player);
+                    new InventoryCreator(player).openInventory(player);
                     break;
                 case ("decrease_saturation"):
-                    new InventoryCreator(ColorChanger.INCREASE_SATURATION.apply(actualColor)).openInventory(player);
+                    ColorChanger.INCREASE_SATURATION.apply(player);
+                    new InventoryCreator(player).openInventory(player);
                     break;
                 case ("increase_saturation"):
-                    new InventoryCreator(ColorChanger.DECREASE_SATURATION.apply(actualColor)).openInventory(player);
+                    ColorChanger.DECREASE_SATURATION.apply(player);
+                    new InventoryCreator(player).openInventory(player);
                     break;
                 case ("decrease_brightness"):
-                    new InventoryCreator(ColorChanger.DECREASE_BRIGHTNESS.apply(actualColor)).openInventory(player);
+                    ColorChanger.DECREASE_BRIGHTNESS.apply(player);
+                    new InventoryCreator(player).openInventory(player);
                     break;
                 case ("increase_brightness"):
-                    new InventoryCreator(ColorChanger.INCREASE_BRIGHTNESS.apply(actualColor)).openInventory(player);
+                    ColorChanger.INCREASE_BRIGHTNESS.apply(player);
+                    new InventoryCreator(player);
                     break;
                 case ("reset"):
-                    new InventoryCreator().openInventory(player);
+                    SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
+                    new InventoryCreator(player);
                     break;
                 case ("dye"):
                     // Mix Colors if the color is not the default one
                     Color newColor = DyeColorMapping.getColorByMat(im.getMaterial());
-                    if (!actualColor.equals(DyeColorMapping.DEFAULT.getColor())) {
-                        newColor = newColor.mixColors(actualColor);
+                    SelectionHandler.setColor(player, newColor);
+                    if (!col.equals(DyeColorMapping.DEFAULT.getColor())) {
+                        SelectionHandler.setColor(player, newColor.mixColors(col));
+                    }
+                    // Create the inventory for choosing the color
+                    new InventoryCreator(player);
+                    break;
+                case ("armor"):
+                    // ToDo move this into method
+                    // Clean Armor
+                    if (col.equals(DyeColorMapping.DEFAULT.getColor())) {
+                        ItemStack[] items = player.getInventory().getContents();
+                        for (int i = 0; i < items.length; i++) {
+                            if (items[i] != null && items[i].getType() == clickedItem.getType()) {
+                                LeatherArmorMeta meta = (LeatherArmorMeta) items[i].getItemMeta();
+                                if (!meta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) {
+                                    player.getInventory().clear(i);
+                                    player.getInventory().addItem(new ItemStack(clickedItem.getType(), 1));
+                                    break;
+                                }
+                            }
+                        }
+
                     }
 
-                    // Create the inventory for choosing the color
-                    new InventoryCreator(newColor).openInventory(player);
+                    // Colorise Armor
+                    else {
+                        if (checkRequirement(player, clickedItem)) {
+                            // Search for the first item in the inventory of the player which is the base item of the colored one
+                            player.getInventory().clear(player.getInventory().first(new ItemStack(clickedItem.getType(), 1)));
+                            player.getInventory().addItem(clickedItem);
+                        }
+                    }
                     break;
             }
 
-        }
-
-        // Player chooses armor piece
-        else if (clickedItem.getType().toString().startsWith("LEATHER_")) {
-
-            // Clean Armor
-            if (actualColor.equals(DyeColorMapping.DEFAULT.getColor())) {
-                ItemStack[] items = player.getInventory().getContents();
-                for (int i = 0; i < items.length; i++) {
-                    if (items[i] != null && items[i].getType() == clickedItem.getType()) {
-                        LeatherArmorMeta meta = (LeatherArmorMeta) items[i].getItemMeta();
-                        if (!meta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) {
-                            player.getInventory().clear(i);
-                            player.getInventory().addItem(new ItemStack(clickedItem.getType(), 1));
-                            break;
-                        }
-                    }
-                }
-
-            }
-
-            // Colorise Armor
-            else {
-                if (checkRequirement(player, clickedItem)) {
-                    // Search for the first item in the inventory of the player which is the base item of the colored one
-                    player.getInventory().clear(player.getInventory().first(new ItemStack(clickedItem.getType(), 1)));
-                    player.getInventory().addItem(clickedItem);
-
-                    // TODO: Remove giveItem or create an own method to clean items?
-                }
-            }
         }
 
         // Open Watermark
         else if (clickedItem.getType().equals(Material.PUFFERFISH)) {
             player.closeInventory();
-            player.sendMessage("§6[§4LCP§6] §aGet more plugins for detailed decoration at\n§3www.minecraft-heads.com");
+            player.sendMessage("§6[§4LC§6] §aGet more plugins for detailed decoration at\n§3www.minecraft-heads.com");
         }
 
 
-        // Choose color you want to have
-        else if (clickedItem.getType().toString().endsWith("_DYE")) {
 
-            ;
-        }
 
     }
 

@@ -3,7 +3,6 @@ package com.minecraftheads.leathercoloriser.data;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.material.Dye;
 
 public enum DyeColorMapping {
     YELLOW_DYE(Material.YELLOW_DYE, DyeColor.YELLOW.getColor()),
@@ -25,17 +24,32 @@ public enum DyeColorMapping {
     DEFAULT(Material.AIR, Color.fromRGB(0xA06540))
     ;
 
-    private Material mat;
-    private Color color;
+    private final Material mat;
+    private final Color color;
+
+    /**
+     * Constructor
+     * @param mat Material
+     * @param color Color
+     */
     DyeColorMapping(Material mat, Color color) {
         this.color = color;
         this.mat = mat;
     }
 
+    /**
+     * Return Color object from given enum
+     * @return Color
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * return Color object of given Material (Dyes)
+     * @param dye Material
+     * @return Color
+     */
     public static Color getColorByMat(Material dye) {
         for (DyeColorMapping dcm : DyeColorMapping.values()) {
             if (dcm.mat.equals(dye)) {

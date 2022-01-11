@@ -2,6 +2,7 @@ package com.minecraftheads.leathercoloriser;
 
 import com.minecraftheads.leathercoloriser.commands.CommandLeatherColoriser;
 import com.minecraftheads.leathercoloriser.listeners.InventoryListener;
+import com.minecraftheads.leathercoloriser.listeners.PlayerListener;
 import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +24,7 @@ public final class LeatherColoriser extends JavaPlugin {
         // Register Listener
         // this.getServer().getPluginManager().registerEvents(new LCPInventory(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
     @Override
