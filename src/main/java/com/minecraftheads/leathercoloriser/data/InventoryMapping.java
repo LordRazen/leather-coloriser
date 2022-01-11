@@ -5,6 +5,7 @@ import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
 import com.minecraftheads.leathercoloriser.utils.CustomHeads;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -13,7 +14,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 public enum InventoryMapping {
     // Control units
     RESET(6, Material.WATER_BUCKET, "color_reset", "reset"),
-    RANDOM(7, CustomHeads.RANDOM.asMaterial(), "random_color", "randomColor"),
+    RANDOM(7, CustomHeads.RANDOM.asMaterial(), "color_random", "randomColor"),
     HEXCOMMAND(8, Material.NAME_TAG, "color_string", "hexCommand"),
     DECREASE_HUE(16, Material.PURPLE_CONCRETE, "decrease_hue", "decrease_hue"),
     INCREASE_HUE(17, Material.RED_TERRACOTTA, "increase_hue", "increase_hue"),
@@ -109,6 +110,7 @@ public enum InventoryMapping {
         if (action.equals("armor")) {
             LeatherArmorMeta laMeta = (LeatherArmorMeta) item.getItemMeta();
             laMeta.setColor(SelectionHandler.getColor(p));
+            laMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             item.setItemMeta(laMeta);
         }
         return item;
