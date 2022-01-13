@@ -36,18 +36,10 @@ public class InventoryCreator {
      */
     public void initializeInventory() {
         this.inv = Bukkit.createInventory(null, 54, LanguageHandler.getMessage("title"));
-        setItems();
-        setWatermark();
-    }
-
-
-    /**
-     * generate Inventory from InventoryMapping
-     */
-    private void setItems() {
         for (InventoryMapping im : InventoryMapping.values()) {
             this.inv.setItem(im.getSlot(), im.getItemStack(p));
         }
+        setWatermark();
     }
 
     /**

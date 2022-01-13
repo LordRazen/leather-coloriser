@@ -50,12 +50,12 @@ public enum DyeColorMapping {
      * @param dye Material
      * @return Color
      */
-    public static Color getColorByMat(Material dye) {
+    public static Color getColorByMat(Material dye) throws NullPointerException {
         for (DyeColorMapping dcm : DyeColorMapping.values()) {
             if (dcm.mat.equals(dye)) {
                 return dcm.color;
             }
         }
-        return null;
+        throw new NullPointerException();
     }
 }

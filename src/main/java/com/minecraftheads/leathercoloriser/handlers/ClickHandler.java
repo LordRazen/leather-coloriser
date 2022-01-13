@@ -69,9 +69,9 @@ public class ClickHandler {
         ItemStack clickedItem = e.getCurrentItem();
         Color col = ((LeatherArmorMeta) e.getInventory().getItem(0).getItemMeta()).getColor();
 
-        InventoryMapping im = InventoryMapping.getBySlot(e.getSlot());
-        if (im != null) {
 
+        try {
+            InventoryMapping im = InventoryMapping.getBySlot(e.getSlot());
             switch (im.getAction()) {
                 // generate random color
                 case ("randomColor"):
@@ -86,23 +86,23 @@ public class ClickHandler {
                     break;
                 case ("decrease_hue"):
                     ColorChanger.DECREASE_HUE.apply(player);
-                    new InventoryCreator(player).openInventory(player);
+                    new InventoryCreator(player);
                     break;
                 case ("increase_hue"):
                     ColorChanger.INCREASE_HUE.apply(player);
-                    new InventoryCreator(player).openInventory(player);
+                    new InventoryCreator(player);
                     break;
                 case ("decrease_saturation"):
                     ColorChanger.INCREASE_SATURATION.apply(player);
-                    new InventoryCreator(player).openInventory(player);
+                    new InventoryCreator(player);
                     break;
                 case ("increase_saturation"):
                     ColorChanger.DECREASE_SATURATION.apply(player);
-                    new InventoryCreator(player).openInventory(player);
+                    new InventoryCreator(player);
                     break;
                 case ("decrease_brightness"):
                     ColorChanger.DECREASE_BRIGHTNESS.apply(player);
-                    new InventoryCreator(player).openInventory(player);
+                    new InventoryCreator(player);
                     break;
                 case ("increase_brightness"):
                     ColorChanger.INCREASE_BRIGHTNESS.apply(player);
@@ -114,7 +114,12 @@ public class ClickHandler {
                     break;
                 case ("dye"):
                     // Mix Colors if the color is not the default one
-                    Color newColor = DyeColorMapping.getColorByMat(im.getMaterial());
+                    Color newColor;
+                    try {
+                        newColor = DyeColorMapping.getColorByMat(im.getMaterial());
+                    } catch (NullPointerException ignored) {
+                        newColor = DyeColorMapping.DEFAULT.getColor();
+                    }
                     SelectionHandler.setColor(player, newColor);
                     if (!col.equals(DyeColorMapping.DEFAULT.getColor())) {
                         SelectionHandler.setColor(player, newColor.mixColors(col));
@@ -151,15 +156,15 @@ public class ClickHandler {
                     break;
             }
 
+        } catch (NullPointerException ignored) {
+
         }
 
         // Open Watermark
-        else if (clickedItem.getType().equals(Material.PUFFERFISH)) {
+        if (clickedItem.getType().equals(Material.PUFFERFISH)) {
             player.closeInventory();
             player.sendMessage("§6[§4LC§6] §aGet more plugins for detailed decoration at\n§3www.minecraft-heads.com");
         }
-
-
 
 
     }

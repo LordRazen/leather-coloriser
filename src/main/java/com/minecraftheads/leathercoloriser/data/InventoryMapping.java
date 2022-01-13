@@ -2,7 +2,6 @@ package com.minecraftheads.leathercoloriser.data;
 
 import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
 import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
-import com.minecraftheads.leathercoloriser.utils.CustomHeads;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -41,6 +40,7 @@ public enum InventoryMapping {
     GRAY_DYE(39, Material.GRAY_DYE, "gray", "dye"),
     BLACK_DYE(40, Material.BLACK_DYE, "black", "dye"),
 
+    // armor
     LEATHER_HELMET(0, Material.LEATHER_HELMET, "leather_helmet", "armor"),
     LEATHER_CHESTPLATE(1, Material.LEATHER_CHESTPLATE, "leather_chestplate", "armor"),
     LEATHER_LEGGINGS(2, Material.LEATHER_LEGGINGS, "leather_leggings", "armor"),
@@ -53,7 +53,6 @@ public enum InventoryMapping {
     private Material mat;
     private String name;
     private String action;
-
 
     /**
      * Constructor
@@ -121,13 +120,13 @@ public enum InventoryMapping {
      * @param slot int
      * @return InventoryMapping
      */
-    public static InventoryMapping getBySlot(int slot) {
+    public static InventoryMapping getBySlot(int slot) throws NullPointerException {
         for (InventoryMapping im : InventoryMapping.values()) {
             if (im.slot == slot) {
                 return im;
             }
         }
-        return null;
+        throw new NullPointerException();
     }
 
 

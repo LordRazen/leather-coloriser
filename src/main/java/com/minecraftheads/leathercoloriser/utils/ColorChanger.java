@@ -60,6 +60,7 @@ public enum ColorChanger {
      */
     public abstract void apply(Player p);
 
+
     /**
      * calculates Color from hsb float value
      * @param hsb float[]
