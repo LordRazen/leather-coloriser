@@ -104,7 +104,7 @@
         <dependency>
             <groupId>com.minecraftheads</groupId>
             <artifactId>plugin-utils</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.6-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

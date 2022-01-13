@@ -1,9 +1,9 @@
 package com.minecraftheads.leathercoloriser.commands;
 
 import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
-import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
+import com.minecraftheads.leathercoloriser.data.LanguageMapping;
 import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
-import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
+import com.minecraftheads.leathercoloriser.utils.InventoryCreatorBridge;
 import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
@@ -26,7 +26,7 @@ public class CommandLeatherColoriser implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Abort if Sender is no player
         if (!(sender instanceof Player)) {
-            Logger.info(LanguageHandler.getMessage("error_invalid_command_sender"));
+            Logger.info(LanguageMapping.ERROR_INVALID_COMMAND_SENDER.getString());
             return true;
         }
 
@@ -34,7 +34,7 @@ public class CommandLeatherColoriser implements CommandExecutor {
 
         // check permissions
         if (!player.hasPermission("lc.main")) {
-            player.sendMessage(LanguageHandler.getMessage("error_permission_missing"));
+            player.sendMessage(LanguageMapping.ERROR_PERMISSION_MISSING.getStringWithPrefix());
             return true;
         }
 
@@ -43,7 +43,7 @@ public class CommandLeatherColoriser implements CommandExecutor {
             if (SelectionHandler.getColor(player) == null) {
                 SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
             }
-            new InventoryCreator(player);
+            new InventoryCreatorBridge(player);
         }
         // One Argument
         else if (args.length == 1) {
@@ -54,16 +54,16 @@ public class CommandLeatherColoriser implements CommandExecutor {
             }
             if (args[0].matches(regex)) {
                 SelectionHandler.setColor(player, Color.fromRGB(Integer.parseInt(args[0], 16)));
-                new InventoryCreator(player);
+                new InventoryCreatorBridge(player);
             }
             // Invalid Color
             else {
-                player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
+                player.sendMessage(LanguageMapping.ERROR_INVALID_COLOR.getStringWithPrefix());
             }
         }
         // More arguments - invalid
         else {
-            player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
+            player.sendMessage(LanguageMapping.ERROR_INVALID_COLOR.getStringWithPrefix());
         }
         return true;
     }

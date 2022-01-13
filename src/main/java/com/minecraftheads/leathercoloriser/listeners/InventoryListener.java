@@ -1,7 +1,7 @@
 package com.minecraftheads.leathercoloriser.listeners;
 
 import com.minecraftheads.leathercoloriser.handlers.ClickHandler;
-import com.minecraftheads.leathercoloriser.handlers.InventoryHandler;
+import com.minecraftheads.pluginUtils.inventory.InventoryStorage;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -19,7 +19,7 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent e) {
         // Check if inventory is an LCP inventory
-        if (!InventoryHandler.getInventory().contains(e.getView().getTopInventory())) return;
+        if (!InventoryStorage.getInventory().contains(e.getView().getTopInventory())) return;
 
         // Verify current item is not null / air
         ItemStack clickedItem = e.getCurrentItem();
@@ -47,21 +47,8 @@ public class InventoryListener implements Listener {
      */
     @EventHandler
     public void onInventoryClick(final InventoryDragEvent e) {
-        if (InventoryHandler.getInventory().contains(e.getView().getTopInventory()))
+        if (InventoryStorage.getInventory().contains(e.getView().getTopInventory()))
             e.setCancelled(true);
     }
 
-    /**
-     * Remove inventory from inventoryHandler when a inventory is closed
-     *
-     * @param e InventoryCloseEvent
-     */
-    @EventHandler
-    public void onInventoryClose(final InventoryCloseEvent e) {
-        // TODO: cleanup of old selections when player leave? could result in memoryleak if server runs a long time
-        // not possible yet, as we do not map players to inventoryHandler
-        if (InventoryHandler.getInventory().contains(e.getView().getTopInventory())) {
-            InventoryHandler.removeInventory(e.getView().getTopInventory());
-        }
-    }
 }

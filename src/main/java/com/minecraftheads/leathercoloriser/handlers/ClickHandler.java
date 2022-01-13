@@ -2,9 +2,9 @@ package com.minecraftheads.leathercoloriser.handlers;
 
 import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
 import com.minecraftheads.leathercoloriser.data.InventoryMapping;
+import com.minecraftheads.leathercoloriser.data.LanguageMapping;
 import com.minecraftheads.leathercoloriser.utils.ColorChanger;
-import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
-import com.minecraftheads.pluginUtils.utils.Logger;
+import com.minecraftheads.leathercoloriser.utils.InventoryCreatorBridge;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -55,7 +55,7 @@ public class ClickHandler {
         SelectionHandler.setColor(player, meta.getColor());
 
         // Open new INV with ripped color
-        new InventoryCreator(player).openInventory(player);
+        new InventoryCreatorBridge(player);
     }
 
 
@@ -77,40 +77,40 @@ public class ClickHandler {
                 case ("randomColor"):
                     Random obj = new Random();
                     SelectionHandler.setColor(player, Color.fromRGB(obj.nextInt(0xffffff + 1)));
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 // Close inventory and send message to player how to use custom color codes
                 case ("hexCommand"):
                     player.closeInventory();
-                    player.sendMessage(LanguageHandler.getMessage("error_invalid_color"));
+                    player.sendMessage(LanguageMapping.ERROR_INVALID_COLOR.getStringWithPrefix());
                     break;
                 case ("decrease_hue"):
                     ColorChanger.DECREASE_HUE.apply(player);
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("increase_hue"):
                     ColorChanger.INCREASE_HUE.apply(player);
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("decrease_saturation"):
                     ColorChanger.INCREASE_SATURATION.apply(player);
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("increase_saturation"):
                     ColorChanger.DECREASE_SATURATION.apply(player);
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("decrease_brightness"):
                     ColorChanger.DECREASE_BRIGHTNESS.apply(player);
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("increase_brightness"):
                     ColorChanger.INCREASE_BRIGHTNESS.apply(player);
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("reset"):
                     SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("dye"):
                     // Mix Colors if the color is not the default one
@@ -125,7 +125,7 @@ public class ClickHandler {
                         SelectionHandler.setColor(player, newColor.mixColors(col));
                     }
                     // Create the inventory for choosing the color
-                    new InventoryCreator(player);
+                    new InventoryCreatorBridge(player);
                     break;
                 case ("armor"):
                     // ToDo move this into method
@@ -180,7 +180,7 @@ public class ClickHandler {
         if (player.getInventory().contains(new ItemStack(item.getType(), 1)))
             return true;
 
-        player.sendMessage(LanguageHandler.getMessage("error_item_missing"));
+        player.sendMessage(LanguageMapping.ERROR_ITEM_MISSING.getStringWithPrefix());
         return false;
     }
 
