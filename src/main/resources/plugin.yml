@@ -1,17 +1,17 @@
-name: LeatherColoriserPro
+name: LeatherColoriser
 version: '${project.version}'
-main: com.minecraftheads.leathercoloriserpro.LeatherColoriserPro
-api-version: 1.17
-prefix: LCP
+main: com.minecraftheads.leathercoloriser.LeatherColoriser
+api-version: 1.16
+prefix: LC
 authors: [ LordRazen, bmack94 ]
 description: This plugin lets players choose the color of leather armor by basic dye's and Hexcode.
 website: https://minecraft-heads.com
 commands:
-  LCP:
-    aliases: [ /lcp ]
-    description: "Open LCP GUI"
+  LC:
+    aliases: [ /lc ]
+    description: "Open LC GUI"
 
 permissions:
-  lcp.main:
+  lc.main:
     default: op
-    description: "Allows users to use the LCP"
+    description: "Allows users to use the LC"

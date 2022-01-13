@@ -1,7 +1,7 @@
-package com.minecraftheads.leathercoloriserpro.listeners;
+package com.minecraftheads.leathercoloriser.listeners;
 
-import com.minecraftheads.leathercoloriserpro.handlers.ClickHandler;
-import com.minecraftheads.leathercoloriserpro.handlers.InventoryHandler;
+import com.minecraftheads.leathercoloriser.handlers.ClickHandler;
+import com.minecraftheads.leathercoloriser.handlers.InventoryHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;

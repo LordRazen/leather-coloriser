@@ -1,4 +1,4 @@
-package com.minecraftheads.leathercoloriserpro.handlers;
+package com.minecraftheads.leathercoloriser.handlers;
 
 import org.bukkit.inventory.Inventory;
 

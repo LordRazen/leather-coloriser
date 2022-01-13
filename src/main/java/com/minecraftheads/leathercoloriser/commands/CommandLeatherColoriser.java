@@ -1,20 +1,20 @@
-package com.minecraftheads.leathercoloriserpro.commands;
+package com.minecraftheads.leathercoloriser.commands;
 
-import com.minecraftheads.leathercoloriserpro.handlers.LanguageHandler;
-import com.minecraftheads.leathercoloriserpro.utils.InventoryCreator;
-import com.minecraftheads.leathercoloriserpro.utils.Logger;
+import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
+import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
+import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
+import com.minecraftheads.leathercoloriser.utils.InventoryCreator;
+import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Objects;
-
-public class CommandLeatherColoriserPro implements CommandExecutor {
+public class CommandLeatherColoriser implements CommandExecutor {
 
     /**
-     * Initiates LCP when /lcp is entered
+     * Initiates LCP when /lc is entered
      *
      * @param sender  CommandSender
      * @param command Command
@@ -33,14 +33,17 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
         Player player = (Player) sender;
 
         // check permissions
-        if (!player.hasPermission("lcp.main")) {
+        if (!player.hasPermission("lc.main")) {
             player.sendMessage(LanguageHandler.getMessage("error_permission_missing"));
             return true;
         }
 
         // Default / No arguments
         if (args.length == 0) {
-            new InventoryCreator().openInventory(player);
+            if (SelectionHandler.getColor(player) == null) {
+                SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
+            }
+            new InventoryCreator(player);
         }
         // One Argument
         else if (args.length == 1) {
@@ -50,7 +53,8 @@ public class CommandLeatherColoriserPro implements CommandExecutor {
                 args[0] = args[0].replace("#", "");
             }
             if (args[0].matches(regex)) {
-                new InventoryCreator(Color.fromRGB(Integer.parseInt(args[0], 16))).openInventory(player);
+                SelectionHandler.setColor(player, Color.fromRGB(Integer.parseInt(args[0], 16)));
+                new InventoryCreator(player);
             }
             // Invalid Color
             else {

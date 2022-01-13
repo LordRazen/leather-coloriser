@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.minecraftheads</groupId>
-    <artifactId>leather-coloriser-pro</artifactId>
+    <artifactId>leather-coloriser</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Leather Coloriser Pro</name>
+    <name>Leather Coloriser</name>
 
     <description>This plugin lets players choose the color of leather armor by basic dye's and Hexcode.</description>
     <properties>
@@ -39,9 +39,29 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
                         <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <target>
+                                <echo>ANT TASK - copying files....</echo>
+                                <copy todir="${basedir}/../../../Minecraft/server-1.18/plugins" overwrite="true" flatten="true">
+                                    <fileset dir="${basedir}" includes="*.bat" >
+                                        <include name="target/leather-coloriser-${project.version}.jar" />
+                                    </fileset>
+                                </copy>
+                            </target>
                         </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -73,19 +93,19 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.17.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <version>1.16.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
             <version>2.3.31</version>
+        </dependency>
+        <dependency>
+            <groupId>com.minecraftheads</groupId>
+            <artifactId>plugin-utils</artifactId>
+            <version>1.5-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
