@@ -1,6 +1,6 @@
 package com.minecraftheads.leathercoloriser.data;
 
-import com.minecraftheads.leathercoloriser.handlers.LanguageHandler;
+import com.minecraftheads.pluginUtils.config.LanguageHandler;
 import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,40 +12,39 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public enum InventoryMapping {
     // Control units
-    RESET(6, Material.WATER_BUCKET, "color_reset", "reset"),
-    RANDOM(7, CustomHeads.RANDOM.asMaterial(), "color_random", "randomColor"),
-    HEXCOMMAND(8, Material.NAME_TAG, "color_string", "hexCommand"),
-    DECREASE_HUE(16, Material.PURPLE_CONCRETE, "decrease_hue", "decrease_hue"),
-    INCREASE_HUE(17, Material.RED_TERRACOTTA, "increase_hue", "increase_hue"),
-    DECREASE_SATURATION(25, Material.BLUE_STAINED_GLASS, "decrease_saturation", "decrease_saturation"),
-    INCREASE_SATURATION(26, Material.BLUE_CONCRETE, "increase_saturation", "increase_saturation"),
-    DECREASE_BRIGHTNESS(34, Material.BLACK_CONCRETE, "decrease_brightness", "decrease_brightness"),
-    INCREASE_BRIGHTNESS(35, Material.WHITE_CONCRETE, "increase_brightness", "increase_brightness"),
+    RANDOM(7, CustomHeads.RANDOM.asMaterial(), LanguageMapping.COLOR_RANDOM.getString(), "randomColor"),
+    HEXCOMMAND(8, Material.NAME_TAG, LanguageMapping.COLOR_STRING.getString(), "hexCommand"),
+    DECREASE_HUE(16, Material.PURPLE_CONCRETE, LanguageMapping.DECREASE_HUE.getString(), "decrease_hue"),
+    INCREASE_HUE(17, Material.RED_TERRACOTTA, LanguageMapping.INCREASE_HUE.getString(), "increase_hue"),
+    DECREASE_SATURATION(25, Material.BLUE_STAINED_GLASS, LanguageMapping.DECREASE_SATURATION.getString(), "decrease_saturation"),
+    INCREASE_SATURATION(26, Material.BLUE_CONCRETE, LanguageMapping.INCREASE_SATURATION.getString(), "increase_saturation"),
+    DECREASE_BRIGHTNESS(34, Material.BLACK_CONCRETE, LanguageMapping.DECREASE_BRIGHTNESS.getString(), "decrease_brightness"),
+    INCREASE_BRIGHTNESS(35, Material.WHITE_CONCRETE, LanguageMapping.INCREASE_BRIGHTNESS.getString(), "increase_brightness"),
 
-    //Dye Colors
-    YELLOW_DYE(18, Material.YELLOW_DYE, "yellow", "dye"),
-    ORANGE_DYE(19, Material.ORANGE_DYE, "orange", "dye"),
-    RED_DYE(20, Material.RED_DYE, "red", "dye"),
-    BROWN_DYE(21, Material.BROWN_DYE, "brown", "dye"),
-    LIME_DYE(22, Material.LIME_DYE, "lime", "dye"),
-    GREEN_DYE(23, Material.GREEN_DYE, "green", "dye"),
-    PINK_DYE(27, Material.PINK_DYE, "pink", "dye"),
-    MAGENTA_DYE(28, Material.MAGENTA_DYE, "magenta", "dye"),
-    PURPLE_DYE(29, Material.PURPLE_DYE, "purple", "dye"),
-    LIGHT_BLUE_DYE(30, Material.LIGHT_BLUE_DYE, "light_blue", "dye"),
-    CYAN_DYE(31, Material.CYAN_DYE, "cyan", "dye"),
-    BLUE_DYE(32, Material.BLUE_DYE, "blue", "dye"),
-    WHITE_DYE(37, Material.WHITE_DYE, "white", "dye"),
-    LIGHT_GRAY_DYE(38, Material.LIGHT_GRAY_DYE, "light_gray", "dye"),
-    GRAY_DYE(39, Material.GRAY_DYE, "gray", "dye"),
-    BLACK_DYE(40, Material.BLACK_DYE, "black", "dye"),
+    // Colors
+    YELLOW_DYE(18, Material.YELLOW_DYE, LanguageMapping.YELLOW.getString(), "dye"),
+    ORANGE_DYE(19, Material.ORANGE_DYE, LanguageMapping.ORANGE.getString(), "dye"),
+    RED_DYE(20, Material.RED_DYE, LanguageMapping.RED.getString(), "dye"),
+    BROWN_DYE(21, Material.BROWN_DYE, LanguageMapping.BROWN.getString(), "dye"),
+    LIME_DYE(22, Material.LIME_DYE, LanguageMapping.LIME.getString(), "dye"),
+    GREEN_DYE(23, Material.GREEN_DYE, LanguageMapping.GREEN.getString(), "dye"),
+    PINK_DYE(27, Material.PINK_DYE, LanguageMapping.PINK.getString(), "dye"),
+    MAGENTA_DYE(28, Material.MAGENTA_DYE, LanguageMapping.MAGENTA.getString(), "dye"),
+    PURPLE_DYE(29, Material.PURPLE_DYE, LanguageMapping.PURPLE.getString(), "dye"),
+    LIGHT_BLUE_DYE(30, Material.LIGHT_BLUE_DYE, LanguageMapping.LIGHT_BLUE.getString(), "dye"),
+    CYAN_DYE(31, Material.CYAN_DYE, LanguageMapping.CYAN.getString(), "dye"),
+    BLUE_DYE(32, Material.BLUE_DYE, LanguageMapping.BLUE.getString(), "dye"),
+    WHITE_DYE(37, Material.WHITE_DYE, LanguageMapping.WHITE.getString(), "dye"),
+    LIGHT_GRAY_DYE(38, Material.LIGHT_GRAY_DYE, LanguageMapping.LIGHT_GRAY.getString(), "dye"),
+    GRAY_DYE(39, Material.GRAY_DYE, LanguageMapping.GRAY.getString(), "dye"),
+    BLACK_DYE(40, Material.BLACK_DYE, LanguageMapping.BLACK.getString(), "dye"),
 
     // armor
-    LEATHER_HELMET(0, Material.LEATHER_HELMET, "leather_helmet", "armor"),
-    LEATHER_CHESTPLATE(1, Material.LEATHER_CHESTPLATE, "leather_chestplate", "armor"),
-    LEATHER_LEGGINGS(2, Material.LEATHER_LEGGINGS, "leather_leggings", "armor"),
-    LEATHER_BOOTS(3, Material.LEATHER_BOOTS, "leather_boots", "armor"),
-    LEATHER_HORSE_ARMOR(4, Material.LEATHER_HORSE_ARMOR, "leather_horse_armor", "armor")
+    LEATHER_HELMET(0, Material.LEATHER_HELMET, LanguageMapping.LEATHER_HELMET.getString(), "armor"),
+    LEATHER_CHESTPLATE(1, Material.LEATHER_CHESTPLATE, LanguageMapping.LEATHER_CHESTPLATE.getString(), "armor"),
+    LEATHER_LEGGINGS(2, Material.LEATHER_LEGGINGS, LanguageMapping.LEATHER_LEGGINGS.getString(), "armor"),
+    LEATHER_BOOTS(3, Material.LEATHER_BOOTS, LanguageMapping.LEATHER_BOOTS.getString(), "armor"),
+    LEATHER_HORSE_ARMOR(4, Material.LEATHER_HORSE_ARMOR, LanguageMapping.LEATHER_HORSE_ARMOR.getString(), "armor")
     ;
 
 
@@ -102,7 +101,7 @@ public enum InventoryMapping {
         }
         // set displayname
         ItemMeta isMeta = item.getItemMeta();
-        isMeta.setDisplayName(LanguageHandler.getMessage(name));
+        isMeta.setDisplayName(name);
         item.setItemMeta(isMeta);
 
         // if selected piece is an armor piece, color it and return the colored item
