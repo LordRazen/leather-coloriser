@@ -51,6 +51,6 @@ public enum LanguageMapping {
         return LanguageHandler.getString(path);
     }
     public String getStringWithPrefix() {
-        return LanguageMapping.PREFIX.getString() + " " + LanguageHandler.getString(path);
+        return LanguageMapping.PREFIX.getString() + "§r " + LanguageHandler.getString(path);
     }
 }
