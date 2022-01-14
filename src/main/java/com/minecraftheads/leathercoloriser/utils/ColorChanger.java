@@ -25,7 +25,7 @@ public enum ColorChanger {
         public void apply(Player p) {
             Color rgb = SelectionHandler.getColor(p);
             float[] hsb = java.awt.Color.RGBtoHSB(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), null);
-            hsb[1] = (hsb[1] - 0.1) < 0 ? 0 : (float) (hsb[1] - 0.1);
+            hsb[1] = (hsb[1] + 0.1) > 1 ? 1 : (float) (hsb[1] + 0.1);
             SelectionHandler.setColor(p, ColorChanger.colorFromHSB(hsb));
         }
     },
@@ -33,7 +33,7 @@ public enum ColorChanger {
         public void apply(Player p) {
             Color rgb = SelectionHandler.getColor(p);
             float[] hsb = java.awt.Color.RGBtoHSB(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), null);
-            hsb[1] = (hsb[1] + 0.1) > 1 ? 1 : (float) (hsb[1] + 0.1);
+            hsb[1] = (hsb[1] - 0.1) < 0 ? 0 : (float) (hsb[1] - 0.1);
             SelectionHandler.setColor(p, ColorChanger.colorFromHSB(hsb));
         }
     },
