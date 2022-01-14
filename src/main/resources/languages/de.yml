@@ -1,2 +1,44 @@
-error_invalid_color: "§6[§4LC§6] §aNutze /lc <Hexadezimal Farbcode>"
-error_item_missing: "§6[§4LC§6] §cDu musst das Item im Inventar haben"
+# Minecraft Colors:
+# https://minecraft.fandom.com/wiki/Classic_server_protocol#Color_codes
+
+prefix: "§6[§4LC§6]"
+title: "§f§nLeather Coloriser"
+
+error_invalid_command_sender: "Leather Coloriser kann nur von Spielern genutzt werden!"
+error_invalid_color: "§aUngültiges Argument - bitte gebe eine HEX-Farbe ein:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
+error_item_missing: "§cDu musst das Item in deinem Inventar haben."
+error_permission_missing: "§cDu hast keine Erlaubnis dies zu tun."
+
+color_reset: "§fFarbe zurücksetzen"
+color_random: "§fZufallsfarbe"
+color_string: "§fGebe RGB Farbe ein"
+
+decrease_hue: "§7(§c-§7) §fFarbton verringern"
+increase_hue: "§7(§a+§7) §fFarbton erhöhen"
+decrease_saturation: "§7(§c-§7) §fSättigung verringern"
+increase_saturation: "§7(§a+§7) §fSättigung erhöhen"
+decrease_brightness: "§7(§c-§7) §fHelligkeit verringern"
+increase_brightness: "§7(§a+§7) §fHelligkeit erhöhen"
+
+yellow: "Gelb hinzufügen"
+orange: "Orange hinzufügen"
+red: "Rot hinzufügen"
+brown: "Braun hinzufügen"
+lime: "Hellgrün hinzufügen"
+green: "Grün hinzufügen"
+light_blue: "Hellblau hinzufügen"
+cyan: "Cyan hinzufügen"
+blue: "Blau hinzufügen"
+pink: "Pink hinzufügen"
+magenta: "Magenta hinzufügen"
+purple: "Lila hinzufügen"
+white: "Weiss hinzufügen"
+light_gray: "Hellgrau hinzufügen"
+gray: "Grau hinzufügen"
+black: "Schwarz hinzufügen"
+
+leather_helmet: "Lederhelm"
+leather_chestplate: "Lederbrustpanzer"
+leather_leggings: "Lederleggings"
+leather_boots: "Lederstiefel"
+leather_horse_armor: "Lederpferderüstung"

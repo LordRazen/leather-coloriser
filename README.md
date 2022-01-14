@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Leather Coloriser Pro</h1>
+<h1>Leather Coloriser</h1>
 <strong>A plugin for the Minecraft Servers (Bukkit/Spigot/Paper).</strong>
   <h3>
     <a href="https://github.com/LordRazen/leather-coloriser-pro/blob/master/README.md">LCP</a>

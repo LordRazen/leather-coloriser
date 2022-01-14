@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public enum InventoryMapping {
     // Control units
+    RESET(6, Material.WATER_BUCKET, LanguageMapping.COLOR_RESET.getString(), "resetColor"),
     RANDOM(7, CustomHeads.RANDOM.asMaterial(), LanguageMapping.COLOR_RANDOM.getString(), "randomColor"),
     HEXCOMMAND(8, Material.NAME_TAG, LanguageMapping.COLOR_STRING.getString(), "hexCommand"),
     DECREASE_HUE(16, Material.PURPLE_CONCRETE, LanguageMapping.DECREASE_HUE.getString(), "decrease_hue"),
