@@ -15,12 +15,12 @@ public enum InventoryMapping {
     RESET(6, Material.WATER_BUCKET, LanguageMapping.COLOR_RESET.getString(), "resetColor"),
     RANDOM(7, CustomHeads.RANDOM.asMaterial(), LanguageMapping.COLOR_RANDOM.getString(), "randomColor"),
     HEXCOMMAND(8, Material.NAME_TAG, LanguageMapping.COLOR_STRING.getString(), "hexCommand"),
-    DECREASE_HUE(16, Material.PURPLE_CONCRETE, LanguageMapping.DECREASE_HUE.getString(), "decrease_hue"),
-    INCREASE_HUE(17, Material.RED_TERRACOTTA, LanguageMapping.INCREASE_HUE.getString(), "increase_hue"),
-    DECREASE_SATURATION(25, Material.BLUE_STAINED_GLASS, LanguageMapping.DECREASE_SATURATION.getString(), "decrease_saturation"),
-    INCREASE_SATURATION(26, Material.BLUE_CONCRETE, LanguageMapping.INCREASE_SATURATION.getString(), "increase_saturation"),
-    DECREASE_BRIGHTNESS(34, Material.BLACK_CONCRETE, LanguageMapping.DECREASE_BRIGHTNESS.getString(), "decrease_brightness"),
-    INCREASE_BRIGHTNESS(35, Material.WHITE_CONCRETE, LanguageMapping.INCREASE_BRIGHTNESS.getString(), "increase_brightness"),
+    DECREASE_HUE(16, CustomHeads.DECREASE_HUE.asMaterial(), LanguageMapping.DECREASE_HUE.getString(), "decrease_hue"),
+    INCREASE_HUE(17, CustomHeads.INCREASE_HUE.asMaterial(), LanguageMapping.INCREASE_HUE.getString(), "increase_hue"),
+    DECREASE_SATURATION(25, CustomHeads.DECREASE_SATURATION.asMaterial(), LanguageMapping.DECREASE_SATURATION.getString(), "decrease_saturation"),
+    INCREASE_SATURATION(26, CustomHeads.INCREASE_SATURATION.asMaterial(), LanguageMapping.INCREASE_SATURATION.getString(), "increase_saturation"),
+    DECREASE_BRIGHTNESS(34, CustomHeads.DECREASE_BRIGHTNESS.asMaterial(), LanguageMapping.DECREASE_BRIGHTNESS.getString(), "decrease_brightness"),
+    INCREASE_BRIGHTNESS(35, CustomHeads.INCREASE_BRIGHTNESS.asMaterial(), LanguageMapping.INCREASE_BRIGHTNESS.getString(), "increase_brightness"),
 
     // Colors
     YELLOW_DYE(18, Material.YELLOW_DYE, LanguageMapping.YELLOW.getString(), "dye"),
@@ -97,9 +97,31 @@ public enum InventoryMapping {
     public ItemStack getItemStack(Player p) {
         ItemStack item = new ItemStack(mat, 1);
         // If item is the Random head overwrite it with CustomHead
-        if (action.equals("randomColor")) {
-            item = CustomHeads.RANDOM.asItemStack();
+        // TODO: Find better Solution for Custom Heads!
+        switch(action) {
+            case "randomColor":
+                item = CustomHeads.RANDOM.asItemStack();
+                break;
+            case "decrease_hue":
+                item = CustomHeads.DECREASE_HUE.asItemStack();
+                break;
+            case "increase_hue":
+                item = CustomHeads.INCREASE_HUE.asItemStack();
+                break;
+            case "decrease_saturation":
+                item = CustomHeads.DECREASE_SATURATION.asItemStack();
+                break;
+            case "increase_saturation":
+                item = CustomHeads.INCREASE_SATURATION.asItemStack();
+                break;
+            case "decrease_brightness":
+                item = CustomHeads.DECREASE_BRIGHTNESS.asItemStack();
+                break;
+            case "increase_brightness":
+                item = CustomHeads.INCREASE_BRIGHTNESS.asItemStack();
+                break;
         }
+
         // set displayname
         ItemMeta isMeta = item.getItemMeta();
         isMeta.setDisplayName(name);
