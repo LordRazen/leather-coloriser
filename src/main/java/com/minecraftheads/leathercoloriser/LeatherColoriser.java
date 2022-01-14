@@ -19,7 +19,7 @@ public final class LeatherColoriser extends JavaPlugin {
     @Override
     public void onEnable() {
         Logger.setPrefix("[LC]");
-        Logger.info("LeatherColoriser starts...");
+        Logger.info("Leather Coloriser loaded");
         LanguageHandler.setPlugin(this);
         checkConfig();
         // Plugin startup logic

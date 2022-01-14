@@ -108,7 +108,7 @@ public class ClickHandler {
                     ColorChanger.INCREASE_BRIGHTNESS.apply(player);
                     new InventoryCreatorBridge(player);
                     break;
-                case ("reset"):
+                case ("resetColor"):
                     SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
                     new InventoryCreatorBridge(player);
                     break;
@@ -163,7 +163,7 @@ public class ClickHandler {
         // Open Watermark
         if (clickedItem.getType().equals(Material.PUFFERFISH)) {
             player.closeInventory();
-            player.sendMessage("§6[§4LC§6] §aGet more plugins for detailed decoration at\n§3www.minecraft-heads.com");
+            player.sendMessage("§6[§4LC§6] §aGet decoration heads and more plugins for detailed decoration at\n§3www.minecraft-heads.com");
         }
 
 
