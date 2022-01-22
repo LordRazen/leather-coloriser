@@ -1,4 +1,4 @@
-package com.minecraftheads.leathercoloriser.data;
+package com.minecraftheads.leathercolorizer.data;
 
 import com.minecraftheads.pluginUtils.heads.HeadCreator;
 import org.bukkit.Material;

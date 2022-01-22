@@ -1,6 +1,6 @@
-package com.minecraftheads.leathercoloriser.listeners;
+package com.minecraftheads.leathercolorizer.listeners;
 
-import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
+import com.minecraftheads.leathercolorizer.handlers.SelectionHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;

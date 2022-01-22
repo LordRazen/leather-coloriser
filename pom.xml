@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.minecraftheads</groupId>
-    <artifactId>leather-coloriser</artifactId>
+    <artifactId>Leather-Colorizer</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Leather Coloriser</name>
+    <name>Leather Colorizer</name>
 
     <description>This plugin lets players choose the color of leather armor by basic dye's and Hexcode.</description>
     <properties>
@@ -38,29 +38,6 @@
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <target>
-                                <echo>ANT TASK - copying files....</echo>
-                                <copy todir="${basedir}/../../../Minecraft/server-1.18/plugins" overwrite="true" flatten="true">
-                                    <fileset dir="${basedir}" includes="*.bat" >
-                                        <include name="target/leather-coloriser-${project.version}.jar" />
-                                    </fileset>
-                                </copy>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>

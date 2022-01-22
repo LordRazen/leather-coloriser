@@ -1,10 +1,10 @@
-package com.minecraftheads.leathercoloriser.handlers;
+package com.minecraftheads.leathercolorizer.handlers;
 
-import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
-import com.minecraftheads.leathercoloriser.data.InventoryMapping;
-import com.minecraftheads.leathercoloriser.data.LanguageMapping;
-import com.minecraftheads.leathercoloriser.utils.ColorChanger;
-import com.minecraftheads.leathercoloriser.utils.InventoryCreatorBridge;
+import com.minecraftheads.leathercolorizer.data.DyeColorMapping;
+import com.minecraftheads.leathercolorizer.data.InventoryMapping;
+import com.minecraftheads.leathercolorizer.data.LanguageMapping;
+import com.minecraftheads.leathercolorizer.utils.ColorChanger;
+import com.minecraftheads.leathercolorizer.utils.InventoryCreatorBridge;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -60,7 +60,7 @@ public class ClickHandler {
 
 
     /**
-     * check what item is clicked and perform action depending on that
+     * Check what item is clicked and perform action depending on that
      *
      * @param e InventoryClickEvent
      */
@@ -68,7 +68,6 @@ public class ClickHandler {
         Player player = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
         Color col = ((LeatherArmorMeta) e.getInventory().getItem(0).getItemMeta()).getColor();
-
 
         try {
             InventoryMapping im = InventoryMapping.getBySlot(e.getSlot());
@@ -124,11 +123,9 @@ public class ClickHandler {
                     if (!col.equals(DyeColorMapping.DEFAULT.getColor())) {
                         SelectionHandler.setColor(player, newColor.mixColors(col));
                     }
-                    // Create the inventory for choosing the color
                     new InventoryCreatorBridge(player);
                     break;
                 case ("armor"):
-                    // ToDo move this into method
                     // Clean Armor
                     if (col.equals(DyeColorMapping.DEFAULT.getColor())) {
                         ItemStack[] items = player.getInventory().getContents();
@@ -142,10 +139,8 @@ public class ClickHandler {
                                 }
                             }
                         }
-
                     }
-
-                    // Colorise Armor
+                    // Colorize Armor
                     else {
                         if (checkRequirement(player, clickedItem)) {
                             // Search for the first item in the inventory of the player which is the base item of the colored one
@@ -155,7 +150,6 @@ public class ClickHandler {
                     }
                     break;
             }
-
         } catch (NullPointerException ignored) {
 
         }
@@ -163,10 +157,8 @@ public class ClickHandler {
         // Open Watermark
         if (clickedItem.getType().equals(Material.PUFFERFISH)) {
             player.closeInventory();
-            player.sendMessage("§6[§4LC§6] §aGet decoration heads and more plugins for detailed decoration at\n§3www.minecraft-heads.com");
+            player.sendMessage("§6[§4LC§6] §aGet decoration heads and more plugins for detailed decoration at §3www.minecraft-heads.com");
         }
-
-
     }
 
     /**
@@ -190,6 +182,8 @@ public class ClickHandler {
      * @param player Player
      * @param item   ItemStack
      */
+    /**
+     * TODO: REMOVE METHOD
     private static void giveItem(Player player, ItemStack item) {
         // Search for the first item in the inventory of the player which is the base item of the colored one
         player.getInventory().clear(player.getInventory().first(new ItemStack(item.getType(), 1)));
@@ -201,4 +195,5 @@ public class ClickHandler {
         } catch (NullPointerException ignored) {
         }
     }
+     */
 }

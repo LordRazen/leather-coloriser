@@ -1,11 +1,10 @@
-package com.minecraftheads.leathercoloriser.listeners;
+package com.minecraftheads.leathercolorizer.listeners;
 
-import com.minecraftheads.leathercoloriser.handlers.ClickHandler;
+import com.minecraftheads.leathercolorizer.handlers.ClickHandler;
 import com.minecraftheads.pluginUtils.inventory.InventoryStorage;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 

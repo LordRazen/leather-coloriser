@@ -1,7 +1,6 @@
-package com.minecraftheads.leathercoloriser.data;
+package com.minecraftheads.leathercolorizer.data;
 
-import com.minecraftheads.pluginUtils.config.LanguageHandler;
-import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
+import com.minecraftheads.leathercolorizer.handlers.SelectionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -97,7 +96,6 @@ public enum InventoryMapping {
     public ItemStack getItemStack(Player p) {
         ItemStack item = new ItemStack(mat, 1);
         // If item is the Random head overwrite it with CustomHead
-        // TODO: Find better Solution for Custom Heads!
         switch(action) {
             case "randomColor":
                 item = CustomHeads.RANDOM.asItemStack();

@@ -1,9 +1,9 @@
-package com.minecraftheads.leathercoloriser.commands;
+package com.minecraftheads.leathercolorizer.commands;
 
-import com.minecraftheads.leathercoloriser.data.DyeColorMapping;
-import com.minecraftheads.leathercoloriser.data.LanguageMapping;
-import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
-import com.minecraftheads.leathercoloriser.utils.InventoryCreatorBridge;
+import com.minecraftheads.leathercolorizer.data.DyeColorMapping;
+import com.minecraftheads.leathercolorizer.data.LanguageMapping;
+import com.minecraftheads.leathercolorizer.handlers.SelectionHandler;
+import com.minecraftheads.leathercolorizer.utils.InventoryCreatorBridge;
 import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
@@ -11,7 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandLeatherColoriser implements CommandExecutor {
+public class CommandLeatherColorizer implements CommandExecutor {
 
     /**
      * Initiates LCP when /lc is entered
@@ -33,7 +33,7 @@ public class CommandLeatherColoriser implements CommandExecutor {
         Player player = (Player) sender;
 
         // check permissions
-        if (!player.hasPermission("lc.main")) {
+        if (!player.hasPermission("leathercolorizer.main")) {
             player.sendMessage(LanguageMapping.ERROR_PERMISSION_MISSING.getStringWithPrefix());
             return true;
         }

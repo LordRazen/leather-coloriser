@@ -1,7 +1,7 @@
-package com.minecraftheads.leathercoloriser.utils;
+package com.minecraftheads.leathercolorizer.utils;
 
-import com.minecraftheads.leathercoloriser.data.InventoryMapping;
-import com.minecraftheads.leathercoloriser.data.LanguageMapping;
+import com.minecraftheads.leathercolorizer.data.InventoryMapping;
+import com.minecraftheads.leathercolorizer.data.LanguageMapping;
 import com.minecraftheads.pluginUtils.inventory.InventoryCreator;
 import org.bukkit.entity.Player;
 

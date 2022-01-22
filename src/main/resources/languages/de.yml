@@ -1,10 +1,9 @@
-# Minecraft Colors:
-# https://minecraft.fandom.com/wiki/Classic_server_protocol#Color_codes
+# Translated by LordRazen
 
 prefix: "§6[§4LC§6]"
-title: "§f§nLeather Coloriser"
+title: "§f§nLeather Colorizer"
 
-error_invalid_command_sender: "Leather Coloriser kann nur von Spielern genutzt werden!"
+error_invalid_command_sender: "Leather Colorizer kann nur von Spielern genutzt werden!"
 error_invalid_color: "§aUngültiges Argument - bitte gebe eine HEX-Farbe ein:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§cDu musst das Item in deinem Inventar haben."
 error_permission_missing: "§cDu hast keine Erlaubnis dies zu tun."

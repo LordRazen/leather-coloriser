@@ -1,6 +1,6 @@
-package com.minecraftheads.leathercoloriser.utils;
+package com.minecraftheads.leathercolorizer.utils;
 
-import com.minecraftheads.leathercoloriser.handlers.SelectionHandler;
+import com.minecraftheads.leathercolorizer.handlers.SelectionHandler;
 import org.bukkit.Color;
 import org.bukkit.entity.Player;
 
