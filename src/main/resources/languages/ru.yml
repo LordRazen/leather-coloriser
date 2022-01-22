@@ -1,0 +1,43 @@
+# Translated by Shini007
+
+prefix: "§6[§4LC§6]"
+title: "§f§nРаскрашиватель кожи"
+
+error_invalid_command_sender: "Раскрашиватель кожи могут использовать только игрокы!"
+error_invalid_color: "§aнедопустимый аргумент- Пожалуйста, введите шестнадцатизначный код цвета:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
+error_item_missing: "§cУ тебя должен быть предмет в инвентаре."
+error_permission_missing: "§cУ тебя нет разрешения на это."
+
+color_reset: "§fсбросить цвет"
+color_random: "§fСлучайный цвет"
+color_string: "§fВведите RGB цвет"
+
+decrease_hue: "§7(§c-§7) §fуменьшить оттенок"
+increase_hue: "§7(§a+§7) §fувеличить оттенок"
+decrease_saturation: "§7(§c-§7) §fувеличить оттенок"
+increase_saturation: "§7(§a+§7) §fувеличить сатурацию"
+decrease_brightness: "§7(§c-§7) §fуменьшить яркость"
+increase_brightness: "§7(§a+§7) §fувеличить яркость"
+
+yellow: "Добавить желтый"
+orange: "Добавить оранжевый"
+red: "Добавить красный"
+brown: "Добавить коричневый"
+lime: "Добавить светло-зеленый"
+green: "Добавить зеленый"
+light_blue: "Добавить светло-голубой"
+cyan: "Добавить Бирюзовый"
+blue: "Добавить синий"
+pink: "Добавить розовый"
+magenta: "Добавить пурпурный"
+purple: "Добавить пурпурный"
+white: "Добавить белый"
+light_gray: "Добавить светло-серый"
+gray: "Добавить серый"
+black: "Добавить черный"
+
+leather_helmet: "кожаный шлем"
+leather_chestplate: "кожаный нагрудник"
+leather_leggings: "Кожаные леггинсы"
+leather_boots: "кожаные ботинки"
+leather_horse_armor: "конский кожаный доспех"

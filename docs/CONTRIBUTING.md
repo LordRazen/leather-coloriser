@@ -1,20 +1,26 @@
 <div align="center">
-<h1>Leather Coloriser Pro</h1>
+<h1>Leather Colorizer</h1>
 <strong>A plugin for the Minecraft Servers (Bukkit/Spigot/Paper).</strong>
-  <h3>
-    <a href="https://github.com/LordRazen/leather-coloriser-pro/blob/master/README.md">LCP</a>
+<h3>
+    <a href="https://github.com/LordRazen/leather-colorizer/blob/main/README.md">Leather Colorizer</a>
     <span> | </span>
-    <a href="https://github.com/LordRazen/leather-coloriser-pro/blob/master/DOCS.md">Docs</a>
+    <a href="https://github.com/LordRazen/leather-colorizer/blob/main/docs/DOCS.md">Docs</a>
     <span> | </span>
-    <a href="https://github.com/LordRazen/leather-coloriser-pro/blob/master/CONTRIBUTING.md">Contributing</a>
+    <a href="https://github.com/LordRazen/leather-colorizer/blob/main/docs/CONTRIBUTING.md">Contributing</a>
     <span> | </span>
-    <a href="https://github.com/LordRazen/leather-coloriser-pro/blob/master/CHANGELOG.md">Changelog</a>
+    <a href="https://github.com/LordRazen/leather-colorizer/blob/main/docs/CHANGELOG.md">Changelog</a>
     <span> | </span>
-    <a href="[ENTER_SPIGOT_PROJECT_PAGE]" target="_blank">Project Page</a>
-  </h3>
+    <a href="https://minecraft-heads.com/" target="_blank">Project Page</a>
+</h3>
 </div>
 
 <hr>
+
+# Contributors
+
+- Concept and Coding: LordRazen, Maccynator
+- Icons: M4th3m1tW
+- Translations: LordRazen, Shini007, Gero, JadeJinni
 
 # Contributing
 
@@ -26,9 +32,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-2. Update the README.md with details of changes to the interface, this includes new configuration variables.
-3. You may merge the Pull Request in once you have the sign-off of the main developers, or if you do not have permission
-   to do that, you may request a reviewer to merge it for you.
+2. We will merge the Pull Request and update the Readme.
 3. Version Numbers will be set by us, so you don't have to care about our versioning.
 
 ## Code of Conduct
@@ -77,7 +81,7 @@ event. Representation of a project may be further defined and clarified by proje
 ### Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at
-lcp@minecraft-heads.com. All complaints will be reviewed and investigated and will result in a response that is deemed
+info@minecraft-heads.com. All complaints will be reviewed and investigated and will result in a response that is deemed
 necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to
 the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 

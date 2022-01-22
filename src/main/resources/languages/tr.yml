@@ -1,0 +1,43 @@
+# Translated by JadeJinni
+
+prefix: "§6[§4LC§6]"
+title: "§f§Deri renklendirici"
+
+error_invalid_command_sender: "Deri renklendirici sadece oyuncular tarafından kullanılabilir!"
+error_invalid_color: "§aGeçersiz argüman - lütfen bir HEX Rengi girin:\n/lc <HEX renk kodu>\n§3https://htmlcolorcodes.com/"
+error_item_missing: "§cÖğenin envanterinizde olması gerekir."
+error_permission_missing: "§cPromission bunu yapmak için iznin yok."
+
+color_reset: "§fRengi sıfırla"
+color_random: "§fRastgele renk"
+color_string: "§fRGB rengini girin"
+
+decrease_hue: "§7(§c-§7) §fGölgeyi artır"
+increase_hue: "§7(§a+§7) §fRenk nüansını azalt"
+decrease_saturation: "§7(§c-§7) §fRenk doygunluğunu artırın"
+increase_saturation: "§7(§a+§7) §fDaha düşük renk doygunluğu"
+decrease_brightness: "§7(§c-§7) §fRenk parlaklığını artırın"
+increase_brightness: "§7(§a+§7) §fDaha düşük renk parlaklığı"
+
+yellow: "Sarı"
+orange: "Turuncu"
+red: "Kırmızı"
+brown: "Kahverengi"
+lime: "Açık yeşil"
+green: "Yeşil"
+light_blue: "Açık mavi"
+cyan: "Turkulaz"
+blue: "Mavi"
+pink: "Pembe"
+magenta: "Macenta"
+purple: "Mor"
+white: "Beyaz"
+light_gray: "Açık gri"
+gray: "Gri"
+black: "Siyah"
+
+leather_helmet: "Deri miğfer"
+leather_chestplate: "Deri göğüslü"
+leather_leggings: "Deri tozluk"
+leather_boots: "Deri çizmeler"
+leather_horse_armor: "Deri at zırhı"

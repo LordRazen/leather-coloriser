@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.minecraftheads</groupId>
-    <artifactId>leather-coloriser</artifactId>
+    <artifactId>Leather-Colorizer</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Leather Coloriser</name>
+    <name>Leather Colorizer</name>
 
     <description>This plugin lets players choose the color of leather armor by basic dye's and Hexcode.</description>
     <properties>
@@ -52,9 +52,9 @@
                         <configuration>
                             <target>
                                 <echo>ANT TASK - copying files....</echo>
-                                <copy todir="${basedir}/../../../Minecraft/server-1.18/plugins" overwrite="true" flatten="true">
+                                <copy todir="${basedir}/../../../../Users/MH-C2016/Desktop/TESTSERVER/TESTSERVER 1.17.1/plugins" overwrite="true" flatten="true">
                                     <fileset dir="${basedir}" includes="*.bat" >
-                                        <include name="target/leather-coloriser-${project.version}.jar" />
+                                        <include name="target/Leather-Colorizer-${project.version}.jar" />
                                     </fileset>
                                 </copy>
                             </target>

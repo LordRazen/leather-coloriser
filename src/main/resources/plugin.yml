@@ -1,6 +1,6 @@
-name: LeatherColoriser
+name: LeatherColorizer
 version: '${project.version}'
-main: com.minecraftheads.leathercoloriser.LeatherColoriser
+main: com.minecraftheads.leathercolorizer.LeatherColorizer
 api-version: 1.16
 prefix: LC
 authors: [ LordRazen, bmack94 ]
@@ -8,10 +8,10 @@ description: This plugin lets players choose the color of leather armor by basic
 website: https://minecraft-heads.com
 commands:
   LC:
-    aliases: [ /lc ]
-    description: "Open LC GUI"
+    aliases: [ /lc , /leathercolorizer ]
+    description: "Open Leather Colorizer GUI"
 
 permissions:
-  lc.main:
+  leathercolorizer.main:
     default: op
-    description: "Allows users to use the LC"
+    description: "Allows users to use the Leather Colorizer."

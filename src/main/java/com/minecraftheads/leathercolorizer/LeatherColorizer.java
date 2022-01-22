@@ -1,8 +1,8 @@
-package com.minecraftheads.leathercoloriser;
+package com.minecraftheads.leathercolorizer;
 
-import com.minecraftheads.leathercoloriser.commands.CommandLeatherColoriser;
-import com.minecraftheads.leathercoloriser.listeners.InventoryListener;
-import com.minecraftheads.leathercoloriser.listeners.PlayerListener;
+import com.minecraftheads.leathercolorizer.commands.CommandLeatherColorizer;
+import com.minecraftheads.leathercolorizer.listeners.InventoryListener;
+import com.minecraftheads.leathercolorizer.listeners.PlayerListener;
 import com.minecraftheads.pluginUtils.config.ConfigUpdater;
 import com.minecraftheads.pluginUtils.config.LanguageHandler;
 import com.minecraftheads.pluginUtils.utils.Logger;
@@ -11,21 +11,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 
-public final class LeatherColoriser extends JavaPlugin {
+public final class LeatherColorizer extends JavaPlugin {
 
     @Override
     public void onEnable() {
         Logger.setPrefix("[LC]");
-        Logger.info("Leather Coloriser loaded");
+        Logger.info("Leather Colorizer loaded");
         LanguageHandler.setPlugin(this);
         checkConfig();
         // Plugin startup logic
 
         // Register Commands
-        this.getCommand("LC").setExecutor(new CommandLeatherColoriser());
+        this.getCommand("LC").setExecutor(new CommandLeatherColorizer());
 
         // Register Listener
         // this.getServer().getPluginManager().registerEvents(new LCPInventory(), this);
@@ -47,6 +46,8 @@ public final class LeatherColoriser extends JavaPlugin {
         if (!langDir.exists()) {
             langDir.mkdir();
         }
+
+        // TODO: Improve language loader for generic file loading
         this.saveResource("languages/en.yml", false);
         this.saveResource("languages/de.yml", false);
 
@@ -63,7 +64,6 @@ public final class LeatherColoriser extends JavaPlugin {
         }
 
         reloadConfig();
-
     }
 
 }

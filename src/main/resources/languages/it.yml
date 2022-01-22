@@ -1,0 +1,43 @@
+# Translated by Gero
+
+prefix: "§6[§4LC§6]"
+title: "§f§nColoratore di cuoio"
+
+error_invalid_command_sender: "Coloratore di cuoio può essere usato solo dai giocatori!"
+error_invalid_color: "§aInvalid Argument - per favore inserisci un HEX Color: ßn/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
+error_item_missing: "§cDevi avere l'oggetto nel tuo inventario."
+error_permission_missing: "§cNon hai il permesso di farlo."
+
+color_reset: "§fAzzeramento del colore"
+color_random: "§fColore casuale"
+color_string: "§fInserisci il colore RGB"
+
+decrease_hue: "§7(§c-§7) §fRidurre la tinta"
+increase_hue: "§7(§a+§7) §fAumentare la tinta"
+decrease_saturation: "§7(§c-§7) §fRidurre la saturazione"
+increase_saturation: "§7(§a+§7) §fAumentare la saturazione"
+decrease_brightness: "§7(§c-§7) §fRidurre la luminosità"
+increase_brightness: "§7(§a+§7) §fAumentare la luminosità"
+
+yellow: "Giallo"
+orange: "Arancione"
+red: "Rosso"
+brown: "Marrone"
+lime: "Lime"
+green: "Verde"
+light_blue: "Azzurro"
+cyan: "Ciano"
+blue: "Blu"
+pink: "Rosa"
+magenta: "Magenta"
+purple: "Viola"
+white: "Bianco"
+light_gray: "Light Grigio chiaro"
+gray: "Grigio"
+black: "Nero"
+
+leather_helmet: "Casco di cuoio"
+leather_chestplate: "Giubba di cuoio"
+leather_leggings: "Pantaloni di cuoio"
+leather_boots: "Stiavli di cuoio"
+leather_horse_armor: "Bardatura di cuoio"
