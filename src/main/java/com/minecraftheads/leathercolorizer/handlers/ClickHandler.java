@@ -9,7 +9,9 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.Arrays;
@@ -145,7 +147,13 @@ public class ClickHandler {
                         if (checkRequirement(player, clickedItem)) {
                             // Search for the first item in the inventory of the player which is the base item of the colored one
                             player.getInventory().clear(player.getInventory().first(new ItemStack(clickedItem.getType(), 1)));
-                            player.getInventory().addItem(clickedItem);
+
+                            // Create clean item (No wrong title, Armor-Info not hidden
+                            ItemStack coloredItem = new ItemStack(clickedItem.getType(), 1);
+                            LeatherArmorMeta meta = (LeatherArmorMeta) coloredItem.getItemMeta();
+                            meta.setColor(((LeatherArmorMeta) clickedItem.getItemMeta()).getColor());
+                            coloredItem.setItemMeta(meta);
+                            player.getInventory().addItem(coloredItem);
                         }
                     }
                     break;
@@ -175,25 +183,4 @@ public class ClickHandler {
         player.sendMessage(LanguageMapping.ERROR_ITEM_MISSING.getStringWithPrefix());
         return false;
     }
-
-    /**
-     * Generate colored armor piece, add it to inventory and remove raw (uncolored) armor
-     *
-     * @param player Player
-     * @param item   ItemStack
-     */
-    /**
-     * TODO: REMOVE METHOD
-    private static void giveItem(Player player, ItemStack item) {
-        // Search for the first item in the inventory of the player which is the base item of the colored one
-        player.getInventory().clear(player.getInventory().first(new ItemStack(item.getType(), 1)));
-        player.getInventory().addItem(item);
-
-        // Remove the color in the SelectionHandler
-        try {
-            SelectionHandler.removeColor(player);
-        } catch (NullPointerException ignored) {
-        }
-    }
-     */
 }
