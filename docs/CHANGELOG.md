@@ -1,6 +1,6 @@
 <div align="center">
 <h1>Leather Colorizer</h1>
-<strong>A plugin for the Minecraft Servers (Bukkit/Spigot/Paper).</strong>
+<strong>Change Leather Armors colors easily.</strong>
 <h3>
     <a href="https://github.com/LordRazen/leather-colorizer/blob/main/README.md">Leather Colorizer</a>
     <span> | </span>
@@ -10,7 +10,7 @@
     <span> | </span>
     <a href="https://github.com/LordRazen/leather-colorizer/blob/main/docs/CHANGELOG.md">Changelog</a>
     <span> | </span>
-    <a href="https://minecraft-heads.com/" target="_blank">Project Page</a>
+    <a href="https://www.spigotmc.org/resources/leather-colorizer.99462/" target="_blank">Project Page</a>
 </h3>
 </div>
 

@@ -1,6 +1,6 @@
 <div align="center">
 <h1>Leather Colorizer</h1>
-<strong>A plugin for the Minecraft Servers (Bukkit/Spigot/Paper).</strong>
+<strong>Change Leather Armors colors easily.</strong>
 <h3>
     <a href="https://github.com/LordRazen/leather-colorizer/blob/main/README.md">Leather Colorizer</a>
     <span> | </span>
@@ -10,22 +10,22 @@
     <span> | </span>
     <a href="https://github.com/LordRazen/leather-colorizer/blob/main/docs/CHANGELOG.md">Changelog</a>
     <span> | </span>
-    <a href="https://minecraft-heads.com/" target="_blank">Project Page</a>
+    <a href="https://www.spigotmc.org/resources/leather-colorizer.99462/" target="_blank">Project Page</a>
 </h3>
 </div>
 
 <hr>
 
-This plugin let players choose the color of leather armor easily.
+This plugin let you change the color of leather armors easily.
 
 ### Features
+- Colorize Leather Armor Items and the Leather Horse Armor in any color you want easily.
 - Select your desired color:
     - Mix the color using Minecraft Color Dyes.
     - Modify the Color with Hue, Saturation and Brightness Controls.
     - Pick the color directly while clicking on colorized leather items.
     - Get the color directly with typing an RGB HEX Color Code.
-- Colorize Leather Armor Items and the Leather Horse Armor in any color you want easily.
-- Clean colored Armor Items easily.
+- Clean colored Armor Items.
 - Version Support: Minecraft 1.16+
 
 ### Demoserver
