@@ -9,11 +9,12 @@ import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Collections;
 
 public final class LeatherColorizer extends JavaPlugin {
+
+    private static String[] LANGUAGES = {"en", "de", "it", "ru", "tr"};
 
     @Override
     public void onEnable() {
@@ -21,13 +22,11 @@ public final class LeatherColorizer extends JavaPlugin {
         Logger.info("Leather Colorizer loaded");
         LanguageHandler.setPlugin(this);
         checkConfig();
-        // Plugin startup logic
 
         // Register Commands
         this.getCommand("LC").setExecutor(new CommandLeatherColorizer());
 
         // Register Listener
-        // this.getServer().getPluginManager().registerEvents(new LCPInventory(), this);
         Bukkit.getPluginManager().registerEvents(new com.minecraftheads.pluginUtils.inventory.InventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
@@ -42,28 +41,31 @@ public final class LeatherColorizer extends JavaPlugin {
     private void checkConfig() {
         //The config needs to exist before using the updater
         saveDefaultConfig();
-        File langDir = new File(this.getDataFolder(), "languages/");
-        if (!langDir.exists()) {
-            langDir.mkdir();
-        }
 
-        // TODO: Improve language loader for generic file loading
-        this.saveResource("languages/en.yml", false);
-        this.saveResource("languages/de.yml", false);
+        // Ensure Language Dir exists
+        File languageDir = new File(this.getDataFolder(), "languages/");
+        if (!languageDir.exists()) languageDir.mkdir();
 
-        // try to run the updater and then reload the files
         try {
+            // Config
             File configFile = new File(getDataFolder(), "config.yml");
             ConfigUpdater.update(this, "config.yml", configFile, Collections.emptyList());
-            configFile = new File(getDataFolder(), "languages/en.yml");
-            ConfigUpdater.update(this, "languages/en.yml", configFile, Collections.emptyList());
-            configFile = new File(getDataFolder(), "languages/de.yml");
-            ConfigUpdater.update(this, "languages/de.yml", configFile, Collections.emptyList());
+
+            // Language Files
+            for (String language : LANGUAGES) {
+                String languageFile = "languages/" + language + ".yml";
+
+                // Ensure language files exist
+                this.saveResource(languageFile, false);
+
+                // Update
+                configFile = new File(getDataFolder(), languageFile);
+                ConfigUpdater.update(this, languageFile, configFile, Collections.emptyList());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         reloadConfig();
     }
-
 }

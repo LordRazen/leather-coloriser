@@ -26,6 +26,7 @@ This plugin let players choose the color of leather armor easily.
     - Get the color directly with typing an RGB HEX Color Code.
 - Colorize Leather Armor Items and the Leather Horse Armor in any color you want easily.
 - Clean colored Armor Items easily.
+- Version Support: Minecraft 1.16+
 
 ### Demoserver
 - Minecraft Heads Demoserver: `minecraft-heads.mcpro.co`

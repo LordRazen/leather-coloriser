@@ -175,25 +175,4 @@ public class ClickHandler {
         player.sendMessage(LanguageMapping.ERROR_ITEM_MISSING.getStringWithPrefix());
         return false;
     }
-
-    /**
-     * Generate colored armor piece, add it to inventory and remove raw (uncolored) armor
-     *
-     * @param player Player
-     * @param item   ItemStack
-     */
-    /**
-     * TODO: REMOVE METHOD
-    private static void giveItem(Player player, ItemStack item) {
-        // Search for the first item in the inventory of the player which is the base item of the colored one
-        player.getInventory().clear(player.getInventory().first(new ItemStack(item.getType(), 1)));
-        player.getInventory().addItem(item);
-
-        // Remove the color in the SelectionHandler
-        try {
-            SelectionHandler.removeColor(player);
-        } catch (NullPointerException ignored) {
-        }
-    }
-     */
 }
