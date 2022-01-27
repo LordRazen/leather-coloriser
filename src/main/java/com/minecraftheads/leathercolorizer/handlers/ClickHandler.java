@@ -5,6 +5,7 @@ import com.minecraftheads.leathercolorizer.data.InventoryMapping;
 import com.minecraftheads.leathercolorizer.data.LanguageMapping;
 import com.minecraftheads.leathercolorizer.utils.ColorChanger;
 import com.minecraftheads.leathercolorizer.utils.InventoryCreatorBridge;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
@@ -23,11 +23,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class ClickHandler {
-    private static Plugin plugin;
-
-    public static void setPlugin(Plugin p) {
-        plugin = p;
-    }
 
     /**
      * Handle clicks within the GUI
@@ -181,16 +176,16 @@ public class ClickHandler {
             Color color = ((LeatherArmorMeta) clickedItem.getItemMeta()).getColor();
 
             // ENCHANTMENTS: Check the item Enchantments
-            if (!plugin.getConfig().getBoolean("allowEnchantedItems"))
+            if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("allowEnchantedItems"))
                 if (itemMeta.hasEnchants()) continue;
 
             // DAMAGE: Check the item damage
             Damageable itemDamage = (Damageable) item.getItemMeta();
-            if (!plugin.getConfig().getBoolean("allowDamagedItems"))
+            if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("allowDamagedItems"))
                 if (itemDamage.hasDamage()) continue;
 
             // Colorize the item
-            ItemStack newItem = buildNewItem(item, color);
+            ItemStack newItem = modifyItem(item, color);
 
             player.getInventory().clear(slot);
             player.getInventory().setItem(slot, newItem);
@@ -222,15 +217,16 @@ public class ClickHandler {
             if (itemMeta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) continue;
 
             // ENCHANTMENTS: Check the item Enchantments
-            if (!plugin.getConfig().getBoolean("allowEnchantedItems"))
+            if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("allowEnchantedItems"))
                 if (itemMeta.hasEnchants()) continue;
 
             // DAMAGE:
-            if (!plugin.getConfig().getBoolean("allowDamagedItems"))
+            if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("allowDamagedItems"))
                 if (((Damageable) item.getItemMeta()).hasDamage()) continue;
 
             // Clean Item
-            ItemStack newItem = buildNewItem(item, DyeColorMapping.DEFAULT.getColor());
+            ItemStack newItem = modifyItem(item, DyeColorMapping.DEFAULT.getColor());
+
             player.getInventory().clear(slot);
             player.getInventory().setItem(slot, newItem);
             noArmorCleaned = false;
@@ -242,28 +238,34 @@ public class ClickHandler {
     }
 
     /**
-     * Build new Item
+     * Modify Item
      * (No wrong title, no hidden info etc)
      *
      * @param item  ItemStack
      * @param color Color
      */
-    private static ItemStack buildNewItem(ItemStack item, Color color) {
-        ItemMeta itemMeta = item.getItemMeta();
-
+    private static ItemStack modifyItem(ItemStack item, Color color) {
         // LeatherArmorMeta: Color and Enchantments
         LeatherArmorMeta colorMeta = (LeatherArmorMeta) item.getItemMeta();
-
-        // Color
         colorMeta.setColor(color);
-
         item.setItemMeta(colorMeta);
 
+        // ItemMeta: Title, Lore, Enchantments
+        ItemMeta itemMeta = item.getItemMeta();
+
+        // Title
+        if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("keepTitle"))
+            itemMeta.setDisplayName("");
+
+        // Lore
+        if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("keepLore"))
+            itemMeta.getLore().clear();
+
         // Enchantments
-        if (!plugin.getConfig().getBoolean("keepEnchantments")) {
-            for (Map.Entry<Enchantment, Integer> entry : itemMeta.getEnchants().entrySet()) {
+        if (!Bukkit.getPluginManager().getPlugin("LeatherColorizer").getConfig().getBoolean("keepEnchantments")) {
+            for (Map.Entry<Enchantment, Integer> entry : colorMeta.getEnchants().entrySet()) {
                 Enchantment enchantment = entry.getKey();
-                itemMeta.removeEnchant(enchantment);
+                colorMeta.removeEnchant(enchantment);
             }
         }
 

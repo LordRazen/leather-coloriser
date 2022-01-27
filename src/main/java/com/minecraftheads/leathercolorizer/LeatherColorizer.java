@@ -22,7 +22,6 @@ public final class LeatherColorizer extends JavaPlugin {
         Logger.setPrefix("[LC]");
         Logger.info("Leather Colorizer loaded");
         LanguageHandler.setPlugin(this);
-        ClickHandler.setPlugin(this);
         checkConfig();
 
         // Register Commands
