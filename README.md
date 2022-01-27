@@ -19,6 +19,7 @@
 This plugin let you change the color of leather armors easily.
 
 ### Features
+
 - Colorize Leather Armor Items and the Leather Horse Armor in any color you want easily.
 - Select your desired color:
     - Mix the color using Minecraft Color Dyes.
@@ -26,9 +27,12 @@ This plugin let you change the color of leather armors easily.
     - Pick the color directly while clicking on colorized leather items.
     - Get the color directly with typing an RGB HEX Color Code.
 - Clean colored Armor Items.
+- Allow colorization of damaged items correctly.
+- Config Updater will update your config if there're new options.
 - Version Support: Minecraft 1.16+
 
 ### Demoserver
+
 - Minecraft Heads Demoserver: `minecraft-heads.mcpro.co`
 
 <img src="docs/LeatherColorizer.gif">

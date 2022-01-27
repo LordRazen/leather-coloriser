@@ -7,17 +7,28 @@ import com.minecraftheads.leathercolorizer.utils.ColorChanger;
 import com.minecraftheads.leathercolorizer.utils.InventoryCreatorBridge;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class ClickHandler {
+    private static Plugin plugin;
+
+    public static void setPlugin(Plugin p) {
+        plugin = p;
+    }
+
     /**
      * Handle clicks within the GUI
      *
@@ -130,31 +141,11 @@ public class ClickHandler {
                 case ("armor"):
                     // Clean Armor
                     if (col.equals(DyeColorMapping.DEFAULT.getColor())) {
-                        ItemStack[] items = player.getInventory().getContents();
-                        for (int i = 0; i < items.length; i++) {
-                            if (items[i] != null && items[i].getType() == clickedItem.getType()) {
-                                LeatherArmorMeta meta = (LeatherArmorMeta) items[i].getItemMeta();
-                                if (!meta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) {
-                                    player.getInventory().clear(i);
-                                    player.getInventory().addItem(new ItemStack(clickedItem.getType(), 1));
-                                    break;
-                                }
-                            }
-                        }
+                        cleanArmor(player, clickedItem);
                     }
                     // Colorize Armor
                     else {
-                        if (checkRequirement(player, clickedItem)) {
-                            // Search for the first item in the inventory of the player which is the base item of the colored one
-                            player.getInventory().clear(player.getInventory().first(new ItemStack(clickedItem.getType(), 1)));
-
-                            // Create clean item (No wrong title, Armor-Info not hidden
-                            ItemStack coloredItem = new ItemStack(clickedItem.getType(), 1);
-                            LeatherArmorMeta meta = (LeatherArmorMeta) coloredItem.getItemMeta();
-                            meta.setColor(((LeatherArmorMeta) clickedItem.getItemMeta()).getColor());
-                            coloredItem.setItemMeta(meta);
-                            player.getInventory().addItem(coloredItem);
-                        }
+                        colorizeArmor(player, clickedItem);
                     }
                     break;
             }
@@ -170,17 +161,130 @@ public class ClickHandler {
     }
 
     /**
-     * Check if the player has the needed item in his inventory
+     * Colorize Armor
      *
-     * @param player Player
-     * @param item   ItemStack
-     * @return boolean
+     * @param player      Player
+     * @param clickedItem Itemstack
      */
-    private static boolean checkRequirement(Player player, ItemStack item) {
-        if (player.getInventory().contains(new ItemStack(item.getType(), 1)))
-            return true;
+    private static void colorizeArmor(Player player, ItemStack clickedItem) {
+        HashMap<Integer, ? extends ItemStack> items = player.getInventory().all(clickedItem.getType());
+        boolean noItemsColorized = true;
 
-        player.sendMessage(LanguageMapping.ERROR_ITEM_MISSING.getStringWithPrefix());
-        return false;
+        // Check all the found armor items
+        for (Map.Entry<Integer, ? extends ItemStack> entry : items.entrySet()) {
+            Integer slot = entry.getKey();
+            ItemStack item = entry.getValue();
+
+            // COLOR: Check if item has the default color
+            LeatherArmorMeta itemMeta = (LeatherArmorMeta) item.getItemMeta();
+            if (!itemMeta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) continue;
+            Color color = ((LeatherArmorMeta) clickedItem.getItemMeta()).getColor();
+
+            // ENCHANTMENTS: Check the item Enchantments
+            if (!plugin.getConfig().getBoolean("allowEnchantedItems"))
+                if (itemMeta.hasEnchants()) continue;
+
+            // DAMAGE: Check the item damage
+            Damageable itemDamage = (Damageable) item.getItemMeta();
+            if (!plugin.getConfig().getBoolean("allowDamagedItems"))
+                if (itemDamage.hasDamage()) continue;
+
+            // Colorize the item
+            ItemStack newItem = buildNewItem(item, color);
+
+            player.getInventory().clear(slot);
+            player.getInventory().setItem(slot, newItem);
+            noItemsColorized = false;
+            break;
+        }
+
+        // Message if no items were colorized
+        if (noItemsColorized) player.sendMessage(LanguageMapping.ERROR_ITEM_MISSING.getStringWithPrefix());
+    }
+
+    /**
+     * Clean Armor
+     *
+     * @param player      Player
+     * @param clickedItem Itemstack
+     */
+    private static void cleanArmor(Player player, ItemStack clickedItem) {
+        HashMap<Integer, ? extends ItemStack> items = player.getInventory().all(clickedItem.getType());
+        boolean noArmorCleaned = true;
+
+        // Check all the found armor items
+        for (Map.Entry<Integer, ? extends ItemStack> entry : items.entrySet()) {
+            Integer slot = entry.getKey();
+            ItemStack item = entry.getValue();
+
+            // COLOR: Item has default color already - nothing to undye
+            LeatherArmorMeta itemMeta = (LeatherArmorMeta) item.getItemMeta();
+            if (itemMeta.getColor().equals(DyeColorMapping.DEFAULT.getColor())) continue;
+
+            // ENCHANTMENTS: Check the item Enchantments
+            if (!plugin.getConfig().getBoolean("allowEnchantedItems"))
+                if (itemMeta.hasEnchants()) continue;
+
+            // DAMAGE:
+            if (!plugin.getConfig().getBoolean("allowDamagedItems"))
+                if (((Damageable) item.getItemMeta()).hasDamage()) continue;
+
+            // Clean Item
+            ItemStack newItem = buildNewItem(item, DyeColorMapping.DEFAULT.getColor());
+            player.getInventory().clear(slot);
+            player.getInventory().setItem(slot, newItem);
+            noArmorCleaned = false;
+            break;
+        }
+
+        // Message if no armor was cleaned
+        if (noArmorCleaned) player.sendMessage(LanguageMapping.ERROR_ITEM_MISSING.getStringWithPrefix());
+    }
+
+    /**
+     * Build new Item
+     * (No wrong title, no hidden info etc)
+     *
+     * @param item  ItemStack
+     * @param color Color
+     */
+    private static ItemStack buildNewItem(ItemStack item, Color color) {
+        ItemMeta itemMeta = item.getItemMeta();
+        ItemStack newItem = new ItemStack(item.getType(), 1);
+
+        // LeatherArmorMeta: Color and Enchantments
+        LeatherArmorMeta newItemMeta = (LeatherArmorMeta) newItem.getItemMeta();
+
+        // Color
+        newItemMeta.setColor(color);
+
+        // Enchantments
+        if (plugin.getConfig().getBoolean("keepEnchantments")) {
+            for (Map.Entry<Enchantment, Integer> entry : itemMeta.getEnchants().entrySet()) {
+                Enchantment enchantment = entry.getKey();
+                int enchantmentLevel = entry.getValue();
+                newItemMeta.addEnchant(enchantment, enchantmentLevel, false);
+            }
+        }
+
+        newItem.setItemMeta(newItemMeta);
+
+        // Damageable: Damage
+        Damageable damageItemMeta = (Damageable) itemMeta;
+        Damageable damageNewItemMeta = (Damageable) newItem.getItemMeta();
+        damageNewItemMeta.setDamage(damageItemMeta.getDamage());
+
+        newItem.setItemMeta((ItemMeta) damageNewItemMeta);
+
+        // Repairable: RepairCost
+        if (plugin.getConfig().getBoolean("keepEnchantments")) {
+            Repairable repairItemMeta = (Repairable) item.getItemMeta();
+            Repairable repairNewItemMeta = (Repairable) newItem.getItemMeta();
+            repairNewItemMeta.setRepairCost(repairItemMeta.getRepairCost());
+
+            newItem.setItemMeta((ItemMeta) repairNewItemMeta);
+        }
+
+        return newItem;
     }
 }
