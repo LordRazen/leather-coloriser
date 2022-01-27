@@ -20,6 +20,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0]
+
+### Added
+
+- Broken items can be colorized (configureable).
+- Enchanted items can be colorized (configureable).
+- Items stay in the same slot while being colorized.
+
 ## [1.0.0]
 
 ### Added

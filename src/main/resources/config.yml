@@ -3,3 +3,10 @@ language: en
 
 # Allow to colorize damaged items.
 allowDamagedItems: false
+
+# Allow to colorize enchanted items in general.
+allowEnchantedItems: false
+
+# Keep Enchantments and RepairCosts on the colorized item.
+# (only used if allowEnchantedItems is true)
+keepEnchantments: falsee

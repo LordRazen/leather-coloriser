@@ -20,10 +20,12 @@
 
 ### config.yml
 
-| Key | description                                 | options          | default |
-|---|---------------------------------------------|------------------|---|
-| language | Choose the language in the languages folder | [en,de,it,ru,tr] | en |
-|allowDamagedItems| Allow to colorize damaged items.            |[true, false]|false|
+| Key | description                                                                                        | options          | default |
+|---|----------------------------------------------------------------------------------------------------|------------------|---|
+| language | Choose the language in the languages folder                                                        | [en,de,it,ru,tr] | en |
+|allowDamagedItems| Allow to colorize damaged items.                                                                   |[true, false]|false|
+|allowEnchantedItems| Allow to colorize enchanted items in general.                                                      |[true, false]|false|
+|keepEnchantments| Keep Enchantments and RepairCosts on the colorized item. Only used if allowEnchantedItems is true. |[true, false]|false|
 
 ### Permissions
 
