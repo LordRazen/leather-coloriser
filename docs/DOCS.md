@@ -20,15 +20,17 @@
 
 ### config.yml
 
-| Key | description | options          | default |
-|---|---|------------------|---|
-| language | choose the language in the languages folder | [en,de,it,ru,tr] | en |
+| Key | description                                 | options          | default |
+|---|---------------------------------------------|------------------|---|
+| language | Choose the language in the languages folder | [en,de,it,ru,tr] | en |
+|allowDamagedItems| Allow to colorize damaged items.            |[true, false]|false|
 
 ### Permissions
+
 - leathercolorizer.main: Use the Leather Colorizer
 
-
 ### Commands
+
 - [`/lc`|`/leathercolorizer`] - Start Leather Colorizer
 - `/lc <HexColor>` - Start Leather Colorizer with a certain HEX Color
 

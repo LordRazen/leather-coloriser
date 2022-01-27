@@ -44,8 +44,7 @@ public enum InventoryMapping {
     LEATHER_CHESTPLATE(1, Material.LEATHER_CHESTPLATE, LanguageMapping.LEATHER_CHESTPLATE.getString(), "armor"),
     LEATHER_LEGGINGS(2, Material.LEATHER_LEGGINGS, LanguageMapping.LEATHER_LEGGINGS.getString(), "armor"),
     LEATHER_BOOTS(3, Material.LEATHER_BOOTS, LanguageMapping.LEATHER_BOOTS.getString(), "armor"),
-    LEATHER_HORSE_ARMOR(4, Material.LEATHER_HORSE_ARMOR, LanguageMapping.LEATHER_HORSE_ARMOR.getString(), "armor")
-    ;
+    LEATHER_HORSE_ARMOR(4, Material.LEATHER_HORSE_ARMOR, LanguageMapping.LEATHER_HORSE_ARMOR.getString(), "armor");
 
 
     private int slot;
@@ -56,9 +55,9 @@ public enum InventoryMapping {
     /**
      * Constructor
      *
-     * @param slot int
-     * @param mat Material
-     * @param name String
+     * @param slot   int
+     * @param mat    Material
+     * @param name   String
      * @param action String
      */
     InventoryMapping(int slot, Material mat, String name, String action) {
@@ -70,33 +69,41 @@ public enum InventoryMapping {
 
     /**
      * Returns the action of the given enum
+     *
      * @return String
      */
-    public String getAction(){
+    public String getAction() {
         return this.action;
     }
 
     /**
      * returns the slot number of the given enum
+     *
      * @return int
      */
-    public int getSlot() { return this.slot; }
+    public int getSlot() {
+        return this.slot;
+    }
 
     /**
      * returns the Material of the given enum
+     *
      * @return Material
      */
-    public Material getMaterial() { return this.mat; }
+    public Material getMaterial() {
+        return this.mat;
+    }
 
     /**
      * returns the ItemStack (colored if armor)
+     *
      * @param p Player
      * @return ItemStack
      */
     public ItemStack getItemStack(Player p) {
         ItemStack item = new ItemStack(mat, 1);
         // If item is the Random head overwrite it with CustomHead
-        switch(action) {
+        switch (action) {
             case "randomColor":
                 item = CustomHeads.RANDOM.asItemStack();
                 break;
@@ -137,6 +144,7 @@ public enum InventoryMapping {
 
     /**
      * returns the enum by given Slot (needed to find by clicked slot)
+     *
      * @param slot int
      * @return InventoryMapping
      */
