@@ -164,7 +164,7 @@ public class ClickHandler {
      * Colorize Armor
      *
      * @param player      Player
-     * @param clickedItem Itemstack
+     * @param clickedItem ItemStack
      */
     private static void colorizeArmor(Player player, ItemStack clickedItem) {
         HashMap<Integer, ? extends ItemStack> items = player.getInventory().all(clickedItem.getType());
@@ -206,7 +206,7 @@ public class ClickHandler {
      * Clean Armor
      *
      * @param player      Player
-     * @param clickedItem Itemstack
+     * @param clickedItem ItemStack
      */
     private static void cleanArmor(Player player, ItemStack clickedItem) {
         HashMap<Integer, ? extends ItemStack> items = player.getInventory().all(clickedItem.getType());
@@ -250,41 +250,25 @@ public class ClickHandler {
      */
     private static ItemStack buildNewItem(ItemStack item, Color color) {
         ItemMeta itemMeta = item.getItemMeta();
-        ItemStack newItem = new ItemStack(item.getType(), 1);
 
         // LeatherArmorMeta: Color and Enchantments
-        LeatherArmorMeta newItemMeta = (LeatherArmorMeta) newItem.getItemMeta();
+        LeatherArmorMeta colorMeta = (LeatherArmorMeta) item.getItemMeta();
 
         // Color
-        newItemMeta.setColor(color);
+        colorMeta.setColor(color);
+
+        item.setItemMeta(colorMeta);
 
         // Enchantments
-        if (plugin.getConfig().getBoolean("keepEnchantments")) {
+        if (!plugin.getConfig().getBoolean("keepEnchantments")) {
             for (Map.Entry<Enchantment, Integer> entry : itemMeta.getEnchants().entrySet()) {
                 Enchantment enchantment = entry.getKey();
-                int enchantmentLevel = entry.getValue();
-                newItemMeta.addEnchant(enchantment, enchantmentLevel, false);
+                itemMeta.removeEnchant(enchantment);
             }
         }
 
-        newItem.setItemMeta(newItemMeta);
+        item.setItemMeta(itemMeta);
 
-        // Damageable: Damage
-        Damageable damageItemMeta = (Damageable) itemMeta;
-        Damageable damageNewItemMeta = (Damageable) newItem.getItemMeta();
-        damageNewItemMeta.setDamage(damageItemMeta.getDamage());
-
-        newItem.setItemMeta((ItemMeta) damageNewItemMeta);
-
-        // Repairable: RepairCost
-        if (plugin.getConfig().getBoolean("keepEnchantments")) {
-            Repairable repairItemMeta = (Repairable) item.getItemMeta();
-            Repairable repairNewItemMeta = (Repairable) newItem.getItemMeta();
-            repairNewItemMeta.setRepairCost(repairItemMeta.getRepairCost());
-
-            newItem.setItemMeta((ItemMeta) repairNewItemMeta);
-        }
-
-        return newItem;
+        return item;
     }
 }
