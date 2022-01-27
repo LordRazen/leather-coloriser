@@ -9,4 +9,4 @@ allowEnchantedItems: false
 
 # Keep Enchantments and RepairCosts on the colorized item.
 # (only used if allowEnchantedItems is true)
-keepEnchantments: falsee
+keepEnchantments: false
