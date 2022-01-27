@@ -1,7 +1,6 @@
 package com.minecraftheads.leathercolorizer;
 
 import com.minecraftheads.leathercolorizer.commands.CommandLeatherColorizer;
-import com.minecraftheads.leathercolorizer.handlers.ClickHandler;
 import com.minecraftheads.leathercolorizer.listeners.InventoryListener;
 import com.minecraftheads.leathercolorizer.listeners.PlayerListener;
 import com.minecraftheads.pluginUtils.config.ConfigUpdater;
@@ -10,7 +9,8 @@ import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 
 public final class LeatherColorizer extends JavaPlugin {
@@ -20,7 +20,7 @@ public final class LeatherColorizer extends JavaPlugin {
     @Override
     public void onEnable() {
         Logger.setPrefix("[LC]");
-        Logger.info("Leather Colorizer loaded");
+        Logger.info("Leather Colorizer v" + getDescription().getVersion() + " loaded");
         LanguageHandler.setPlugin(this);
         checkConfig();
 
