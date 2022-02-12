@@ -1,7 +1,8 @@
 # Translated by Shini007
 
 prefix: "§6[§4LC§6]"
-title: "§f§nРаскрашиватель кожи"
+title_gui: "§f§nРаскрашиватель кожи"
+title_chat: "§aРаскрашиватель кожи"
 
 error_invalid_command_sender: "Раскрашиватель кожи могут использовать только игрокы!"
 error_invalid_color: "§aнедопустимый аргумент- Пожалуйста, введите шестнадцатизначный код цвета:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"

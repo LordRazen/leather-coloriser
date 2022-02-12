@@ -4,11 +4,18 @@ import com.minecraftheads.pluginUtils.config.LanguageHandler;
 
 public enum LanguageMapping {
     PREFIX("prefix"),
-    TITLE("title"),
+    TITLE_GUI("title_gui"),
+    TITLE_CHAT("title_chat"),
     ERROR_INVALID_COMMAND_SENDER("error_invalid_command_sender"),
     ERROR_INVALID_COLOR("error_invalid_color"),
     ERROR_ITEM_MISSING("error_item_missing"),
     ERROR_PERMISSION_MISSING("error_permission_missing"),
+    INFO_OPEN_LC("info_open_lc"),
+    INFO_OPEN_LC_RGB("info_open_lc_rgb"),
+    INFO_INFO("info_info"),
+    INFO_RELOAD("info_reload"),
+    INFO_VERSION("info_version"),
+    RELOAD("reload"),
     COLOR_RESET("color_reset"),
     COLOR_RANDOM("color_random"),
     COLOR_STRING("color_string"),
@@ -38,8 +45,7 @@ public enum LanguageMapping {
     LEATHER_CHESTPLATE("leather_chestplate"),
     LEATHER_LEGGINGS("leather_leggings"),
     LEATHER_BOOTS("leather_boots"),
-    LEATHER_HORSE_ARMOR("leather_horse_armor")
-    ;
+    LEATHER_HORSE_ARMOR("leather_horse_armor");
 
     private final String path;
 
@@ -50,7 +56,9 @@ public enum LanguageMapping {
     public String getString() {
         return LanguageHandler.getString(path);
     }
+
     public String getStringWithPrefix() {
         return LanguageMapping.PREFIX.getString() + "§r " + LanguageHandler.getString(path);
     }
+
 }

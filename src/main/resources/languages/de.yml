@@ -1,12 +1,21 @@
 # Translated by LordRazen
 
 prefix: "§6[§4LC§6]"
-title: "§f§nLeather Colorizer"
+title_gui: "§f§nLeather Colorizer"
+title_chat: "§aLeather Colorizer"
 
 error_invalid_command_sender: "Leather Colorizer kann nur von Spielern genutzt werden!"
 error_invalid_color: "§aUngültiges Argument - bitte gebe eine HEX-Farbe ein:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§cDu musst das Item in deinem Inventar haben."
 error_permission_missing: "§cDu hast keine Erlaubnis dies zu tun."
+
+info_open_lc: "§a- /lc: §7Öffne den Leather Colorizer"
+info_open_lc_rgb: "§a- /lc <RGB>: §7Öffne den Leather Colorizer mit einer bestimmten RGB Farbe (Bsp.: /lc FF0000)"
+info_info: "§a- /lc info: §7Plugin Info"
+info_reload: "§a- /lc reload: §7Lade die Plugin Config und Sprachdateien erneut."
+info_version: "§a- /lc version: §7Plugin Version"
+
+reload: "§aLeather Colorizer wurde neu geladen."
 
 color_reset: "§fFarbe zurücksetzen"
 color_random: "§fZufallsfarbe"

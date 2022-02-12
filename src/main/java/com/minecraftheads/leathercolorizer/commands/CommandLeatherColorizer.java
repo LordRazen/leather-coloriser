@@ -5,6 +5,7 @@ import com.minecraftheads.leathercolorizer.data.LanguageMapping;
 import com.minecraftheads.leathercolorizer.handlers.SelectionHandler;
 import com.minecraftheads.leathercolorizer.utils.InventoryCreatorBridge;
 import com.minecraftheads.pluginUtils.utils.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -32,22 +33,61 @@ public class CommandLeatherColorizer implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        // check permissions
+        // Check basic permission
         if (!player.hasPermission("leathercolorizer.main")) {
             player.sendMessage(LanguageMapping.ERROR_PERMISSION_MISSING.getStringWithPrefix());
             return true;
         }
 
-        // Default / No arguments
+        // Zero Arguments => Open Clean LC
         if (args.length == 0) {
             if (SelectionHandler.getColor(player) == null) {
                 SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
             }
             new InventoryCreatorBridge(player);
         }
+
         // One Argument
         else if (args.length == 1) {
-            // Check by regex if string matches HEX Color Code
+
+            // Reload command
+            if (args[0].equals("reload")) {
+                if (player.hasPermission("leathercolorizer.admin")) {
+                    player.sendMessage(LanguageMapping.RELOAD.getStringWithPrefix());
+                    // TODO: RELOAD
+                } else {
+                    player.sendMessage(LanguageMapping.ERROR_PERMISSION_MISSING.getStringWithPrefix());
+                }
+                return true;
+            }
+
+            // Version command
+            if (args[0].equals("version")) {
+                if (player.hasPermission("leathercolorizer.admin")) {
+                    player.sendMessage(LanguageMapping.TITLE_CHAT.getStringWithPrefix() + " v" +
+                            Bukkit.getPluginManager().getPlugin("LeatherColorizer").getDescription().getVersion());
+                } else {
+                    player.sendMessage(LanguageMapping.ERROR_PERMISSION_MISSING.getStringWithPrefix());
+                }
+                return true;
+            }
+
+            // Info command
+            if (args[0].equals("info")) {
+                String info = LanguageMapping.TITLE_CHAT.getStringWithPrefix() + "\n" +
+                        LanguageMapping.INFO_OPEN_LC.getString() + "\n" +
+                        LanguageMapping.INFO_OPEN_LC_RGB.getString() + "\n" +
+                        LanguageMapping.INFO_INFO.getString() + "\n";
+                // Additional infos for Admins
+                if (player.hasPermission("leathercolorizer.admin")) {
+                    info += LanguageMapping.INFO_RELOAD.getString() + "\n" +
+                            LanguageMapping.INFO_VERSION.getString() + "\n";
+                }
+                player.sendMessage(info);
+                return true;
+            }
+
+            // Color Command => Check by regex if string matches HEX Color Code
             String regex = "^[#]?[0-9a-fA-F]{6}$";
             if (args[0].contains("#")) {
                 args[0] = args[0].replace("#", "");
@@ -61,7 +101,8 @@ public class CommandLeatherColorizer implements CommandExecutor {
                 player.sendMessage(LanguageMapping.ERROR_INVALID_COLOR.getStringWithPrefix());
             }
         }
-        // More arguments - invalid
+
+        // More arguments => Invalid
         else {
             player.sendMessage(LanguageMapping.ERROR_INVALID_COLOR.getStringWithPrefix());
         }
