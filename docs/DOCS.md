@@ -30,9 +30,12 @@
 ### Permissions
 
 - leathercolorizer.main: Use the Leather Colorizer
+- leathercolorizer.admin: Use the version and the reload command
 
 ### Commands
 
 - [`/lc`|`/leathercolorizer`] - Start Leather Colorizer
 - `/lc <HexColor>` - Start Leather Colorizer with a certain HEX Color
-
+- `/lc info` - Get Plugin info
+- `/lc version` - Get Plugin version
+- `/lc reload` - Reload Plugin 

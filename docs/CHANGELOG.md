@@ -27,6 +27,8 @@ All notable changes to this project will be documented in this file.
 - Broken items can be colorized (configureable).
 - Enchanted items can be colorized (configureable).
 - Items stay in the same slot while being colorized.
+- Options to decide if the enchantment, lore or title should stay while colorizing an item.
+- Added reload, version and info command.
 
 ## [1.0.0]
 
