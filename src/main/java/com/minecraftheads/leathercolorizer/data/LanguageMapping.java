@@ -6,7 +6,6 @@ public enum LanguageMapping {
     PREFIX("prefix"),
     TITLE_GUI("title_gui"),
     TITLE_CHAT("title_chat"),
-    ERROR_INVALID_COMMAND_SENDER("error_invalid_command_sender"),
     ERROR_INVALID_COLOR("error_invalid_color"),
     ERROR_ITEM_MISSING("error_item_missing"),
     ERROR_PERMISSION_MISSING("error_permission_missing"),

@@ -8,14 +8,22 @@ import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class CommandLeatherColorizer implements CommandExecutor {
+import java.util.Arrays;
+import java.util.List;
+
+public class CommandLeatherColorizer implements TabExecutor {
+
+    private final List<String> tabConsole = Arrays.asList("version", "reload");
+    private final List<String> tabAdmin = Arrays.asList("info", "#FFFFFF", "version", "reload");
+    private final List<String> tabPlayer = Arrays.asList("info", "#FFFFFF");
+
 
     /**
-     * Initiates LCP when /lc is entered
+     * Initiates Leather Colorizer when /lc is entered
      *
      * @param sender  CommandSender
      * @param command Command
@@ -25,12 +33,23 @@ public class CommandLeatherColorizer implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // Abort if Sender is no player
-        if (!(sender instanceof Player)) {
-            Logger.info(LanguageMapping.ERROR_INVALID_COMMAND_SENDER.getString());
-            return true;
+        if (sender instanceof Player) {
+            return onCommandPlayer(sender, command, label, args);
+        } else {
+            return onCommandConsole(sender, command, label, args);
         }
+    }
 
+    /**
+     * Commands used by players
+     *
+     * @param sender
+     * @param command
+     * @param label
+     * @param args
+     * @return
+     */
+    public boolean onCommandPlayer(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
 
         // Check basic permission
@@ -107,5 +126,61 @@ public class CommandLeatherColorizer implements CommandExecutor {
             player.sendMessage(LanguageMapping.ERROR_INVALID_COLOR.getStringWithPrefix());
         }
         return true;
+    }
+
+    /**
+     * Commands on Console
+     *
+     * @param sender
+     * @param command
+     * @param label
+     * @param args
+     * @return
+     */
+    public boolean onCommandConsole(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 1) {
+            // Reload command
+            if (args[0].equals("reload")) {
+                Logger.info("Leather Colorizer reloaded");
+                // TODO: RELOAD
+                return true;
+            }
+
+            // Version command
+            if (args[0].equals("version")) {
+                Logger.info("Leather Colorizer v" +
+                        Bukkit.getPluginManager().getPlugin("LeatherColorizer").getDescription().getVersion());
+                return true;
+            }
+        }
+
+        Logger.info("Invalid command");
+        return true;
+    }
+
+    /**
+     * Auto Complete for Leather Colorizer commands
+     *
+     * @param sender  CommandSender
+     * @param command Command
+     * @param alias   String
+     * @param args    String
+     * @return
+     */
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        // Player
+        if (sender instanceof Player) {
+            if (sender.hasPermission("leathercolorizer.admin")) {
+                return tabAdmin;
+            } else if (sender.hasPermission("leathercolorizer.main")) {
+                return tabPlayer;
+            }
+        }
+        // Console
+        else {
+            return tabConsole;
+        }
+        return null;
     }
 }

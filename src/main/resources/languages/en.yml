@@ -5,8 +5,7 @@ prefix: "§6[§4LC§6]"
 title_gui: "§f§nLeather Colorizer"
 title_chat: "§aLeather Colorizer"
 
-error_invalid_command_sender: "Leather Colorizer can only be used by players!"
-error_invalid_color: "§aInvalid Argument - please enter a HEX Color:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
+error_invalid_color: "§aInvalid Argument - please enter a valid command or a HEX Color:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§cYou need to have the item in your inventory."
 error_permission_missing: "§cYou don't have the permission to do this."
 

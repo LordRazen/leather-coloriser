@@ -4,7 +4,6 @@ prefix: "§6[§4LC§6]"
 title_gui: "§f§nColoratore di cuoio"
 title_chat: "§aColoratore di cuoio"
 
-error_invalid_command_sender: "Coloratore di cuoio può essere usato solo dai giocatori!"
 error_invalid_color: "§aInvalid Argument - per favore inserisci un HEX Color: ßn/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§cDevi avere l'oggetto nel tuo inventario."
 error_permission_missing: "§cNon hai il permesso di farlo."
