@@ -56,14 +56,14 @@ public final class LeatherColorizer extends JavaPlugin {
                 String languageFile = "languages/" + language + ".yml";
 
                 File file = new File(getDataFolder(), languageFile);
-                if (file.exists()) continue;
-
-                // Ensure language files exist
-                this.saveResource(languageFile, false);
-
-                // Update
-                configFile = new File(getDataFolder(), languageFile);
-                ConfigUpdater.update(this, languageFile, configFile, Collections.emptyList());
+                if (file.exists()) {
+                    // Update
+                    configFile = new File(getDataFolder(), languageFile);
+                    ConfigUpdater.update(this, languageFile, configFile, Collections.emptyList());
+                } else {
+                    // Ensure language files exist
+                    this.saveResource(languageFile, false);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
