@@ -2,12 +2,20 @@
 # https://minecraft.fandom.com/wiki/Classic_server_protocol#Color_codes
 
 prefix: "§6[§4LC§6]"
-title: "§f§nLeather Colorizer"
+title_gui: "§f§nLeather Colorizer"
+title_chat: "§aLeather Colorizer"
 
-error_invalid_command_sender: "Leather Colorizer can only be used by players!"
-error_invalid_color: "§aInvalid Argument - please enter a HEX Color:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
+error_invalid_color: "§aInvalid Argument - please enter a valid command or a HEX Color:\n/lc <HEX Color Code>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§cYou need to have the item in your inventory."
 error_permission_missing: "§cYou don't have the permission to do this."
+
+info_open_lc: "§a- /lc: §7Open Leather Colorizer"
+info_open_lc_rgb: "§a- /lc <RGB>: §7Open Leather Colorizer with a certain RGB color (Ex.: /lc FF0000)"
+info_info: "§a- /lc info: §7Get plugin info"
+info_reload: "§a- /lc reload: §7Reload plugin config and language files"
+info_version: "§a- /lc version: §7Get plugin version"
+
+reload: "§aLeather Colorizer reloaded"
 
 color_reset: "§fReset Color"
 color_random: "§fRandom Color"

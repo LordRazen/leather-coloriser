@@ -1,7 +1,6 @@
 package com.minecraftheads.leathercolorizer;
 
 import com.minecraftheads.leathercolorizer.commands.CommandLeatherColorizer;
-import com.minecraftheads.leathercolorizer.handlers.ClickHandler;
 import com.minecraftheads.leathercolorizer.listeners.InventoryListener;
 import com.minecraftheads.leathercolorizer.listeners.PlayerListener;
 import com.minecraftheads.pluginUtils.config.ConfigUpdater;
@@ -10,7 +9,8 @@ import com.minecraftheads.pluginUtils.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 
 public final class LeatherColorizer extends JavaPlugin {
@@ -20,9 +20,8 @@ public final class LeatherColorizer extends JavaPlugin {
     @Override
     public void onEnable() {
         Logger.setPrefix("[LC]");
-        Logger.info("Leather Colorizer loaded");
+        Logger.info("Leather Colorizer v" + getDescription().getVersion() + " loaded");
         LanguageHandler.setPlugin(this);
-        ClickHandler.setPlugin(this);
         checkConfig();
 
         // Register Commands
@@ -56,12 +55,15 @@ public final class LeatherColorizer extends JavaPlugin {
             for (String language : LANGUAGES) {
                 String languageFile = "languages/" + language + ".yml";
 
-                // Ensure language files exist
-                this.saveResource(languageFile, false);
-
-                // Update
-                configFile = new File(getDataFolder(), languageFile);
-                ConfigUpdater.update(this, languageFile, configFile, Collections.emptyList());
+                File file = new File(getDataFolder(), languageFile);
+                if (file.exists()) {
+                    // Update
+                    configFile = new File(getDataFolder(), languageFile);
+                    ConfigUpdater.update(this, languageFile, configFile, Collections.emptyList());
+                } else {
+                    // Ensure language files exist
+                    this.saveResource(languageFile, false);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

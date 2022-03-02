@@ -1,12 +1,18 @@
-version: 1.1
+# Language (en, de, it, ru, tr)
 language: en
 
-# Allow to colorize damaged items.
+# Allow to colorize damaged items
 allowDamagedItems: false
 
-# Allow to colorize enchanted items in general.
+# Allow to colorize enchanted items
 allowEnchantedItems: false
 
-# Keep Enchantments and RepairCosts on the colorized item.
+# Keep Enchantments and RepairCosts
 # (only used if allowEnchantedItems is true)
 keepEnchantments: false
+
+# Keep Item Title
+keepTitle: false
+
+# Keep Item Lore
+keepLore: false

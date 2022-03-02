@@ -12,6 +12,11 @@ commands:
     description: "Open Leather Colorizer GUI"
 
 permissions:
+  leathercolorizer.admin:
+    default: op
+    description: "Allows users to use the reload and the version command."
+    children:
+      - leathercolorizer.main
   leathercolorizer.main:
     default: op
     description: "Allows users to use the Leather Colorizer."

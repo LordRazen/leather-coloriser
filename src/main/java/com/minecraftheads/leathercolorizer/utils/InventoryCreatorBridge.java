@@ -14,7 +14,7 @@ public class InventoryCreatorBridge {
      * @param player Player
      */
     public InventoryCreatorBridge(Player player) {
-        InventoryCreator inv = new InventoryCreator(LanguageMapping.TITLE.getString());
+        InventoryCreator inv = new InventoryCreator(LanguageMapping.TITLE_GUI.getString());
         for (InventoryMapping im : InventoryMapping.values()) {
             inv.addItem(im.getSlot(), im.getItemStack(player));
         }
