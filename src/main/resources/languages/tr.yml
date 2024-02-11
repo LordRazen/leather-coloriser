@@ -1,9 +1,9 @@
 # Translated by JadeJinni
 
 prefix: "§6[§4LC§6]"
-title: "§f§nDeri renklendirici"
+title_gui: "§f§nDeri renklendirici"
+title_chat: "§aDeri renklendirici"
 
-error_invalid_command_sender: "Deri renklendirici sadece oyuncular tarafından kullanılabilir!"
 error_invalid_color: "§aGeçersiz argüman - lütfen bir HEX Rengi girin:\n/lc <HEX renk kodu>\n§3https://htmlcolorcodes.com/"
 error_item_missing: "§cÖğenin envanterinizde olması gerekir."
 error_permission_missing: "§cPromission bunu yapmak için iznin yok."
