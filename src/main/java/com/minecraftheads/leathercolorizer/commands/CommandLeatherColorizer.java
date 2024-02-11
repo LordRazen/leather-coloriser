@@ -43,6 +43,7 @@ public class CommandLeatherColorizer implements CommandExecutor {
             if (SelectionHandler.getColor(player) == null) {
                 SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
             }
+
             new InventoryCreatorBridge(player);
         }
         // One Argument
