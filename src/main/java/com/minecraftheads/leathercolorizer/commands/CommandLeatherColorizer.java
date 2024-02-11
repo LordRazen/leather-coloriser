@@ -63,6 +63,7 @@ public class CommandLeatherColorizer implements TabExecutor {
             if (SelectionHandler.getColor(player) == null) {
                 SelectionHandler.setColor(player, DyeColorMapping.DEFAULT.getColor());
             }
+
             new InventoryCreatorBridge(player);
         }
 
