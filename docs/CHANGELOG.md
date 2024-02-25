@@ -20,6 +20,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0]
+### Updates
+- Updated maven dependency plugin-utils
+- Reflect changes in plugin utils to support 1.20.4
+
 ## [1.1.0]
 
 ### Added
