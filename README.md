@@ -47,4 +47,4 @@ Afterwards you can run ``mvn package``
 
 www.minecraft-heads.com
 
-![Minecraft Heads Banner](https://minecraft-heads.com/images/banners/minecraft-heads_halfbanner_234x60.png)
+![Minecraft Heads Banner](https://images.minecraft-heads.com/banners/minecraft-heads_halfbanner_234x60.png?_gl=1*10hu3m5*_ga*MTc5NjMwODg3OS4xNzA5MjEyNTg0*_ga_2RQ4VHKQYK*MTcwOTMxMTg3My43LjEuMTcwOTMxMTg5MC4wLjAuMA..)
