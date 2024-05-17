@@ -44,7 +44,8 @@ public enum LanguageMapping {
     LEATHER_CHESTPLATE("leather_chestplate"),
     LEATHER_LEGGINGS("leather_leggings"),
     LEATHER_BOOTS("leather_boots"),
-    LEATHER_HORSE_ARMOR("leather_horse_armor");
+    LEATHER_HORSE_ARMOR("leather_horse_armor"),
+    WOLF_ARMOR("wolf_armor");
 
     private final String path;
 

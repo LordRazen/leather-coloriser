@@ -5,9 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-
 
 public enum InventoryMapping {
     // Control units
@@ -22,29 +22,30 @@ public enum InventoryMapping {
     INCREASE_BRIGHTNESS(35, CustomHeads.INCREASE_BRIGHTNESS.asMaterial(), LanguageMapping.INCREASE_BRIGHTNESS.getString(), "increase_brightness"),
 
     // Colors
-    YELLOW_DYE(18, Material.YELLOW_DYE, LanguageMapping.YELLOW.getString(), "dye"),
-    ORANGE_DYE(19, Material.ORANGE_DYE, LanguageMapping.ORANGE.getString(), "dye"),
-    RED_DYE(20, Material.RED_DYE, LanguageMapping.RED.getString(), "dye"),
-    BROWN_DYE(21, Material.BROWN_DYE, LanguageMapping.BROWN.getString(), "dye"),
-    LIME_DYE(22, Material.LIME_DYE, LanguageMapping.LIME.getString(), "dye"),
-    GREEN_DYE(23, Material.GREEN_DYE, LanguageMapping.GREEN.getString(), "dye"),
-    PINK_DYE(27, Material.PINK_DYE, LanguageMapping.PINK.getString(), "dye"),
-    MAGENTA_DYE(28, Material.MAGENTA_DYE, LanguageMapping.MAGENTA.getString(), "dye"),
-    PURPLE_DYE(29, Material.PURPLE_DYE, LanguageMapping.PURPLE.getString(), "dye"),
-    LIGHT_BLUE_DYE(30, Material.LIGHT_BLUE_DYE, LanguageMapping.LIGHT_BLUE.getString(), "dye"),
-    CYAN_DYE(31, Material.CYAN_DYE, LanguageMapping.CYAN.getString(), "dye"),
-    BLUE_DYE(32, Material.BLUE_DYE, LanguageMapping.BLUE.getString(), "dye"),
-    WHITE_DYE(37, Material.WHITE_DYE, LanguageMapping.WHITE.getString(), "dye"),
-    LIGHT_GRAY_DYE(38, Material.LIGHT_GRAY_DYE, LanguageMapping.LIGHT_GRAY.getString(), "dye"),
-    GRAY_DYE(39, Material.GRAY_DYE, LanguageMapping.GRAY.getString(), "dye"),
-    BLACK_DYE(40, Material.BLACK_DYE, LanguageMapping.BLACK.getString(), "dye"),
+    YELLOW_DYE(27, Material.YELLOW_DYE, LanguageMapping.YELLOW.getString(), "dye"),
+    ORANGE_DYE(28, Material.ORANGE_DYE, LanguageMapping.ORANGE.getString(), "dye"),
+    RED_DYE(29, Material.RED_DYE, LanguageMapping.RED.getString(), "dye"),
+    BROWN_DYE(30, Material.BROWN_DYE, LanguageMapping.BROWN.getString(), "dye"),
+    LIME_DYE(31, Material.LIME_DYE, LanguageMapping.LIME.getString(), "dye"),
+    GREEN_DYE(32, Material.GREEN_DYE, LanguageMapping.GREEN.getString(), "dye"),
+    PINK_DYE(36, Material.PINK_DYE, LanguageMapping.PINK.getString(), "dye"),
+    MAGENTA_DYE(37, Material.MAGENTA_DYE, LanguageMapping.MAGENTA.getString(), "dye"),
+    PURPLE_DYE(38, Material.PURPLE_DYE, LanguageMapping.PURPLE.getString(), "dye"),
+    LIGHT_BLUE_DYE(39, Material.LIGHT_BLUE_DYE, LanguageMapping.LIGHT_BLUE.getString(), "dye"),
+    CYAN_DYE(40, Material.CYAN_DYE, LanguageMapping.CYAN.getString(), "dye"),
+    BLUE_DYE(41, Material.BLUE_DYE, LanguageMapping.BLUE.getString(), "dye"),
+    WHITE_DYE(46, Material.WHITE_DYE, LanguageMapping.WHITE.getString(), "dye"),
+    LIGHT_GRAY_DYE(47, Material.LIGHT_GRAY_DYE, LanguageMapping.LIGHT_GRAY.getString(), "dye"),
+    GRAY_DYE(48, Material.GRAY_DYE, LanguageMapping.GRAY.getString(), "dye"),
+    BLACK_DYE(49, Material.BLACK_DYE, LanguageMapping.BLACK.getString(), "dye"),
 
     // armor
     LEATHER_HELMET(0, Material.LEATHER_HELMET, LanguageMapping.LEATHER_HELMET.getString(), "armor"),
     LEATHER_CHESTPLATE(1, Material.LEATHER_CHESTPLATE, LanguageMapping.LEATHER_CHESTPLATE.getString(), "armor"),
     LEATHER_LEGGINGS(2, Material.LEATHER_LEGGINGS, LanguageMapping.LEATHER_LEGGINGS.getString(), "armor"),
     LEATHER_BOOTS(3, Material.LEATHER_BOOTS, LanguageMapping.LEATHER_BOOTS.getString(), "armor"),
-    LEATHER_HORSE_ARMOR(4, Material.LEATHER_HORSE_ARMOR, LanguageMapping.LEATHER_HORSE_ARMOR.getString(), "armor");
+    LEATHER_HORSE_ARMOR(9, Material.LEATHER_HORSE_ARMOR, LanguageMapping.LEATHER_HORSE_ARMOR.getString(), "armor"),
+    WOLF_ARMOR(10, Material.WOLF_ARMOR, LanguageMapping.WOLF_ARMOR.getString(), "armor");
 
 
     private int slot;
