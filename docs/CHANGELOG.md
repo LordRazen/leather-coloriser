@@ -20,6 +20,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0]
+### Updates
+- Upgrade to spigot-api 1.20.6 to support new Wolf Armor Item.
+- Dropped support for versions below 1.20.6
+### Known Issues
+- Translations missing for IT, RU and TR
+
 ## [1.2.0]
 ### Updates
 - Updated maven dependency plugin-utils
